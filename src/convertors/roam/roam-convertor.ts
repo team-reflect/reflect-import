@@ -1,22 +1,8 @@
-import {DOM, domToHtml} from '../../helpers/dom'
+import {DOM, domToHtmlDoc} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
 import {Convertor, REFLECT_HOSTNAME} from '../../types'
-import {markdownToHtml} from './markdown'
-
-interface RoamNote {
-  title: string
-  uid: string
-  'edit-time': number
-  children?: RoamNoteString[]
-}
-
-interface RoamNoteString {
-  string: string
-  'create-time': number
-  uid: string
-  'edit-time': number
-  children?: RoamNoteString[]
-}
+import {roamMarkdownToHtml} from './roam-markdown'
+import {RoamNote, RoamNoteString} from './types'
 
 export class RoamConvertor implements Convertor {
   graphId: string
@@ -33,12 +19,10 @@ export class RoamConvertor implements Convertor {
     this.linkHost = linkHost
   }
 
-  toHtml(data: string): string {
-    const note = JSON.parse(data) as RoamNote
+  toHtml(json: string): string {
+    const note = JSON.parse(json) as RoamNote
 
-    header1(note.title)
-
-    return domToHtml(this.generateList(note))
+    return domToHtmlDoc([header1(note.title), this.generateList(note)])
   }
 
   private generateList(note: RoamNote): DOM {
@@ -67,7 +51,7 @@ export class RoamConvertor implements Convertor {
       checked = true
     }
 
-    const itemContent = markdownToHtml(string, {
+    const itemContent = roamMarkdownToHtml(string, {
       graphId: this.graphId,
       linkHost: this.linkHost,
     })

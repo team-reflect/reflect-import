@@ -48,6 +48,10 @@ export const domToHtml = (structure: DOM, wraps?: string): string => {
   return `<${tag}${mapProps(props)}>${children.join('')}</${tag}>`
 }
 
+export const domToHtmlDoc = (nodes: DOM[]): string => {
+  return nodes.map((node) => domToHtml(node)).join('')
+}
+
 const mapProps = (attributes: DOMAttrs): string => {
   return Object.entries(attributes)
     .filter(([, value]) => value !== undefined)

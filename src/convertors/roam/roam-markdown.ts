@@ -5,11 +5,11 @@ import markdown from 'remark-parse'
 import remark2rehype from 'remark-rehype'
 import wikiLinkPlugin from 'remark-wiki-link'
 import {unified} from 'unified'
-
 import {buildBacklinkUrl} from '../../helpers/backlink'
-import {parseNoteIdSubject} from './helpers'
 
-export const markdownToHtml = (
+import {parseNoteIdSubject} from './roam-helpers'
+
+export const roamMarkdownToHtml = (
   content: string,
   options: {graphId: string; linkHost: string},
 ) => {
