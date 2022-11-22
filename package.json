@@ -30,11 +30,7 @@
   "author": "Alex MacCaw",
   "size-limit": [
     {
-      "path": "dist/reflect-import.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/reflect-import.esm.js",
+      "path": "dist/index.js",
       "limit": "10 KB"
     }
   ],
