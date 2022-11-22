@@ -3,5 +3,3 @@
 exports[`generateContentFromRoamNote > handles both formats of todos 1`] = `"<h1>note1</h1><ul><li><p>parent</p><ul><li><input type=\\"checkbox\\" ><p>todo 1</p><ul></ul></li><li><input type=\\"checkbox\\" ><p>todo 2</p><ul></ul></li></ul></li></ul>"`;
 
 exports[`generateContentFromRoamNote > handles list with mixed bullets and tasks 1`] = `"<h1>note1</h1><ul><li><p>parent</p><ul><li><input type=\\"checkbox\\" ><p>todo 1</p><ul></ul></li><li><input type=\\"checkbox\\" checked><p>todo 2</p><ul></ul></li><li><p>bullet 1</p><ul></ul></li><li><p>bullet 2</p><ul></ul></li><li><input type=\\"checkbox\\" ><p>todo 3</p><ul></ul></li></ul></li></ul>"`;
-
-exports[`parseContentFromHTML 1`] = `"<h1>The Great CEO Within</h1><ul><li><p>Author:: <a class=\\"internal new\\" href=\\"https://reflect.app/g/123/mattmochary\\">Matt Mochary</a></p></li><li><p><strong>Chapter 1: Getting Started</strong></p><ul><li><p>This is explained clearly and thoroughly in Disciplined Entrepreneurship by Bill Aulet. I won’t repeat or even summarize what he wrote. If you haven’t yet launched or achieved more than $1 million of revenue, go read Bill’s book first.</p></li></ul></li></ul>"`;

@@ -26,6 +26,7 @@ export const roamMarkdownToHtml = (
     .data('fromMarkdownExtensions', [gfmAutolinkLiteralFromMarkdown])
     .use(markdown)
     .use(wikiLinkPlugin, {
+      wikiLinkClassName: 'backlink',
       hrefTemplate: (link: string) => {
         // This helper is only used to convert Markdown -> HTML -> ProseMirror.
         // So the real values of linkHost and graphId are not important, it will

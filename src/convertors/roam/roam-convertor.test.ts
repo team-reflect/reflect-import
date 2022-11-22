@@ -1,5 +1,6 @@
 import {RoamConvertor} from './roam-convertor'
 import {RoamNote, RoamNoteString} from './types'
+import {formatHtml} from '../../testing/format-html'
 
 const ROAM_SAMPLE: RoamNote = {
   title: 'The Great CEO Within',
@@ -30,88 +31,41 @@ const ROAM_SAMPLE: RoamNote = {
   ],
 }
 
-const CONTENT_SAMPLE = {
-  type: 'doc',
-  content: [
-    {
-      type: 'heading',
-      attrs: {level: 1},
-      content: [{type: 'text', text: 'The Great CEO Within'}],
-    },
-    {
-      type: 'bulletList',
-      content: [
-        {
-          type: 'listItem',
-          attrs: {closed: false, nested: false},
-          content: [
-            {
-              type: 'paragraph',
-              content: [
-                {type: 'text', text: 'Author:: '},
-                {
-                  attrs: {
-                    id: 'mattmochary',
-                    label: 'Matt Mochary',
-                  },
-                  type: 'backlink',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          type: 'listItem',
-          attrs: {closed: false, nested: false},
-          content: [
-            {
-              type: 'paragraph',
-              content: [
-                {
-                  type: 'text',
-                  marks: [{type: 'bold'}],
-                  text: 'Chapter 1: Getting Started',
-                },
-              ],
-            },
-            {
-              type: 'bulletList',
-              content: [
-                {
-                  type: 'listItem',
-                  attrs: {
-                    closed: false,
-                    nested: false,
-                  },
-                  content: [
-                    {
-                      type: 'paragraph',
-                      content: [
-                        {
-                          type: 'text',
-                          text:
-                            'This is explained clearly and thoroughly in Disciplined Entrepreneurship by Bill Aulet. I won’t repeat or even summarize what he wrote. If you haven’t yet launched or achieved more than $1 million of revenue, go read Bill’s book first.',
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ],
-}
-
 const htmlFromRoamNote = (note: RoamNote, graphId: string) =>
   new RoamConvertor({graphId}).toHtml(JSON.stringify(note))
 
 test('parseContentFromHTML', () => {
   const result = htmlFromRoamNote(ROAM_SAMPLE, '123')
 
-  expect(result).toMatchSnapshot()
+  expect(formatHtml(result)).toMatchInlineSnapshot(
+    `
+    "<h1>The Great CEO Within</h1>
+    <ul>
+      <li>
+        <p>
+          Author::
+          <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/mattmochary\\"
+            >Matt Mochary</a
+          >
+        </p>
+      </li>
+      <li>
+        <p><strong>Chapter 1: Getting Started</strong></p>
+        <ul>
+          <li>
+            <p>
+              This is explained clearly and thoroughly in Disciplined
+              Entrepreneurship by Bill Aulet. I won’t repeat or even summarize what
+              he wrote. If you haven’t yet launched or achieved more than $1 million
+              of revenue, go read Bill’s book first.
+            </p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    "
+  `,
+  )
 })
 
 describe('generateContentFromRoamNote', () => {
