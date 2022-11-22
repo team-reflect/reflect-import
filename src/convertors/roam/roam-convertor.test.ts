@@ -208,24 +208,24 @@ describe('generateContentFromRoamNote', () => {
   })
 })
 
-//   it('handles code blocks', () => {
-//     const node = generateListItemFromRoamNoteString(
-//       {
-//         string: '```javascript\nlonger code snippet\n```',
-//         'create-time': 12345,
-//         uid: '123',
-//         'edit-time': 12345,
-//         children: [],
-//       },
-//       '123',
-//     )
+// it('handles code blocks', () => {
+//   const node = generateListItemFromRoamNoteString(
+//     {
+//       string: '```javascript\nlonger code snippet\n```',
+//       'create-time': 12345,
+//       uid: '123',
+//       'edit-time': 12345,
+//       children: [],
+//     },
+//     '123',
+//   )
 
-//     const html = htmlFromNode(node)
+//   const html = htmlFromNode(node)
 
-//     expect(html).toEqual(
-//       `<li class="remirror-list-item-with-custom-mark"><span class="remirror-list-item-marker-container"><div class="remirror-collapsible-list-item-button"></div></span><div><pre spellcheck="false" class="language-javascript"><code data-code-block-language="javascript">longer code snippet\n</code></pre></div></li>`,
-//     )
-//   })
+//   expect(html).toEqual(
+//     `<li class="remirror-list-item-with-custom-mark"><span class="remirror-list-item-marker-container"><div class="remirror-collapsible-list-item-button"></div></span><div><pre spellcheck="false" class="language-javascript"><code data-code-block-language="javascript">longer code snippet\n</code></pre></div></li>`,
+//   )
+// })
 
 //   it('handles ordered lists', () => {
 //     const node = generateListItemFromRoamNoteString(

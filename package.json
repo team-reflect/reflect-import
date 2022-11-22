@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "date-fns": "^2.29.3",
+    "jsdom": "^20.0.3",
     "lodash": "^4.17.21",
     "mdast-util-gfm-autolink-literal": "^1.0.2",
     "micromark-extension-gfm-autolink-literal": "^1.0.3",

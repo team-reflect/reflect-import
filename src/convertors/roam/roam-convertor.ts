@@ -1,4 +1,4 @@
-import {DOM, domToHtmlDoc} from '../../helpers/dom'
+import {DOM, domArrayToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
 import {Convertor, REFLECT_HOSTNAME} from '../../types'
 import {roamMarkdownToHtml} from './roam-markdown'
@@ -22,7 +22,7 @@ export class RoamConvertor implements Convertor {
   toHtml(json: string): string {
     const note = JSON.parse(json) as RoamNote
 
-    return domToHtmlDoc([header1(note.title), this.generateList(note)])
+    return domArrayToHtml([header1(note.title), this.generateList(note)])
   }
 
   private generateList(note: RoamNote): DOM {
@@ -32,7 +32,7 @@ export class RoamConvertor implements Convertor {
 
     const listItems = note.children.map((child) => this.generateListItem(child))
 
-    return list(...listItems)
+    return list(listItems)
   }
 
   private generateListItem(noteString: RoamNoteString): DOM {
@@ -56,13 +56,16 @@ export class RoamConvertor implements Convertor {
       linkHost: this.linkHost,
     })
 
-    const itemChildren = (noteString.children ?? []).map((child) =>
-      this.generateListItem(child),
-    )
+    let itemChildren: DOM = ''
+
+    if (noteString.children) {
+      const listItems = noteString.children.map((child) => this.generateListItem(child))
+      itemChildren = list(listItems)
+    }
 
     return checked === undefined
-      ? listItem([itemContent, ...itemChildren])
-      : taskListItem([itemContent, ...itemChildren], {checked})
+      ? listItem(domArrayToHtml([itemContent, itemChildren]))
+      : taskListItem(domArrayToHtml([itemContent, itemChildren]), {checked})
   }
 
   private convertRoamTagsToBacklinks(str: string) {
