@@ -46,7 +46,7 @@ export const markdownToHtml = (
       return (tree, file) => {
         const frontMatter = tree.children.find((node) => node.type === 'yaml') as any
 
-        if (frontMatter) {
+        if (frontMatter?.value) {
           const data = loadYaml(frontMatter.value) as any
           file.data = {...file.data, ...data}
         }
