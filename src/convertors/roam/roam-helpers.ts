@@ -1,5 +1,5 @@
-import isValid from 'date-fns/isValid'
-import parse from 'date-fns/parse'
+import isValid from 'date-fns/isValid/index.js'
+import parse from 'date-fns/parse/index.js'
 import {toDailyNoteId, toNoteId} from '../../helpers/to-id'
 
 export const parseDateFromSubject = (str: string): Date | null => {
