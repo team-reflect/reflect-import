@@ -1,4 +1,4 @@
-import format from 'date-fns/format'
+import format from 'date-fns/format/index.js'
 
 export const toNoteId = (value: string) => {
   return value
