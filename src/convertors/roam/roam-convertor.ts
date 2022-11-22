@@ -1,7 +1,7 @@
 import {DOM, domArrayToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
 import {Convertor, REFLECT_HOSTNAME} from '../../types'
-import {roamMarkdownToHtml} from './roam-markdown'
+import {markdownToHtml} from '../../helpers/markdown'
 import {RoamNote, RoamNoteString} from './types'
 
 export class RoamConvertor implements Convertor {
@@ -51,9 +51,13 @@ export class RoamConvertor implements Convertor {
       checked = true
     }
 
-    const itemContent = roamMarkdownToHtml(string, {
+    const {html: itemContent} = markdownToHtml(string, {
       graphId: this.graphId,
       linkHost: this.linkHost,
+      // Disable certain constructs from Micromark.
+      // All constructs: https://github.com/micromark/micromark/blob/116bfa56b90b6bbc1facddfd0886a7e127a6b03f/packages/micromark-core-commonmark/dev/index.js
+      // Related discussion: https://github.com/micromark/micromark/discussions/63
+      constructsToDisable: ['thematicBreak', 'list', 'headingAtx'],
     })
 
     let itemChildren: DOM = ''

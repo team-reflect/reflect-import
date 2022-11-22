@@ -40,6 +40,7 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^8.1.0",
+    "@types/js-yaml": "^4.0.5",
     "@types/lodash": "^4.14.189",
     "husky": "^8.0.2",
     "size-limit": "^8.1.0",
@@ -50,11 +51,13 @@
   },
   "dependencies": {
     "date-fns": "^2.29.3",
+    "js-yaml": "^4.1.0",
     "jsdom": "^20.0.3",
     "lodash": "^4.17.21",
     "mdast-util-gfm-autolink-literal": "^1.0.2",
     "micromark-extension-gfm-autolink-literal": "^1.0.3",
     "rehype-stringify": "^9.0.3",
+    "remark-frontmatter": "^4.0.1",
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",
     "remark-wiki-link": "^1.0.4",

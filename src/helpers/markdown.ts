@@ -1,22 +1,20 @@
+import remarkFrontmatter from 'remark-frontmatter'
 import {gfmAutolinkLiteralFromMarkdown} from 'mdast-util-gfm-autolink-literal'
 import {gfmAutolinkLiteral} from 'micromark-extension-gfm-autolink-literal'
-import html from 'rehype-stringify'
-import markdown from 'remark-parse'
-import remark2rehype from 'remark-rehype'
+import pipeToHtml from 'rehype-stringify'
+import pipeToMarkdown from 'remark-parse'
+import pipeToRehype from 'remark-rehype'
 import wikiLinkPlugin from 'remark-wiki-link'
 import {unified} from 'unified'
-import {buildBacklinkUrl} from '../../helpers/backlink'
+import {buildBacklinkUrl} from './backlink'
+import {parseNoteIdSubject} from '../convertors/roam/roam-helpers'
+import {load as loadYaml} from 'js-yaml'
 
-import {parseNoteIdSubject} from './roam-helpers'
-
-export const roamMarkdownToHtml = (
+export const markdownToHtml = (
   content: string,
-  options: {graphId: string; linkHost: string},
+  options: {graphId: string; linkHost: string; constructsToDisable?: string[]},
 ) => {
-  // Disable certain constructs from Micromark.
-  // All constructs: https://github.com/micromark/micromark/blob/116bfa56b90b6bbc1facddfd0886a7e127a6b03f/packages/micromark-core-commonmark/dev/index.js
-  // Related discussion: https://github.com/micromark/micromark/discussions/63
-  const constructsToDisable = ['thematicBreak', 'list', 'headingAtx']
+  const {constructsToDisable = []} = options
 
   const processor = unified()
     .data('micromarkExtensions', [
@@ -24,7 +22,7 @@ export const roamMarkdownToHtml = (
       {disable: {null: constructsToDisable}},
     ])
     .data('fromMarkdownExtensions', [gfmAutolinkLiteralFromMarkdown])
-    .use(markdown)
+    .use(pipeToMarkdown)
     .use(wikiLinkPlugin, {
       wikiLinkClassName: 'backlink',
       hrefTemplate: (link: string) => {
@@ -43,9 +41,23 @@ export const roamMarkdownToHtml = (
         return [parseNoteIdSubject(name)]
       },
     })
-    .use(remark2rehype)
-    .use(html)
+    .use(remarkFrontmatter, ['yaml'])
+    .use(() => {
+      return (tree, file) => {
+        const frontMatter = tree.children.find((node) => node.type === 'yaml') as any
+
+        if (frontMatter) {
+          const data = loadYaml(frontMatter.value) as any
+          file.data = {...file.data, ...data}
+        }
+      }
+    })
+    .use(pipeToRehype)
+    .use(pipeToHtml)
     .processSync(content)
 
-  return processor.toString()
+  return {
+    html: processor.toString(),
+    data: processor.data,
+  }
 }
