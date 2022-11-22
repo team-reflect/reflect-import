@@ -1,5 +1,5 @@
 // Vitest Snapshot v1
 
-exports[`generateContentFromRoamNote > handles both formats of todos 1`] = `"<h1>note1</h1><ul><li><p>parent</p><ul><li><input type=\\"checkbox\\" ><p>todo 1</p><ul></ul></li><li><input type=\\"checkbox\\" ><p>todo 2</p><ul></ul></li></ul></li></ul>"`;
+exports[`RoamConvertor > generateContentFromRoamNote > handles both formats of todos 1`] = `"<h1>note1</h1><ul><li><p>parent</p><ul><li><input type=\\"checkbox\\" ><p>todo 1</p><ul></ul></li><li><input type=\\"checkbox\\" ><p>todo 2</p><ul></ul></li></ul></li></ul>"`;
 
-exports[`generateContentFromRoamNote > handles list with mixed bullets and tasks 1`] = `"<h1>note1</h1><ul><li><p>parent</p><ul><li><input type=\\"checkbox\\" ><p>todo 1</p><ul></ul></li><li><input type=\\"checkbox\\" checked><p>todo 2</p><ul></ul></li><li><p>bullet 1</p><ul></ul></li><li><p>bullet 2</p><ul></ul></li><li><input type=\\"checkbox\\" ><p>todo 3</p><ul></ul></li></ul></li></ul>"`;
+exports[`RoamConvertor > generateContentFromRoamNote > handles list with mixed bullets and tasks 1`] = `"<h1>note1</h1><ul><li><p>parent</p><ul><li><input type=\\"checkbox\\" ><p>todo 1</p><ul></ul></li><li><input type=\\"checkbox\\" checked><p>todo 2</p><ul></ul></li><li><p>bullet 1</p><ul></ul></li><li><p>bullet 2</p><ul></ul></li><li><input type=\\"checkbox\\" ><p>todo 3</p><ul></ul></li></ul></li></ul>"`;
