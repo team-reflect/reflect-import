@@ -5,7 +5,7 @@ describe('nodesFromRoamMarkdown', () => {
   it('skips headings', () => {
     const {html} = markdownToHtml('# foo', {
       graphId: '123',
-      linkHost: 'http://example.com',
+      linkHost: 'reflect.app',
       constructsToDisable: ['thematicBreak', 'list', 'headingAtx'],
     })
     expect(html).toEqual('<p># foo</p>')
