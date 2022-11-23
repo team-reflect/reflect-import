@@ -9,6 +9,7 @@ import {unified} from 'unified'
 import {buildBacklinkUrl} from './backlink'
 import {parseNoteIdSubject} from '../convertors/roam/roam-helpers'
 import {load as loadYaml} from 'js-yaml'
+import {toString} from 'mdast-util-to-string'
 
 export const markdownToHtml = (
   content: string,
@@ -41,12 +42,24 @@ export const markdownToHtml = (
         return [parseNoteIdSubject(name)]
       },
     })
+    .use(() => {
+      return (tree, file) => {
+        const header = tree.children.find((node) => node.type === 'heading')
+
+        // Try and parse out the subject from the first header
+        if (header?.type === 'heading' && header.children.length) {
+          const data = {subject: toString(header)}
+          file.data = {...file.data, ...data}
+        }
+      }
+    })
     .use(remarkFrontmatter, ['yaml'])
     .use(() => {
       return (tree, file) => {
-        const frontMatter = tree.children.find((node) => node.type === 'yaml') as any
+        const frontMatter = tree.children.find((node) => node.type === 'yaml')
 
-        if (frontMatter?.value) {
+        // Hydrate data with frontmatter
+        if (frontMatter?.type === 'yaml' && frontMatter.value) {
           const data = loadYaml(frontMatter.value) as any
           file.data = {...file.data, ...data}
         }
