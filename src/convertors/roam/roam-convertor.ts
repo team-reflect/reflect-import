@@ -25,6 +25,10 @@ export class RoamConvertor implements Convertor {
     return domArrayToHtml([header1(note.title), this.generateList(note)])
   }
 
+  convert(data: string) {
+    return {html: this.toHtml(data)}
+  }
+
   private generateList(note: RoamNote): DOM {
     if (!note.children) {
       return list()
