@@ -1,9 +1,9 @@
-import {format} from 'prettier'
-import parserHtml from 'prettier/parser-html'
+import { format } from "prettier";
+import parserHtml from "prettier/parser-html";
 
 export function formatHtml(htmlString: string) {
   return format(htmlString, {
-    parser: 'html',
+    parser: "html",
     plugins: [parserHtml],
-  })
+  });
 }
