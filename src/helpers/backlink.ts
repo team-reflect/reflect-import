@@ -3,9 +3,9 @@ export const buildBacklinkUrl = ({
   graphId,
   noteId,
 }: {
-  linkHost: string;
-  graphId: string;
-  noteId: string;
+  linkHost: string
+  graphId: string
+  noteId: string
 }) => {
-  return `https://${linkHost}/g/${graphId}/${noteId}`;
-};
+  return `https://${linkHost}/g/${graphId}/${noteId}`
+}
