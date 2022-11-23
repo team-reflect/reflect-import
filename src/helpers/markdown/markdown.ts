@@ -5,15 +5,16 @@ import pipeToMarkdown from 'remark-parse'
 import pipeToRehype from 'remark-rehype'
 import wikiLinkPlugin from 'remark-wiki-link'
 import {unified} from 'unified'
-import {buildBacklinkUrl} from './backlink'
-import {parseNoteIdSubject} from '../convertors/roam/roam-helpers'
-import {toString} from 'mdast-util-to-string'
+import {buildBacklinkUrl} from '../backlink'
+import {parseNoteIdSubject} from '../../convertors/roam/roam-helpers'
+import {hydrateBacklinkNoteIds} from './plugins/hydrate-backlink-note-ids'
+import {hydrateSubject} from './plugins/hydrate-subject'
 
 export const markdownToHtml = (
   content: string,
   options: {graphId: string; linkHost: string; constructsToDisable?: string[]},
 ) => {
-  const {constructsToDisable = []} = options
+  const {constructsToDisable = [], graphId, linkHost} = options
 
   const processor = unified()
     .data('micromarkExtensions', [
@@ -40,23 +41,15 @@ export const markdownToHtml = (
         return [parseNoteIdSubject(name)]
       },
     })
-    .use(() => {
-      return (tree, file) => {
-        const header = tree.children.find((node) => node.type === 'heading')
-
-        // Try and parse out the subject from the first header
-        if (header?.type === 'heading' && header.children.length) {
-          const data = {subject: toString(header)}
-          file.data = {...file.data, ...data}
-        }
-      }
-    })
+    .use(hydrateSubject)
     .use(pipeToRehype)
+    .use(hydrateBacklinkNoteIds, {graphId, linkHost})
     .use(pipeToHtml)
     .processSync(content)
 
   return {
     html: processor.toString(),
-    data: processor.data,
+    subject: processor.data.subject as string | undefined,
+    backlinkNoteIds: processor.data.backlinkNoteIds as string[],
   }
 }

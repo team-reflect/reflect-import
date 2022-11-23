@@ -1,4 +1,4 @@
-import {markdownToHtml} from '../../helpers/markdown'
+import {markdownToHtml} from '../../helpers/markdown/markdown'
 import {describe, it, expect} from 'vitest'
 
 describe('nodesFromRoamMarkdown', () => {

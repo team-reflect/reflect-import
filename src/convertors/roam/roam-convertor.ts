@@ -1,7 +1,7 @@
 import {DOM, domArrayToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
 import {Convertor, REFLECT_HOSTNAME} from '../../types'
-import {markdownToHtml} from '../../helpers/markdown'
+import {markdownToHtml} from '../../helpers/markdown/markdown'
 import {RoamNote, RoamNoteString} from './types'
 
 export class RoamConvertor implements Convertor {

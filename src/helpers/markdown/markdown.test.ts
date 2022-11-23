@@ -36,11 +36,27 @@ This is a test
 This is a test
 `
 
-    const {data} = markdownToHtml(markdown, {
+    const {subject} = markdownToHtml(markdown, {
       graphId: 'testgraph',
       linkHost: 'reflect.app',
     })
 
-    expect(data.subject).toBe('Hello World')
+    expect(subject).toBe('Hello World')
+  })
+
+  it('should extract backlinks from the markdown', () => {
+    const markdown = `
+# Hello World
+
+[[my backlink]]
+[[another backlink]]
+`
+
+    const {backlinkNoteIds: ids} = markdownToHtml(markdown, {
+      graphId: 'testgraph',
+      linkHost: 'reflect.app',
+    })
+
+    expect(ids).toEqual(['mybacklink', 'anotherbacklink'])
   })
 })

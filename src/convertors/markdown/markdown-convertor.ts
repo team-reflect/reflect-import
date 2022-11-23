@@ -1,6 +1,6 @@
 import {domArrayToHtml} from '../../helpers/dom'
 import {header1} from '../../helpers/generators'
-import {markdownToHtml} from '../../helpers/markdown'
+import {markdownToHtml} from '../../helpers/markdown/markdown'
 import {Convertor, REFLECT_HOSTNAME} from '../../types'
 
 export class MarkdownConvertor implements Convertor {
