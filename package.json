@@ -46,7 +46,7 @@
   "size-limit": [
     {
       "path": "dist/index.js",
-      "limit": "500 KB"
+      "limit": "100 KB"
     }
   ],
   "tsup": {
