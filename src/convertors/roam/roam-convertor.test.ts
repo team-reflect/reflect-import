@@ -1,6 +1,7 @@
 import {RoamConvertor} from './roam-convertor'
 import {RoamNote} from './types'
 import {formatHtml} from '../../testing/format-html'
+import {describe, it, expect} from 'vitest'
 
 describe('RoamConvertor', () => {
   const ROAM_SAMPLE: RoamNote = {
@@ -35,7 +36,7 @@ describe('RoamConvertor', () => {
   const htmlFromRoamNote = (note: RoamNote, graphId: string) =>
     new RoamConvertor({graphId}).toHtml(JSON.stringify(note))
 
-  test('parseContentFromHTML', () => {
+  it('parseContentFromHTML', () => {
     const result = htmlFromRoamNote(ROAM_SAMPLE, '123')
 
     expect(formatHtml(result)).toMatchInlineSnapshot(

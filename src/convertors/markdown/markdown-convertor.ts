@@ -19,12 +19,10 @@ export class MarkdownConvertor implements Convertor {
   }
 
   toHtml(markdown: string): string {
-    const {html, data} = markdownToHtml(markdown, {
+    const {html, subject} = markdownToHtml(markdown, {
       graphId: this.graphId,
       linkHost: this.linkHost,
     })
-
-    const subject = (data?.subject || data?.title) as string | undefined
 
     return subject ? domArrayToHtml([header1(subject), html]) : html
   }
