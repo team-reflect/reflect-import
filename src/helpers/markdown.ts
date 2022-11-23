@@ -1,4 +1,3 @@
-import remarkFrontmatter from 'remark-frontmatter'
 import {gfmAutolinkLiteralFromMarkdown} from 'mdast-util-gfm-autolink-literal'
 import {gfmAutolinkLiteral} from 'micromark-extension-gfm-autolink-literal'
 import pipeToHtml from 'rehype-stringify'
@@ -8,7 +7,6 @@ import wikiLinkPlugin from 'remark-wiki-link'
 import {unified} from 'unified'
 import {buildBacklinkUrl} from './backlink'
 import {parseNoteIdSubject} from '../convertors/roam/roam-helpers'
-import {load as loadYaml} from 'js-yaml'
 import {toString} from 'mdast-util-to-string'
 
 export const markdownToHtml = (
@@ -49,18 +47,6 @@ export const markdownToHtml = (
         // Try and parse out the subject from the first header
         if (header?.type === 'heading' && header.children.length) {
           const data = {subject: toString(header)}
-          file.data = {...file.data, ...data}
-        }
-      }
-    })
-    .use(remarkFrontmatter, ['yaml'])
-    .use(() => {
-      return (tree, file) => {
-        const frontMatter = tree.children.find((node) => node.type === 'yaml')
-
-        // Hydrate data with frontmatter
-        if (frontMatter?.type === 'yaml' && frontMatter.value) {
-          const data = loadYaml(frontMatter.value) as any
           file.data = {...file.data, ...data}
         }
       }
