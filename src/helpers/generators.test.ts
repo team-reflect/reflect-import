@@ -1,5 +1,6 @@
 import {domToHtml} from './dom'
 import {header1, list, listItem, paragraph} from './generators'
+import {describe, it, expect} from 'vitest'
 
 describe('generators', () => {
   it('generates a header', () => {
