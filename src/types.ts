@@ -1,5 +1,11 @@
+type ConvertResult = {
+  html: string
+  subject?: string
+  backlinkNoteIds?: string[]
+}
+
 export interface Convertor {
-  toHtml(data: string): string
+  convert(data: string): ConvertResult
 }
 
 export const REFLECT_HOSTNAME = 'reflect.app'

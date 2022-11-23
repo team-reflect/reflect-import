@@ -18,12 +18,14 @@ export class MarkdownConvertor implements Convertor {
     this.linkHost = linkHost
   }
 
-  toHtml(markdown: string): string {
-    const {html, subject} = markdownToHtml(markdown, {
+  convert(data: string) {
+    const {html, subject, backlinkNoteIds} = markdownToHtml(data, {
       graphId: this.graphId,
       linkHost: this.linkHost,
     })
 
-    return subject ? domArrayToHtml([header1(subject), html]) : html
+    const htmlWithSubject = subject ? domArrayToHtml([header1(subject), html]) : html
+
+    return {html: htmlWithSubject, subject, backlinkNoteIds}
   }
 }
