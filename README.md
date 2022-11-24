@@ -14,4 +14,4 @@ They implement a `convert(data: string)` function and return either a note or an
 - [x] Evernote
 - [x] Roam
 - [x] Markdown
-- [] Workflowy
+- [ ] Workflowy
