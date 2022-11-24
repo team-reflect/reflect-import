@@ -1,6 +1,7 @@
 import {notEmpty} from '../../helpers/array-fns'
 import {buildBacklinkParser} from '../../helpers/backlink'
 import {ListConvertor, REFLECT_HOSTNAME} from '../../types'
+import {EvernoteConversionError} from './types'
 
 export class EvernoteConvertor implements ListConvertor {
   graphId: string
@@ -45,7 +46,7 @@ export class EvernoteConvertor implements ListConvertor {
     const parseError = doc.querySelector('parsererror')
 
     if (parseError) {
-      throw new Error(parseError.textContent ?? 'Unknown parse error')
+      throw new EvernoteConversionError(parseError.textContent ?? 'Unknown parse error')
     }
 
     return doc
