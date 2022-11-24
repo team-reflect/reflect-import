@@ -6,7 +6,7 @@ import {EvernoteConversionError} from './types'
 export class EvernoteConvertor implements ListConvertor {
   graphId: string
   linkHost: string
-  backlinkParser: (url: string) => string | null
+  private backlinkParser: (url: string) => string | null
 
   constructor({
     graphId,
