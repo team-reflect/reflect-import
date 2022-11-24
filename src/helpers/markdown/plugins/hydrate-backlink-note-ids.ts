@@ -2,6 +2,7 @@ import 'urlpattern-polyfill'
 import {visit} from 'unist-util-visit'
 import {Root} from 'mdast'
 import {Plugin} from 'unified'
+import {buildBacklinkParser} from '../../../helpers/backlink'
 
 type HydrateBacklinkNoteIdsOptions = {
   graphId: string
@@ -10,20 +11,16 @@ type HydrateBacklinkNoteIdsOptions = {
 export const hydrateBacklinkNoteIds: Plugin<[HydrateBacklinkNoteIdsOptions], Root> = (
   options: HydrateBacklinkNoteIdsOptions,
 ) => {
-  const backlinkMatcher = new URLPattern({
-    protocol: 'http{s}?',
-    hostname: options.linkHost,
-    pathname: `/g/${options.graphId}/:noteId`,
-  })
+  const backlinkMatcher = buildBacklinkParser(options)
 
   return (tree, file) => {
     const noteIds = new Set<string>()
     visit(tree, (node: any) => {
       if (node.type === 'element' && node.tagName === 'a' && node.properties.href) {
-        const match = backlinkMatcher.exec(node.properties.href)
+        const url = backlinkMatcher(node.properties.href)
 
-        if (match && match.pathname.groups.noteId) {
-          noteIds.add(match.pathname.groups.noteId)
+        if (url) {
+          noteIds.add(url)
         }
       }
     })

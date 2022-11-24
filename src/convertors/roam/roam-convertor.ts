@@ -1,10 +1,10 @@
 import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
-import {Convertor, REFLECT_HOSTNAME} from '../../types'
+import {ListConvertor, REFLECT_HOSTNAME} from '../../types'
 import {markdownToHtml} from '../../helpers/markdown/markdown'
 import {RoamNote, RoamNoteString} from './types'
 
-export class RoamConvertor implements Convertor {
+export class RoamConvertor implements ListConvertor {
   graphId: string
   linkHost: string
 
@@ -19,14 +19,14 @@ export class RoamConvertor implements Convertor {
     this.linkHost = linkHost
   }
 
-  toHtml(json: string): string {
-    const {html} = this.convert(json)
-    return html
-  }
-
   convert(data: string) {
-    const note = JSON.parse(data) as RoamNote
-    return this.convertRoamNote(note)
+    const notes = JSON.parse(data) as RoamNote[]
+
+    if (!Array.isArray(notes)) {
+      throw new Error('Roam export must be an array of notes')
+    }
+
+    return notes.map((note) => this.convertRoamNote(note))
   }
 
   private convertRoamNote(note: RoamNote): {html: string; backlinkNoteIds: string[]} {

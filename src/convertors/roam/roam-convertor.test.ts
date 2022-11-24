@@ -33,8 +33,12 @@ describe('RoamConvertor', () => {
     ],
   }
 
-  const htmlFromRoamNote = (note: RoamNote, graphId: string) =>
-    new RoamConvertor({graphId}).toHtml(JSON.stringify(note))
+  const htmlFromRoamNote = (note: RoamNote, graphId: string) => {
+    const notesJson = JSON.stringify([note])
+    const convertor = new RoamConvertor({graphId})
+    const [{html}] = convertor.convert(notesJson)
+    return html
+  }
 
   it('parseContentFromHTML', () => {
     const result = htmlFromRoamNote(ROAM_SAMPLE, '123')
