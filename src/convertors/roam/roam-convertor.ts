@@ -1,8 +1,8 @@
 import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
-import {ListConvertor, REFLECT_HOSTNAME} from '../../types'
+import {ConvertedNote, ListConvertor, REFLECT_HOSTNAME} from '../../types'
 import {markdownToHtml} from '../../helpers/markdown/markdown'
-import {RoamNote, RoamNoteString} from './types'
+import {RoamConversionError, RoamConvertedNote, RoamNote, RoamNoteString} from './types'
 
 export class RoamConvertor implements ListConvertor {
   graphId: string
@@ -23,22 +23,36 @@ export class RoamConvertor implements ListConvertor {
     const notes = JSON.parse(data) as RoamNote[]
 
     if (!Array.isArray(notes)) {
-      throw new Error('Roam export must be an array of notes')
+      throw new RoamConversionError('Roam export must be an array of notes')
     }
 
     return notes.map((note) => this.convertRoamNote(note))
   }
 
-  private convertRoamNote(note: RoamNote): {html: string; backlinkNoteIds: string[]} {
-    const aggregBacklinkNoteIds = new Set<string>()
+  private convertRoamNote(note: RoamNote): RoamConvertedNote {
+    const {html, backlinkNoteIds} = this.extractHtmlAndBacklinks(note)
 
+    const updated = note['edit-time']
+    const created = note.children?.map((child) => child['create-time']).sort()[0]
+
+    return {
+      html,
+      subject: note.title,
+      backlinkNoteIds,
+      created,
+      updated,
+    }
+  }
+
+  private extractHtmlAndBacklinks(note: RoamNote) {
     let dom = list()
+    const aggregBacklinkNoteIds = new Set<string>()
 
     if (note.children) {
       const listItems: DOM[] = []
 
       for (const child of note.children) {
-        const {html, backlinkNoteIds} = this.generateListItem(child)
+        const {html, backlinkNoteIds} = this.parseListItem(child)
 
         listItems.push(html)
         backlinkNoteIds.forEach((id) => aggregBacklinkNoteIds.add(id))
@@ -47,15 +61,16 @@ export class RoamConvertor implements ListConvertor {
       dom = list(listItems)
     }
 
-    const html = domArrayToHtml([header1(note.title), dom])
-
-    return {html, backlinkNoteIds: Array.from(aggregBacklinkNoteIds)}
+    return {
+      html: domArrayToHtml([header1(note.title), dom]),
+      backlinkNoteIds: Array.from(aggregBacklinkNoteIds),
+    }
   }
 
-  private generateListItem(
+  private parseListItem(
     noteString: RoamNoteString,
     aggregNoteIds = new Set<string>(),
-  ): {html: string; backlinkNoteIds: string[]} {
+  ): ConvertedNote & {backlinkNoteIds: string[]} {
     let string = this.convertRoamTagsToBacklinks(noteString.string?.trim() ?? '')
 
     let taskChecked: boolean | undefined
@@ -86,7 +101,7 @@ export class RoamConvertor implements ListConvertor {
 
     if (noteString.children) {
       const listItems = noteString.children.map((child) => {
-        const {html} = this.generateListItem(child, aggregNoteIds)
+        const {html} = this.parseListItem(child, aggregNoteIds)
         return html
       })
       itemChildren = list(listItems)

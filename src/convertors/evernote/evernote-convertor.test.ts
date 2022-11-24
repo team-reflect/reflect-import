@@ -5,7 +5,7 @@ describe('EvernoteConvertor', () => {
   it('converts evernote to HTML', () => {
     const convertor = new EvernoteConvertor({graphId: '123'})
 
-    const [{subject, html}] = convertor.convert(
+    const [{subject, html, created, updated}] = convertor.convert(
       `<?xml version="1.0" encoding="UTF-8"?>
     <en-export export-date="20221224T010732Z" application="Evernote" version="10.49.4">
       <note>
@@ -27,6 +27,8 @@ describe('EvernoteConvertor', () => {
     expect(html).toMatchInlineSnapshot(
       '"<h2>h2 title</h2><ul><li><div>list <a href=\\"https://google.com\\">link</a> </div></li></ul>"',
     )
+    expect(created).toEqual(new Date('2022-11-23T11:12:27.000Z').getTime())
+    expect(updated).toEqual(new Date('2022-11-23T12:06:54.000Z').getTime())
   })
 
   it('raises an error if parsing fails', () => {

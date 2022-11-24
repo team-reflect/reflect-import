@@ -1,3 +1,4 @@
+import parse from 'date-fns/parse'
 import {notEmpty} from '../../helpers/array-fns'
 import {buildBacklinkParser} from '../../helpers/backlink'
 import {ListConvertor, REFLECT_HOSTNAME} from '../../types'
@@ -32,8 +33,9 @@ export class EvernoteConvertor implements ListConvertor {
     const subject = this.extractSubject(noteDoc)
     const html = this.extractHtml(noteDoc)
     const backlinkNoteIds = this.extractBacklinkNoteIds(noteDoc)
+    const timestamps = this.extractTimestamps(noteDoc)
 
-    return {html, subject, backlinkNoteIds}
+    return {html, subject, backlinkNoteIds, ...timestamps}
   }
 
   private extractSubject(noteDoc: Element): string | undefined {
@@ -56,6 +58,21 @@ export class EvernoteConvertor implements ListConvertor {
       .filter(notEmpty)
 
     return backlinkNoteIds
+  }
+
+  private extractTimestamps(noteDoc: Element) {
+    const createdAtString = noteDoc.querySelector('created')?.textContent
+    const updatedAtString = noteDoc.querySelector('updated')?.textContent
+
+    const created = createdAtString ? this.parseDate(createdAtString) : undefined
+    const updated = updatedAtString ? this.parseDate(updatedAtString) : undefined
+
+    return {created, updated}
+  }
+
+  private parseDate(dateString: string): number {
+    // Format is 20221124T000557Z
+    return parse(dateString, "yyyyMMdd'T'HHmmss'Z'", new Date()).getTime()
   }
 
   private parseXml(xml: string) {

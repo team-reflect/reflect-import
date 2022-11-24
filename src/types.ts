@@ -1,9 +1,16 @@
 export const REFLECT_HOSTNAME = 'reflect.app'
 
 export type ConvertedNote = {
+  // A required html string
   html: string
+  // An optional subject
   subject?: string
+  // A list of note ids that are references from inside this note
   backlinkNoteIds?: string[]
+  // The date the note was created
+  created?: number
+  // The date the note was updated
+  updated?: number
 }
 
 export interface Convertor {
