@@ -9,5 +9,10 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    alias: {
+      convertors: '/src/convertors',
+      helpers: '/src/helpers',
+      testing: '/src/testing',
+    },
   },
 })
