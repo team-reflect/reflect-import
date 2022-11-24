@@ -29,14 +29,33 @@ export class EvernoteConvertor implements ListConvertor {
   }
 
   private convertNoteDoc(noteDoc: Element) {
+    const subject = this.extractSubject(noteDoc)
+    const html = this.extractHtml(noteDoc)
+    const backlinkNoteIds = this.extractBacklinkNoteIds(noteDoc)
+
+    return {html, subject, backlinkNoteIds}
+  }
+
+  private extractSubject(noteDoc: Element): string | undefined {
     const subject = noteDoc.querySelector('title')?.textContent ?? undefined
+    return subject
+  }
+
+  private extractHtml(noteDoc: Element): string {
     const content = noteDoc.querySelector('content')?.textContent ?? ''
-    const html = this.parseXml(content).querySelector('en-note')?.innerHTML ?? ''
+    const contentDoc = this.parseXml(content)
+    const contentNoteDoc = contentDoc.querySelector('en-note')
+    const html = contentNoteDoc?.innerHTML ?? ''
+
+    return html
+  }
+
+  private extractBacklinkNoteIds(noteDoc: Element): string[] {
     const backlinkNoteIds = Array.from(noteDoc.querySelectorAll('a[href]'))
       .map((element) => this.backlinkParser(element.getAttribute('href')!))
       .filter(notEmpty)
 
-    return {html, subject, backlinkNoteIds}
+    return backlinkNoteIds
   }
 
   private parseXml(xml: string) {
