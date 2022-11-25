@@ -1,5 +1,9 @@
 {
-  "name": "reflect-import",
+  "name": "@team-reflect/reflect-import",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": "git://github.com/team-reflect/reflect-import.git",
   "type": "module",
   "version": "0.1.0",
   "author": "Alex MacCaw",
