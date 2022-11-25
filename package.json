@@ -21,7 +21,7 @@
   "scripts": {
     "start": "tsup --watch",
     "build": "tsup",
-    "test": "vitest",
+    "test": "TZ=UTC vitest",
     "prepare": "tsup",
     "size": "size-limit",
     "analyze": "size-limit --why",

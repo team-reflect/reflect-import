@@ -346,4 +346,29 @@ describe('RoamConvertor', () => {
       expect(html).toMatchInlineSnapshot('"<h1>note1</h1><ul><li></li></ul>"')
     })
   })
+
+  describe('createdAt', () => {
+    it('should be extracted from the title', () => {
+      const note: RoamNote = {
+        title: 'October 10th, 2020',
+        uid: '123',
+        'edit-time': 12345,
+        children: [
+          {
+            string: '',
+            'create-time': 12345,
+            uid: '123',
+            'edit-time': 12345,
+          },
+        ],
+      }
+
+      const convertor = new RoamConvertor({graphId: '123'})
+      const [result] = convertor.convert(JSON.stringify([note]))
+
+      const {created} = result
+
+      expect(new Date(created!)).toEqual(new Date('2020-10-10T00:00:00.000Z'))
+    })
+  })
 })

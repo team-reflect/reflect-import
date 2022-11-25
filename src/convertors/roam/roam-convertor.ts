@@ -4,6 +4,7 @@ import {ConvertedNote, ListConvertor, REFLECT_HOSTNAME} from '../../types'
 import {markdownToHtml} from '../../helpers/markdown/markdown'
 import {RoamConversionError, RoamConvertedNote, RoamNote, RoamNoteString} from './types'
 import isValid from 'date-fns/isValid'
+import {parseDateFromSubject} from './roam-helpers'
 
 export class RoamConvertor implements ListConvertor {
   graphId: string
@@ -34,13 +35,14 @@ export class RoamConvertor implements ListConvertor {
     const {html, backlinkNoteIds} = this.extractHtmlAndBacklinks(note)
 
     const updated = note['edit-time']
-    const created = note.children?.map((child) => child['create-time']).sort()[0]
+    const minChildCreated = note.children?.map((child) => child['create-time']).sort()[0]
+    const titleDate = parseDateFromSubject(note.title)
 
     return {
       html,
       subject: note.title,
       backlinkNoteIds,
-      created: this.validateTime(created),
+      created: this.validateTime(titleDate?.getTime() ?? minChildCreated),
       updated: this.validateTime(updated),
     }
   }
