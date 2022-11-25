@@ -3,6 +3,7 @@ import {header1, list, listItem, taskListItem} from '../../helpers/generators'
 import {ConvertedNote, ListConvertor, REFLECT_HOSTNAME} from '../../types'
 import {markdownToHtml} from '../../helpers/markdown/markdown'
 import {RoamConversionError, RoamConvertedNote, RoamNote, RoamNoteString} from './types'
+import isValid from 'date-fns/isValid'
 
 export class RoamConvertor implements ListConvertor {
   graphId: string
@@ -39,9 +40,19 @@ export class RoamConvertor implements ListConvertor {
       html,
       subject: note.title,
       backlinkNoteIds,
-      created,
-      updated,
+      created: this.validateTime(created),
+      updated: this.validateTime(updated),
     }
+  }
+
+  private validateTime(time: number | undefined): number | undefined {
+    const date = time ? new Date(time) : undefined
+
+    if (date && isValid(date)) {
+      return time
+    }
+
+    return
   }
 
   private extractHtmlAndBacklinks(note: RoamNote) {
