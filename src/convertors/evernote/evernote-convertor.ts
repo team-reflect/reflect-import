@@ -1,7 +1,7 @@
 import parse from 'date-fns/parse'
 import {notEmpty} from '../../helpers/array-fns'
 import {buildBacklinkParser} from '../../helpers/backlink'
-import {ListConvertor, REFLECT_HOSTNAME} from '../../types'
+import {ConvertedNote, ListConvertor, REFLECT_HOSTNAME} from '../../types'
 import {EvernoteConversionError} from './types'
 
 export class EvernoteConvertor implements ListConvertor {
@@ -21,7 +21,7 @@ export class EvernoteConvertor implements ListConvertor {
     this.backlinkParser = buildBacklinkParser({linkHost, graphId})
   }
 
-  convert(data: string) {
+  convert(data: string): ConvertedNote[] {
     const doc = this.parseXml(data)
 
     const noteDocs = Array.from(doc.querySelectorAll('en-export > note'))
@@ -29,7 +29,7 @@ export class EvernoteConvertor implements ListConvertor {
     return noteDocs.map((noteDoc) => this.convertNoteDoc(noteDoc))
   }
 
-  private convertNoteDoc(noteDoc: Element) {
+  private convertNoteDoc(noteDoc: Element): ConvertedNote {
     const subject = this.extractSubject(noteDoc)
     const html = this.extractHtml(noteDoc)
     const backlinkNoteIds = this.extractBacklinkNoteIds(noteDoc)
@@ -64,13 +64,13 @@ export class EvernoteConvertor implements ListConvertor {
     const createdAtString = noteDoc.querySelector('created')?.textContent
     const updatedAtString = noteDoc.querySelector('updated')?.textContent
 
-    const created = createdAtString ? this.parseDate(createdAtString) : undefined
-    const updated = updatedAtString ? this.parseDate(updatedAtString) : undefined
+    const createdAt = createdAtString ? this.parseTime(createdAtString) : undefined
+    const updatedAt = updatedAtString ? this.parseTime(updatedAtString) : undefined
 
-    return {created, updated}
+    return {createdAt, updatedAt}
   }
 
-  private parseDate(dateString: string): number {
+  private parseTime(dateString: string): number {
     // Format is 20221124T000557Z
     return parse(dateString, "yyyyMMdd'T'HHmmss'Z'", new Date()).getTime()
   }

@@ -12,7 +12,7 @@ const convertor = new EvernoteConvertor({graphId: '123'})
 
 const notes = convertor.convert(exexExport)
 
-// => [{subject: '', html: '', created: 123, updated: 123, backlinkedNoteIds}]
+// => [{subject: '', html: '', createdAt: 123, updatedAt: 123, backlinkedNoteIds}]
 ```
 
 ## TODO

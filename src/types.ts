@@ -8,9 +8,9 @@ export type ConvertedNote = {
   // A list of note ids that are references from inside this note
   backlinkNoteIds?: string[]
   // The date the note was created
-  created?: number
+  createdAt?: number
   // The date the note was updated
-  updated?: number
+  updatedAt?: number
 }
 
 export interface Convertor {
