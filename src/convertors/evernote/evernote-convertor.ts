@@ -1,7 +1,7 @@
 import parse from 'date-fns/parse'
 import {notEmpty} from '../../helpers/array-fns'
 import {buildBacklinkParser} from '../../helpers/backlink'
-import {ConvertedNote, ListConvertor, REFLECT_HOSTNAME} from '../../types'
+import {ConvertedNote, ConvertOptions, ListConvertor, REFLECT_HOSTNAME} from '../../types'
 import {EvernoteConversionError} from './types'
 
 export class EvernoteConvertor implements ListConvertor {
@@ -21,7 +21,7 @@ export class EvernoteConvertor implements ListConvertor {
     this.backlinkParser = buildBacklinkParser({linkHost, graphId})
   }
 
-  convert(data: string): ConvertedNote[] {
+  convert({data}: ConvertOptions): ConvertedNote[] {
     const doc = this.parseXml(data)
 
     const noteDocs = Array.from(doc.querySelectorAll('en-export > note'))

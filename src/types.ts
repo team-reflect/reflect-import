@@ -15,12 +15,17 @@ export type ConvertedNote = {
   isDaily?: boolean
 }
 
+export interface ConvertOptions {
+  data: string
+  filename?: string
+}
+
 export interface Convertor {
-  convert(data: string): ConvertedNote
+  convert(options: ConvertOptions): ConvertedNote
 }
 
 export interface ListConvertor {
-  convert(data: string): ConvertedNote[]
+  convert(options: ConvertOptions): ConvertedNote[]
 }
 export class ConversionError extends Error {
   constructor(message: string) {

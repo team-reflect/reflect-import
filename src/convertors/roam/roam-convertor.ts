@@ -1,6 +1,6 @@
 import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
-import {ConvertedNote, ListConvertor, REFLECT_HOSTNAME} from '../../types'
+import {ConvertedNote, ConvertOptions, ListConvertor, REFLECT_HOSTNAME} from '../../types'
 import {markdownToHtml} from '../../helpers/markdown/markdown'
 import {RoamConversionError, RoamConvertedNote, RoamNote, RoamNoteString} from './types'
 import isValid from 'date-fns/isValid'
@@ -21,7 +21,7 @@ export class RoamConvertor implements ListConvertor {
     this.linkHost = linkHost
   }
 
-  convert(data: string) {
+  convert({data}: ConvertOptions) {
     const notes = JSON.parse(data) as RoamNote[]
 
     if (!Array.isArray(notes)) {

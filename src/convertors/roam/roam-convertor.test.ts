@@ -36,7 +36,7 @@ describe('RoamConvertor', () => {
   const htmlFromRoamNote = (note: RoamNote, graphId: string) => {
     const notesJson = JSON.stringify([note])
     const convertor = new RoamConvertor({graphId})
-    const [{html}] = convertor.convert(notesJson)
+    const [{html}] = convertor.convert({data: notesJson})
     return html
   }
 
@@ -364,7 +364,7 @@ describe('RoamConvertor', () => {
       }
 
       const convertor = new RoamConvertor({graphId: '123'})
-      const [result] = convertor.convert(JSON.stringify([note]))
+      const [result] = convertor.convert({data: JSON.stringify([note])})
 
       const {createdAt} = result
 
