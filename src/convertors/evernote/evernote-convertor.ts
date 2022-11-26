@@ -1,4 +1,5 @@
 import parse from 'date-fns/parse'
+import {toNoteId} from 'helpers/to-id'
 import {notEmpty} from '../../helpers/array-fns'
 import {buildBacklinkParser} from '../../helpers/backlink'
 import {ConvertedNote, ConvertOptions, ListConvertor, REFLECT_HOSTNAME} from '../../types'
@@ -40,7 +41,7 @@ export class EvernoteConvertor implements ListConvertor {
   }
 
   private buildId(createdAt?: number, subject?: string) {
-    return `${createdAt}-${subject}`
+    return toNoteId(`${createdAt}${subject}`)
   }
 
   private extractSubject(noteDoc: Element): string | undefined {
