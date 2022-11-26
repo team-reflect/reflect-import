@@ -21,7 +21,7 @@ export class RoamConvertor implements ListConvertor {
     this.linkHost = linkHost
   }
 
-  convert({data}: ConvertOptions) {
+  convert({data}: ConvertOptions): ConvertedNote[] {
     const notes = JSON.parse(data) as RoamNote[]
 
     if (!Array.isArray(notes)) {
@@ -39,6 +39,7 @@ export class RoamConvertor implements ListConvertor {
     const titleDate = parseDateFromSubject(note.title)
 
     return {
+      id: note.uid,
       html,
       subject: note.title,
       backlinkNoteIds,
@@ -81,10 +82,7 @@ export class RoamConvertor implements ListConvertor {
     }
   }
 
-  private parseListItem(
-    noteString: RoamNoteString,
-    aggregNoteIds = new Set<string>(),
-  ): ConvertedNote & {backlinkNoteIds: string[]} {
+  private parseListItem(noteString: RoamNoteString, aggregNoteIds = new Set<string>()) {
     let string = this.convertRoamTagsToBacklinks(noteString.string?.trim() ?? '')
 
     let taskChecked: boolean | undefined

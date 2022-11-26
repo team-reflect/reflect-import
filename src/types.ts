@@ -1,6 +1,8 @@
 export const REFLECT_HOSTNAME = 'reflect.app'
 
 export type ConvertedNote = {
+  // A unique id for the note
+  id: string
   // A required html string
   html: string
   // An optional subject

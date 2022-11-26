@@ -34,8 +34,13 @@ export class EvernoteConvertor implements ListConvertor {
     const html = this.extractHtml(noteDoc)
     const backlinkNoteIds = this.extractBacklinkNoteIds(noteDoc)
     const timestamps = this.extractTimestamps(noteDoc)
+    const id = this.buildId(timestamps.createdAt, subject)
 
-    return {html, subject, backlinkNoteIds, isDaily: false, ...timestamps}
+    return {id, html, subject, backlinkNoteIds, isDaily: false, ...timestamps}
+  }
+
+  private buildId(createdAt?: number, subject?: string) {
+    return `${createdAt}-${subject}`
   }
 
   private extractSubject(noteDoc: Element): string | undefined {

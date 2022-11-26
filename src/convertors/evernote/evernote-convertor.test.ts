@@ -18,7 +18,7 @@ describe('EvernoteConvertor', () => {
   <!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note><h2>h2 title</h2><ul><li><div>list <a href="https://google.com">link</a> </div></li></ul></en-note>      ]]>
       </content>
     </note>
-  </en-export>    
+  </en-export>
   `
     const [{subject, html, createdAt, updatedAt}] = convertor.convert({data})
 

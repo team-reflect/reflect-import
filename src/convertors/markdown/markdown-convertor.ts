@@ -16,15 +16,15 @@ export class MarkdownConvertor implements Convertor {
     this.linkHost = linkHost
   }
 
-  convert({data, filename}: ConvertOptions) {
+  convert({data, filename}: ConvertOptions & {filename: string}) {
     const {html, subject, backlinkNoteIds} = markdownToHtml(data, {
       graphId: this.graphId,
       linkHost: this.linkHost,
     })
 
     // Filename matches yyyy-MM-dd.md
-    const isDaily = !!filename?.match(/^\d{4}-\d{2}-\d{2}/)
+    const isDaily = /^\d{4}-\d{2}-\d{2}/.test(filename)
 
-    return {html, subject, isDaily, backlinkNoteIds}
+    return {id: filename, html, subject, isDaily, backlinkNoteIds}
   }
 }
