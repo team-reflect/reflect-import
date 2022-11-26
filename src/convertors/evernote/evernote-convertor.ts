@@ -2,10 +2,16 @@ import parse from 'date-fns/parse'
 import {toNoteId} from 'helpers/to-id'
 import {notEmpty} from '../../helpers/array-fns'
 import {buildBacklinkParser} from '../../helpers/backlink'
-import {ConvertedNote, ConvertOptions, ListConvertor, REFLECT_HOSTNAME} from '../../types'
+import {
+  ConvertedNote,
+  ConvertOptions,
+  Convertor,
+  ConvertResponse,
+  REFLECT_HOSTNAME,
+} from '../../types'
 import {EvernoteConversionError} from './types'
 
-export class EvernoteConvertor implements ListConvertor {
+export class EvernoteConvertor implements Convertor {
   graphId: string
   linkHost: string
   private backlinkParser: (url: string) => string | null
@@ -22,12 +28,14 @@ export class EvernoteConvertor implements ListConvertor {
     this.backlinkParser = buildBacklinkParser({linkHost, graphId})
   }
 
-  convert({data}: ConvertOptions): ConvertedNote[] {
+  convert({data}: ConvertOptions): ConvertResponse {
     const doc = this.parseXml(data)
 
     const noteDocs = Array.from(doc.querySelectorAll('en-export > note'))
 
-    return noteDocs.map((noteDoc) => this.convertNoteDoc(noteDoc))
+    const notes = noteDocs.map((noteDoc) => this.convertNoteDoc(noteDoc))
+
+    return {notes}
   }
 
   private convertNoteDoc(noteDoc: Element): ConvertedNote {

@@ -22,12 +22,12 @@ export interface ConvertOptions {
   filename?: string
 }
 
-export interface Convertor {
-  convert(options: ConvertOptions): ConvertedNote
+export interface ConvertResponse {
+  notes: ConvertedNote[]
 }
 
-export interface ListConvertor {
-  convert(options: ConvertOptions): ConvertedNote[]
+export interface Convertor {
+  convert(options: ConvertOptions): ConvertResponse
 }
 export class ConversionError extends Error {
   constructor(message: string) {

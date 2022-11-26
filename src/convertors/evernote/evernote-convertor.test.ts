@@ -20,7 +20,8 @@ describe('EvernoteConvertor', () => {
     </note>
   </en-export>
   `
-    const [{subject, html, createdAt, updatedAt}] = convertor.convert({data})
+    const {notes} = convertor.convert({data})
+    const [{subject, html, createdAt, updatedAt}] = notes
 
     expect(subject).toEqual('My first note')
     expect(html).toMatchInlineSnapshot(

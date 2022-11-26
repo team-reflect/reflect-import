@@ -4,7 +4,9 @@ import {describe, it, expect} from 'vitest'
 describe('convert', () => {
   it('converts markdown to HTML', () => {
     const convertor = new MarkdownConvertor({graphId: '123'})
-    const {html} = convertor.convert({data: '# foo'})
+    const {notes} = convertor.convert({data: '# foo', filename: 'foo.md'})
+    const [{html}] = notes
+
     expect(html).toEqual('<h1>foo</h1>')
   })
 })
@@ -12,13 +14,17 @@ describe('convert', () => {
 describe('isDaily', () => {
   it('is true when filename is a date', () => {
     const convertor = new MarkdownConvertor({graphId: '123'})
-    const {isDaily} = convertor.convert({data: '# foo', filename: '2020-10-10.md'})
+    const {notes} = convertor.convert({data: '# foo', filename: '2020-10-10.md'})
+    const [{isDaily}] = notes
+
     expect(isDaily).toBe(true)
   })
 
   it('is false when filename is not a date', () => {
     const convertor = new MarkdownConvertor({graphId: '123'})
-    const {isDaily} = convertor.convert({data: '# foo', filename: 'foo'})
+    const {notes} = convertor.convert({data: '# foo', filename: 'foo'})
+    const [{isDaily}] = notes
+
     expect(isDaily).toBe(false)
   })
 })

@@ -33,10 +33,11 @@ describe('RoamConvertor', () => {
     ],
   }
 
-  const htmlFromRoamNote = (note: RoamNote, graphId: string) => {
+  const htmlFromRoamNote = (note: RoamNote, graphId: string): string => {
     const notesJson = JSON.stringify([note])
     const convertor = new RoamConvertor({graphId})
-    const [{html}] = convertor.convert({data: notesJson})
+    const {notes} = convertor.convert({data: notesJson})
+    const [{html}] = notes
     return html
   }
 
@@ -364,9 +365,9 @@ describe('RoamConvertor', () => {
       }
 
       const convertor = new RoamConvertor({graphId: '123'})
-      const [result] = convertor.convert({data: JSON.stringify([note])})
+      const {notes} = convertor.convert({data: JSON.stringify([note])})
 
-      const {createdAt} = result
+      const [{createdAt}] = notes
 
       expect(createdAt).toEqual(new Date('2020-10-10T00:00:00.000Z').getTime())
     })

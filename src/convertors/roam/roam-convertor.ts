@@ -1,12 +1,12 @@
 import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
-import {ConvertedNote, ConvertOptions, ListConvertor, REFLECT_HOSTNAME} from '../../types'
+import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../../types'
 import {markdownToHtml} from '../../helpers/markdown/markdown'
 import {RoamConversionError, RoamConvertedNote, RoamNote, RoamNoteString} from './types'
 import isValid from 'date-fns/isValid'
 import {parseDateFromSubject} from './roam-helpers'
 
-export class RoamConvertor implements ListConvertor {
+export class RoamConvertor implements Convertor {
   graphId: string
   linkHost: string
 
@@ -21,14 +21,16 @@ export class RoamConvertor implements ListConvertor {
     this.linkHost = linkHost
   }
 
-  convert({data}: ConvertOptions): ConvertedNote[] {
-    const notes = JSON.parse(data) as RoamNote[]
+  convert({data}: ConvertOptions): ConvertResponse {
+    const roamNotes = JSON.parse(data) as RoamNote[]
 
-    if (!Array.isArray(notes)) {
+    if (!Array.isArray(roamNotes)) {
       throw new RoamConversionError('Roam export must be an array of notes')
     }
 
-    return notes.map((note) => this.convertRoamNote(note))
+    const notes = roamNotes.map((note) => this.convertRoamNote(note))
+
+    return {notes}
   }
 
   private convertRoamNote(note: RoamNote): RoamConvertedNote {
