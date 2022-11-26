@@ -42,6 +42,7 @@ export class RoamConvertor implements ListConvertor {
       html,
       subject: note.title,
       backlinkNoteIds,
+      isDaily: !!titleDate,
       createdAt: this.validateTime(titleDate?.getTime() ?? minChildCreated),
       updatedAt: this.validateTime(updated),
     }

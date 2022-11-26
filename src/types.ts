@@ -11,6 +11,8 @@ export type ConvertedNote = {
   createdAt?: number
   // The date the note was updated
   updatedAt?: number
+  // Whether or not the note is a daily note
+  isDaily?: boolean
 }
 
 export interface Convertor {
