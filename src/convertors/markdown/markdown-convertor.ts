@@ -22,6 +22,8 @@ export class MarkdownConvertor implements Convertor {
       linkHost: this.linkHost,
     })
 
+    // TODO isdaily
+
     return {html, subject, backlinkNoteIds}
   }
 }
