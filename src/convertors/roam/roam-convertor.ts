@@ -4,7 +4,7 @@ import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../.
 import {markdownToHtml} from '../../helpers/markdown'
 import {RoamConversionError, RoamConvertedNote, RoamNote, RoamNoteString} from './types'
 import {parseDateFromSubject, parseNoteIdFromSubject, validateTime} from './roam-helpers'
-import {first} from 'lodash'
+import first from 'lodash/first'
 
 export class RoamConvertor implements Convertor {
   graphId: string
