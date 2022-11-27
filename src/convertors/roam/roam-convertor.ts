@@ -1,10 +1,10 @@
 import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
 import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../../types'
-import {markdownToHtml} from '../../helpers/markdown/markdown'
+import {markdownToHtml} from '../../helpers/markdown'
 import {RoamConversionError, RoamConvertedNote, RoamNote, RoamNoteString} from './types'
-import isValid from 'date-fns/isValid'
-import {parseDateFromSubject} from './roam-helpers'
+import {parseDateFromSubject, parseNoteIdFromSubject, validateTime} from './roam-helpers'
+import {first} from 'lodash'
 
 export class RoamConvertor implements Convertor {
   graphId: string
@@ -21,7 +21,7 @@ export class RoamConvertor implements Convertor {
     this.linkHost = linkHost
   }
 
-  accept = {'text/*': ['.json']}
+  accept = {'application/json': ['.json']}
 
   convert({data}: ConvertOptions): ConvertResponse {
     const roamNotes = JSON.parse(data) as RoamNote[]
@@ -39,7 +39,9 @@ export class RoamConvertor implements Convertor {
     const {html, backlinkNoteIds} = this.extractHtmlAndBacklinks(note)
 
     const updated = note['edit-time']
-    const minChildCreated = note.children?.map((child) => child['create-time']).sort()[0]
+    const minChildCreated = first(
+      (note.children ?? []).map((child) => child['create-time']).sort(),
+    )
     const titleDate = parseDateFromSubject(note.title)
 
     return {
@@ -48,19 +50,9 @@ export class RoamConvertor implements Convertor {
       subject: note.title,
       backlinkNoteIds,
       isDaily: !!titleDate,
-      createdAt: this.validateTime(titleDate?.getTime() ?? minChildCreated),
-      updatedAt: this.validateTime(updated),
+      createdAt: validateTime(titleDate?.getTime() ?? minChildCreated),
+      updatedAt: validateTime(updated),
     }
-  }
-
-  private validateTime(time: number | undefined): number | undefined {
-    const date = time ? new Date(time) : undefined
-
-    if (date && isValid(date)) {
-      return time
-    }
-
-    return
   }
 
   private extractHtmlAndBacklinks(note: RoamNote) {
@@ -105,10 +97,8 @@ export class RoamConvertor implements Convertor {
     const {html: itemContent, backlinkNoteIds} = markdownToHtml(string, {
       graphId: this.graphId,
       linkHost: this.linkHost,
-      // Disable certain constructs from Micromark.
-      // All constructs: https://github.com/micromark/micromark/blob/116bfa56b90b6bbc1facddfd0886a7e127a6b03f/packages/micromark-core-commonmark/dev/index.js
-      // Related discussion: https://github.com/micromark/micromark/discussions/63
       constructsToDisable: ['thematicBreak', 'list', 'headingAtx'],
+      pageResolver: parseNoteIdFromSubject,
     })
 
     backlinkNoteIds.forEach((id) => aggregNoteIds.add(id))
