@@ -16,6 +16,8 @@ export class MarkdownConvertor implements Convertor {
     this.linkHost = linkHost
   }
 
+  accept = {'text/*': ['.md']}
+
   convert({data, filename}: ConvertOptions & {filename: string}): ConvertResponse {
     const {html, subject, backlinkNoteIds} = markdownToHtml(data, {
       graphId: this.graphId,

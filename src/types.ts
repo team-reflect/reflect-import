@@ -26,7 +26,10 @@ export interface ConvertResponse {
   notes: ConvertedNote[]
 }
 
+export type ConvertorAcceptType = Record<string, string | string[]>
+
 export interface Convertor {
+  accept: ConvertorAcceptType
   convert(options: ConvertOptions): ConvertResponse
 }
 export class ConversionError extends Error {

@@ -28,6 +28,8 @@ export class EvernoteConvertor implements Convertor {
     this.backlinkParser = buildBacklinkParser({linkHost, graphId})
   }
 
+  accept = {'text/*': ['.enex']}
+
   convert({data}: ConvertOptions): ConvertResponse {
     const doc = this.parseXml(data)
 

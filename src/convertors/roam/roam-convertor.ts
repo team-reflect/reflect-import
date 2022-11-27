@@ -21,6 +21,8 @@ export class RoamConvertor implements Convertor {
     this.linkHost = linkHost
   }
 
+  accept = {'text/*': ['.json']}
+
   convert({data}: ConvertOptions): ConvertResponse {
     const roamNotes = JSON.parse(data) as RoamNote[]
 
