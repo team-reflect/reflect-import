@@ -367,9 +367,10 @@ describe('RoamConvertor', () => {
       const convertor = new RoamConvertor({graphId: '123'})
       const {notes} = convertor.convert({data: JSON.stringify([note])})
 
-      const [{createdAt}] = notes
+      const [{createdAt, dailyAt}] = notes
 
       expect(createdAt).toEqual(new Date('2020-10-10T00:00:00.000Z').getTime())
+      expect(dailyAt).toEqual(new Date('2020-10-10T00:00:00.000Z').getTime())
     })
   })
 })

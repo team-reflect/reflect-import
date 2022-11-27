@@ -1,5 +1,12 @@
 import {markdownToHtml} from '../../helpers/markdown/markdown'
-import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../../types'
+import {
+  ConvertedNote,
+  ConvertOptions,
+  Convertor,
+  ConvertResponse,
+  REFLECT_HOSTNAME,
+} from '../../types'
+import {dailyDateFromFilename} from './markdown-helpers'
 
 export class MarkdownConvertor implements Convertor {
   graphId: string
@@ -25,9 +32,15 @@ export class MarkdownConvertor implements Convertor {
     })
 
     // Filename matches yyyy-MM-dd.md
-    const isDaily = /^\d{4}-\d{2}-\d{2}/.test(filename)
+    const dailyDate = dailyDateFromFilename(filename)
 
-    const note = {id: filename, html, subject, isDaily, backlinkNoteIds}
+    const note: ConvertedNote = {
+      id: filename,
+      html,
+      subject,
+      dailyAt: dailyDate?.getTime(),
+      backlinkNoteIds,
+    }
 
     return {notes: [note]}
   }

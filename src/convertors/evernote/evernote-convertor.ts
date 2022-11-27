@@ -47,7 +47,7 @@ export class EvernoteConvertor implements Convertor {
     const timestamps = this.extractTimestamps(noteDoc)
     const id = this.buildId(timestamps.createdAt, subject)
 
-    return {id, html, subject, backlinkNoteIds, isDaily: false, ...timestamps}
+    return {id, html, subject, backlinkNoteIds, ...timestamps}
   }
 
   private buildId(createdAt?: number, subject?: string) {

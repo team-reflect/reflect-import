@@ -49,7 +49,7 @@ export class RoamConvertor implements Convertor {
       html,
       subject: note.title,
       backlinkNoteIds,
-      isDaily: !!titleDate,
+      dailyAt: validateTime(titleDate?.getTime()),
       createdAt: validateTime(titleDate?.getTime() ?? minChildCreated),
       updatedAt: validateTime(updated),
     }
