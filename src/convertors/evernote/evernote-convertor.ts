@@ -1,6 +1,7 @@
 import parse from 'date-fns/parse'
 
 import {toNoteId} from 'helpers/to-id'
+import {parseXml} from 'helpers/xml'
 
 import {notEmpty} from '../../helpers/array-fns'
 import {buildBacklinkParser} from '../../helpers/backlink'
@@ -11,7 +12,6 @@ import {
   ConvertResponse,
   REFLECT_HOSTNAME,
 } from '../../types'
-import {EvernoteConversionError} from './types'
 
 export class EvernoteConvertor implements Convertor {
   graphId: string
@@ -33,27 +33,27 @@ export class EvernoteConvertor implements Convertor {
   accept = {'application/enex': ['.enex']}
 
   convert({data}: ConvertOptions): ConvertResponse {
-    const doc = this.parseXml(data)
+    const doc = parseXml(data)
 
     const noteDocs = Array.from(doc.querySelectorAll('en-export > note'))
 
-    const notes = noteDocs.map((noteDoc) => this.convertNoteDoc(noteDoc))
+    const notes = noteDocs.map((noteDoc, index) => this.convertNoteDoc(noteDoc, index))
 
     return {notes}
   }
 
-  private convertNoteDoc(noteDoc: Element): ConvertedNote {
+  private convertNoteDoc(noteDoc: Element, index: number): ConvertedNote {
     const subject = this.extractSubject(noteDoc)
     const html = this.extractHtml(noteDoc)
     const backlinkNoteIds = this.extractBacklinkNoteIds(noteDoc)
     const timestamps = this.extractTimestamps(noteDoc)
-    const id = this.buildId(timestamps.createdAt, subject)
+    const id = this.buildId(index, subject)
 
     return {id, html, subject, backlinkNoteIds, ...timestamps}
   }
 
-  private buildId(createdAt?: number, subject?: string) {
-    return toNoteId(`${createdAt}${subject}`)
+  private buildId(index: number, subject?: string) {
+    return `enex-${index}-${toNoteId(`${subject}`)}`
   }
 
   private extractSubject(noteDoc: Element): string | undefined {
@@ -63,7 +63,7 @@ export class EvernoteConvertor implements Convertor {
 
   private extractHtml(noteDoc: Element): string {
     const content = noteDoc.querySelector('content')?.textContent ?? ''
-    const contentDoc = this.parseXml(content)
+    const contentDoc = parseXml(content)
     const contentNoteDoc = contentDoc.querySelector('en-note')
     const html = contentNoteDoc?.innerHTML ?? ''
 
@@ -91,18 +91,5 @@ export class EvernoteConvertor implements Convertor {
   private parseTime(dateString: string): number {
     // Format is 20221124T000557Z
     return parse(dateString, "yyyyMMdd'T'HHmmss'Z'", new Date()).getTime()
-  }
-
-  private parseXml(xml: string) {
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(xml.trim(), 'text/xml')
-
-    const parseError = doc.querySelector('parsererror')
-
-    if (parseError) {
-      throw new EvernoteConversionError(parseError.textContent ?? 'Unknown parse error')
-    }
-
-    return doc
   }
 }

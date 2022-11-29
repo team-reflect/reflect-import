@@ -46,7 +46,7 @@ export class RoamConvertor implements Convertor {
     const titleDate = parseDateFromSubject(note.title)
 
     return {
-      id: note.uid,
+      id: `roam-${note.uid}`,
       html,
       subject: note.title,
       backlinkNoteIds,

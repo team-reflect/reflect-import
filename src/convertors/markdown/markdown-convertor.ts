@@ -1,3 +1,4 @@
+import {toNoteId} from 'helpers/to-id'
 import {markdownToHtml} from '../../helpers/markdown/markdown'
 import {
   ConvertedNote,
@@ -35,7 +36,7 @@ export class MarkdownConvertor implements Convertor {
     const dailyDate = dailyDateFromFilename(filename)
 
     const note: ConvertedNote = {
-      id: filename,
+      id: `md-${toNoteId(filename)}`,
       html,
       subject,
       dailyAt: dailyDate?.getTime(),

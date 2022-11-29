@@ -1,35 +1,15 @@
 import {toNoteId} from 'helpers/to-id'
 
-import {
-  ConvertedNote,
-  ConvertOptions,
-  Convertor,
-  ConvertResponse,
-  REFLECT_HOSTNAME,
-} from '../../types'
+import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
 
 export class HtmlConvertor implements Convertor {
-  graphId: string
-  linkHost: string
-
-  constructor({
-    graphId,
-    linkHost = REFLECT_HOSTNAME,
-  }: {
-    graphId: string
-    linkHost?: string
-  }) {
-    this.graphId = graphId
-    this.linkHost = linkHost
-  }
-
   accept = {'text/html': ['.html', '.htm']}
 
   convert({data, filename}: ConvertOptions & {filename: string}): ConvertResponse {
     const basename = filename.replace(/\.[^/.]+$/, '')
 
     const note: ConvertedNote = {
-      id: toNoteId(basename),
+      id: `html-${toNoteId(basename)}`,
       html: data,
     }
 

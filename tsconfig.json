@@ -4,6 +4,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "module": "esnext",
+    "target": "es6",
     "lib": ["dom", "esnext"],
     "importHelpers": false,
     // output .d.ts declaration files for consumers
