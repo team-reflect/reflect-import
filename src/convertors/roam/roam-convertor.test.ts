@@ -2,6 +2,9 @@ import {RoamConvertor} from './roam-convertor'
 import {RoamNote} from './types'
 import {formatHtml} from '../../testing/format-html'
 import {describe, it, expect} from 'vitest'
+import dailyNotes from './fixtures/roam-daily-notes.json'
+import todoNotes from './fixtures/roam-todos.json'
+import urlsNotes from './fixtures/roam-urls.json'
 
 describe('RoamConvertor', () => {
   const ROAM_SAMPLE: RoamNote = {
@@ -324,6 +327,33 @@ describe('RoamConvertor', () => {
     expect(html).toMatchInlineSnapshot(
       '"<h1>note1</h1><ul><li><p>link to <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/anothernote\\">another note</a></p><ul></ul></li></ul>"',
     )
+  })
+
+  it('parses todo', () => {
+    const roamNote = todoNotes[0]
+    const html = htmlFromRoamNote(roamNote, '123')
+
+    expect(html).toMatchInlineSnapshot(
+      '"<h1>test1</h1><ul><li><input type=\\"checkbox\\" ><p>item 1</p></li><li><input type=\\"checkbox\\" checked><p>item 2</p></li><li></li></ul>"',
+    )
+  })
+
+  it('parses urls', () => {
+    const roamNote = urlsNotes[0]
+    const html = htmlFromRoamNote(roamNote, '123')
+
+    expect(html).toMatchInlineSnapshot(
+      '"<h1>urls</h1><ul><li><p><a href=\\"https://reflect.app\\">https://reflect.app</a></p></li><li></li></ul>"',
+    )
+  })
+
+  it('parses daily notes', () => {
+    const convertor = new RoamConvertor({graphId: '123'})
+    const {notes} = convertor.convert({data: JSON.stringify(dailyNotes)})
+    const [note] = notes
+
+    expect(note.subject).toEqual('September 14th, 2020')
+    expect(note.dailyAt).toEqual(1600041600000)
   })
 
   describe('generateListFromRoamNoteString', () => {

@@ -1,0 +1,52 @@
+[
+  {
+    "create-time": 1623222101620,
+    "title": "test1",
+    ":create/user": {
+      ":user/uid": "D1Vbji4IXvMD5KoE2v0hwVl2B0x2"
+    },
+    "children": [
+      {
+        "string": "foo",
+        "create-time": 1623222102361,
+        "uid": "6k8p0Imsh",
+        "edit-time": 1623222105596,
+        ":create/user": {
+          ":user/uid": "D1Vbji4IXvMD5KoE2v0hwVl2B0x2"
+        },
+        ":edit/user": {
+          ":user/uid": "D1Vbji4IXvMD5KoE2v0hwVl2B0x2"
+        }
+      },
+      {
+        "string": "---",
+        "create-time": 1623222105591,
+        "uid": "Uf9x-eKpd",
+        "edit-time": 1623222106158,
+        ":create/user": {
+          ":user/uid": "D1Vbji4IXvMD5KoE2v0hwVl2B0x2"
+        },
+        ":edit/user": {
+          ":user/uid": "D1Vbji4IXvMD5KoE2v0hwVl2B0x2"
+        }
+      },
+      {
+        "string": "bar",
+        "create-time": 1623222106153,
+        "uid": "Op6ulzC0x",
+        "edit-time": 1623222107186,
+        ":create/user": {
+          ":user/uid": "D1Vbji4IXvMD5KoE2v0hwVl2B0x2"
+        },
+        ":edit/user": {
+          ":user/uid": "D1Vbji4IXvMD5KoE2v0hwVl2B0x2"
+        }
+      }
+    ],
+    "uid": "XUcSTjCE3",
+    "edit-time": 1623222101620,
+    ":edit/user": {
+      ":user/uid": "D1Vbji4IXvMD5KoE2v0hwVl2B0x2"
+    }
+  }
+]
