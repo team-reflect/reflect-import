@@ -16,10 +16,15 @@ export class HtmlConvertor implements Convertor {
       doc.querySelector('h1')?.textContent ??
       basename
 
+    // Remove <br /> tags
+    doc.querySelectorAll('br').forEach((br) => br.remove())
+
+    const html = doc.body.innerHTML
+
     const note: ConvertedNote = {
       id: `html-${toNoteId(basename)}`,
       subject,
-      html: data,
+      html,
     }
 
     return {notes: [note]}
