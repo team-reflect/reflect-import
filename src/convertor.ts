@@ -18,7 +18,7 @@ export const getConvertorForFormat = ({
     case 'roam':
       return new RoamConvertor({graphId})
     case 'evernote':
-      return new EvernoteConvertor({graphId})
+      return new EvernoteConvertor()
     case 'markdown':
       return new MarkdownConvertor({graphId})
     case 'html':

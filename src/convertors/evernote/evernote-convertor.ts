@@ -3,8 +3,6 @@ import parse from 'date-fns/parse'
 import {toNoteId} from 'helpers/to-id'
 import {parseXml} from 'helpers/xml'
 
-import {notEmpty} from '../../helpers/array-fns'
-import {buildBacklinkParser} from '../../helpers/backlink'
 import {
   ConvertedNote,
   ConvertOptions,
@@ -16,7 +14,6 @@ import {
 export class EvernoteConvertor implements Convertor {
   graphId: string
   linkHost: string
-  private backlinkParser: (url: string) => string | null
 
   constructor({
     graphId,
@@ -27,7 +24,6 @@ export class EvernoteConvertor implements Convertor {
   }) {
     this.graphId = graphId
     this.linkHost = linkHost
-    this.backlinkParser = buildBacklinkParser({linkHost, graphId})
   }
 
   accept = {'application/enex': ['.enex']}
@@ -45,11 +41,10 @@ export class EvernoteConvertor implements Convertor {
   private convertNoteDoc(noteDoc: Element, index: number): ConvertedNote {
     const subject = this.extractSubject(noteDoc)
     const html = this.extractHtml(noteDoc)
-    const backlinkNoteIds = this.extractBacklinkNoteIds(noteDoc)
     const timestamps = this.extractTimestamps(noteDoc)
     const id = this.buildId(index, subject)
 
-    return {id, html, subject, backlinkNoteIds, ...timestamps}
+    return {id, html, subject, ...timestamps}
   }
 
   private buildId(index: number, subject?: string) {
@@ -68,14 +63,6 @@ export class EvernoteConvertor implements Convertor {
     const html = contentNoteDoc?.innerHTML ?? ''
 
     return html
-  }
-
-  private extractBacklinkNoteIds(noteDoc: Element): string[] {
-    const backlinkNoteIds = Array.from(noteDoc.querySelectorAll('a[href]'))
-      .map((element) => this.backlinkParser(element.getAttribute('href')!))
-      .filter(notEmpty)
-
-    return backlinkNoteIds
   }
 
   private extractTimestamps(noteDoc: Element) {
