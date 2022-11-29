@@ -5,7 +5,7 @@ import {OpmlConvertor} from './convertors/opml'
 import {RoamConvertor} from './convertors/roam'
 import {Convertor} from './types'
 
-export type Format = 'evernote' | 'html' | 'markdown' | 'roam' | 'opml'
+export type Format = 'evernote' | 'html' | 'markdown' | 'roam' | 'opml' | 'html'
 
 export const getConvertorForFormat = ({
   graphId,
