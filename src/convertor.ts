@@ -1,17 +1,27 @@
-import {EvernoteConvertor} from 'convertors/evernote'
-import {HtmlConvertor} from 'convertors/html'
-import {MarkdownConvertor} from 'convertors/markdown'
-import {RoamConvertor} from 'convertors/roam'
+import {EvernoteConvertor} from './convertors/evernote'
+import {HtmlConvertor} from './convertors/html'
+import {MarkdownConvertor} from './convertors/markdown'
+import {RoamConvertor} from './convertors/roam'
+import {Convertor} from './types'
 
-export type ImportFormat = 'evernote' | 'markdown' | 'roam' | 'html'
+export type Format = 'evernote' | 'html' | 'markdown' | 'roam'
+
+export const FORMATS: Format[] = ['evernote', 'html', 'markdown', 'roam']
+
+export const FORMAT_LABELS: Record<Format, string> = {
+  markdown: 'Markdown',
+  html: 'HTML',
+  evernote: 'Evernote ENEX',
+  roam: 'Roam JSON',
+}
 
 export const getConvertorForFormat = ({
   graphId,
   format,
 }: {
   graphId: string
-  format: ImportFormat
-}) => {
+  format: Format
+}): Convertor => {
   switch (format) {
     case 'roam':
       return new RoamConvertor({graphId})
