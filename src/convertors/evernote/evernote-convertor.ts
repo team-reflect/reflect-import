@@ -2,30 +2,9 @@ import parse from 'date-fns/parse'
 
 import {toNoteId} from 'helpers/to-id'
 import {parseXml} from 'helpers/xml'
-
-import {
-  ConvertedNote,
-  ConvertOptions,
-  Convertor,
-  ConvertResponse,
-  REFLECT_HOSTNAME,
-} from '../../types'
+import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from 'types'
 
 export class EvernoteConvertor implements Convertor {
-  graphId: string
-  linkHost: string
-
-  constructor({
-    graphId,
-    linkHost = REFLECT_HOSTNAME,
-  }: {
-    graphId: string
-    linkHost?: string
-  }) {
-    this.graphId = graphId
-    this.linkHost = linkHost
-  }
-
   accept = {'application/enex': ['.enex']}
 
   convert({data}: ConvertOptions): ConvertResponse {

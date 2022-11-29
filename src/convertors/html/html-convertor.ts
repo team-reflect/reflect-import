@@ -1,6 +1,5 @@
 import {toNoteId} from 'helpers/to-id'
-
-import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
+import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from 'types'
 
 export class HtmlConvertor implements Convertor {
   accept = {'text/html': ['.html', '.htm']}

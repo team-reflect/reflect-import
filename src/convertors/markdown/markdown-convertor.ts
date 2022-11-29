@@ -1,5 +1,6 @@
+import {markdownToHtml} from 'helpers/markdown'
 import {toNoteId} from 'helpers/to-id'
-import {markdownToHtml} from '../../helpers/markdown/markdown'
+
 import {
   ConvertedNote,
   ConvertOptions,
