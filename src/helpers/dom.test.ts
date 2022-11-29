@@ -1,5 +1,6 @@
-import {DOM, domToHtml} from './dom'
 import {describe, it, expect} from 'vitest'
+
+import {DOM, domToHtml} from './dom'
 
 describe('domToHtml', () => {
   it('renders html', () => {

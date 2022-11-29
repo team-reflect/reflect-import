@@ -1,10 +1,11 @@
+import first from 'lodash/first'
+
 import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
-import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../../types'
 import {markdownToHtml} from '../../helpers/markdown'
-import {RoamConversionError, RoamConvertedNote, RoamNote, RoamNoteString} from './types'
+import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../../types'
 import {parseDateFromSubject, parseNoteIdFromSubject, validateTime} from './roam-helpers'
-import first from 'lodash/first'
+import {RoamConversionError, RoamConvertedNote, RoamNote, RoamNoteString} from './types'
 
 export class RoamConvertor implements Convertor {
   graphId: string

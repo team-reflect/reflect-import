@@ -1,5 +1,6 @@
 import isValid from 'date-fns/isValid'
 import parse from 'date-fns/parse'
+
 import {toDailyNoteId, toNoteId} from '../../helpers/to-id'
 
 // Tries to parse out a date from the subject of a note.

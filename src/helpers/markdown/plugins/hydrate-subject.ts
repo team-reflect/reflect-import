@@ -1,5 +1,5 @@
-import {toString} from 'mdast-util-to-string'
 import {Root} from 'mdast'
+import {toString} from 'mdast-util-to-string'
 import {Plugin} from 'unified'
 
 export const hydrateSubject: Plugin<[], Root> = () => {

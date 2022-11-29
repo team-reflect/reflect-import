@@ -1,3 +1,21 @@
 {
-  "extends": ["@ocavue/eslint-config"]
+  "extends": ["@ocavue/eslint-config"],
+
+  "rules": {
+    "import/order": [
+      "warn",
+      {
+        "newlines-between": "always",
+        "alphabetize": {"order": "asc"},
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling"],
+          "index",
+          "type"
+        ]
+      }
+    ]
+  }
 }

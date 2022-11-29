@@ -1,4 +1,3 @@
-import {toNoteId} from 'helpers/to-id'
 import {gfmAutolinkLiteralFromMarkdown} from 'mdast-util-gfm-autolink-literal'
 import {gfmAutolinkLiteral} from 'micromark-extension-gfm-autolink-literal'
 import pipeToHtml from 'rehype-stringify'
@@ -6,6 +5,9 @@ import pipeToMarkdown from 'remark-parse'
 import pipeToRehype from 'remark-rehype'
 import wikiLinkPlugin from 'remark-wiki-link'
 import {unified} from 'unified'
+
+import {toNoteId} from 'helpers/to-id'
+
 import {buildBacklinkUrl} from '../backlink'
 import {hydrateBacklinkNoteIds} from './plugins/hydrate-backlink-note-ids'
 import {hydrateSubject} from './plugins/hydrate-subject'

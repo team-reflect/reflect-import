@@ -1,16 +1,12 @@
 {
   "name": "@team-reflect/reflect-import",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "repository": "git://github.com/team-reflect/reflect-import.git",
   "type": "module",
   "version": "0.1.9",
   "author": "Alex MacCaw",
   "license": "MIT",
+  "repository": "git://github.com/team-reflect/reflect-import.git",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
@@ -27,6 +23,7 @@
     "analyze": "size-limit --why",
     "lint": "eslint ."
   },
+  "typings": "dist/index.d.ts",
   "dependencies": {
     "date-fns": "^2.29.3",
     "jsdom": "^20.0.3",
@@ -43,6 +40,21 @@
     "urlpattern-polyfill": "^6.0.2"
   },
   "peerDependencies": {},
+  "devDependencies": {
+    "@ocavue/eslint-config": "^0.4.5",
+    "@size-limit/preset-small-lib": "^8.1.0",
+    "@types/js-yaml": "^4.0.5",
+    "@types/lodash": "^4.14.189",
+    "eslint": "^8.28.0",
+    "prettier": "^2.8.0",
+    "size-limit": "^8.1.0",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.3",
+    "vitest": "^0.25.2"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "size-limit": [
     {
       "path": "dist/index.js",
@@ -58,17 +70,5 @@
     ],
     "dts": true,
     "clean": true
-  },
-  "devDependencies": {
-    "@ocavue/eslint-config": "^0.4.5",
-    "@size-limit/preset-small-lib": "^8.1.0",
-    "@types/js-yaml": "^4.0.5",
-    "@types/lodash": "^4.14.189",
-    "eslint": "^8.28.0",
-    "prettier": "^2.8.0",
-    "size-limit": "^8.1.0",
-    "tsup": "^6.5.0",
-    "typescript": "^4.9.3",
-    "vitest": "^0.25.2"
   }
 }

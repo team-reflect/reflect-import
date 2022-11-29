@@ -1,5 +1,6 @@
-import {MarkdownConvertor} from './markdown-convertor'
 import {describe, it, expect} from 'vitest'
+
+import {MarkdownConvertor} from './markdown-convertor'
 
 describe('convert', () => {
   it('converts markdown to HTML', () => {

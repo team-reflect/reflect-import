@@ -1,5 +1,7 @@
 import parse from 'date-fns/parse'
+
 import {toNoteId} from 'helpers/to-id'
+
 import {notEmpty} from '../../helpers/array-fns'
 import {buildBacklinkParser} from '../../helpers/backlink'
 import {

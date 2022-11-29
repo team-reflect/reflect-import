@@ -1,7 +1,8 @@
 import 'urlpattern-polyfill'
-import {visit} from 'unist-util-visit'
 import {Root} from 'mdast'
 import {Plugin} from 'unified'
+import {visit} from 'unist-util-visit'
+
 import {buildBacklinkParser} from '../../../helpers/backlink'
 
 type HydrateBacklinkNoteIdsOptions = {
