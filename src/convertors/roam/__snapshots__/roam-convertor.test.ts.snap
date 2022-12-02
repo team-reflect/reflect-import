@@ -17,11 +17,11 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
   },
   {
     "backlinkNoteIds": [
-      "roam-j6wBG1tYR",
+      "hid",
     ],
     "createdAt": 1600128000000,
     "dailyAt": 1600128000000,
-    "html": "<h1>September 15th, 2020</h1><ul><li><p>test</p></li><li><p>asdf <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/roam-j6wBG1tYR\\">hid</a></p></li><li></li></ul>",
+    "html": "<h1>September 15th, 2020</h1><ul><li><p>test</p></li><li><p>asdf <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/hid\\">hid</a></p></li><li></li></ul>",
     "id": "roam-09-15-2020",
     "subject": "September 15th, 2020",
     "updatedAt": 1600139707013,
@@ -46,12 +46,12 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
   },
   {
     "backlinkNoteIds": [
-      "roam-20vV-tWxq",
-      "roam-JSdjtHezQ",
+      "Page",
+      "Another%20one",
     ],
     "createdAt": 1600560000000,
     "dailyAt": 1600560000000,
-    "html": "<h1>September 20th, 2020</h1><ul><li><p>Blah</p></li><li><p>Antoher</p><ul><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/roam-20vV-tWxq\\">Page</a></p></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/roam-JSdjtHezQ\\">Another one</a></p></li><li></li></ul></li></ul>",
+    "html": "<h1>September 20th, 2020</h1><ul><li><p>Blah</p></li><li><p>Antoher</p><ul><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/Page\\">Page</a></p></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/Another one\\">Another one</a></p></li><li></li></ul></li></ul>",
     "id": "roam-09-20-2020",
     "subject": "September 20th, 2020",
     "updatedAt": 1600566771305,
@@ -78,22 +78,22 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
   },
   {
     "backlinkNoteIds": [
-      "roam-20vV-tWxq",
+      "Page",
     ],
     "createdAt": 1601510400000,
     "dailyAt": 1601510400000,
-    "html": "<h1>October 1st, 2020</h1><ul><li><p>A parent</p><ul><li><p>Alex <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/roam-20vV-tWxq\\">Page</a></p></li></ul></li><li><p>Alex Page</p><ul><li></li><li><p>Test</p><ul><li><p>Another</p><ul><li><p>Deep</p><ul><li><p>asdfasdf</p></li><li><p>as</p></li><li><p>dfa</p></li><li><p>sdf'asd</p></li></ul></li></ul></li></ul></li></ul></li></ul>",
+    "html": "<h1>October 1st, 2020</h1><ul><li><p>A parent</p><ul><li><p>Alex <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/Page\\">Page</a></p></li></ul></li><li><p>Alex Page</p><ul><li></li><li><p>Test</p><ul><li><p>Another</p><ul><li><p>Deep</p><ul><li><p>asdfasdf</p></li><li><p>as</p></li><li><p>dfa</p></li><li><p>sdf'asd</p></li></ul></li></ul></li></ul></li></ul></li></ul>",
     "id": "roam-10-01-2020",
     "subject": "October 1st, 2020",
     "updatedAt": 1601547790265,
   },
   {
     "backlinkNoteIds": [
-      "roam-20vV-tWxq",
+      "Page",
     ],
     "createdAt": 1601596800000,
     "dailyAt": 1601596800000,
-    "html": "<h1>October 2nd, 2020</h1><ul><li><p>asdf</p></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/roam-20vV-tWxq\\">Page</a></p></li><li><p>asdf</p><ul><li><p>asdf</p><ul><li><p>adsf</p></li></ul></li></ul></li></ul>",
+    "html": "<h1>October 2nd, 2020</h1><ul><li><p>asdf</p></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/Page\\">Page</a></p></li><li><p>asdf</p><ul><li><p>asdf</p><ul><li><p>adsf</p></li></ul></li></ul></li></ul>",
     "id": "roam-10-02-2020",
     "subject": "October 2nd, 2020",
     "updatedAt": 1601603710972,
@@ -181,11 +181,11 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
   },
   {
     "backlinkNoteIds": [
-      "roam-JSdjtHezQ",
+      "Another%20one",
     ],
     "createdAt": 1607817600000,
     "dailyAt": 1607817600000,
-    "html": "<h1>December 13th, 2020</h1><ul><li><p>one</p></li><li><p>two</p></li><li><p>tthree</p></li><li><p>asd</p><ul><li><p>d</p></li></ul></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/roam-JSdjtHezQ\\">Another one</a></p></li><li></li><li></li><li></li><li></li><li></li></ul>",
+    "html": "<h1>December 13th, 2020</h1><ul><li><p>one</p></li><li><p>two</p></li><li><p>tthree</p></li><li><p>asd</p><ul><li><p>d</p></li></ul></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/Another one\\">Another one</a></p></li><li></li><li></li><li></li><li></li><li></li></ul>",
     "id": "roam-12-13-2020",
     "subject": "December 13th, 2020",
     "updatedAt": 1607800050272,
@@ -201,11 +201,11 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
   },
   {
     "backlinkNoteIds": [
-      "roam-pTKChrTZg",
+      "Richard",
     ],
     "createdAt": 1612569600000,
     "dailyAt": 1612569600000,
-    "html": "<h1>February 6th, 2021</h1><ul><li><p>Hello <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/roam-pTKChrTZg\\">Richard</a></p></li><li><p>I can't <em>even</em> do html <strong>preview</strong></p><ul><li></li></ul></li></ul>",
+    "html": "<h1>February 6th, 2021</h1><ul><li><p>Hello <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/Richard\\">Richard</a></p></li><li><p>I can't <em>even</em> do html <strong>preview</strong></p><ul><li></li></ul></li></ul>",
     "id": "roam-02-06-2021",
     "subject": "February 6th, 2021",
     "updatedAt": 1612558450851,
