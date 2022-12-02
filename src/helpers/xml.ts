@@ -7,7 +7,7 @@ export class XmlConversionError extends Error {
 
 export const parseXml = (xml: string) => {
   const parser = new DOMParser()
-  const doc = parser.parseFromString(xml.trim(), 'text/xml')
+  const doc = parser.parseFromString(xml, 'text/xml')
 
   const parseError = doc.querySelector('parsererror')
 
