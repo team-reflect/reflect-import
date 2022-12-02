@@ -39,7 +39,7 @@ describe('EvernoteConvertor', () => {
     expect(() => convertor.convert({data: ''})).toThrow()
   })
 
-  it('parses an old evernote export', () => {
+  it.each(['&gt;', '&nbsp;'])('parses note with html entity', (entity) => {
     const convertor = new EvernoteConvertor()
 
     const data = `<?xml version="1.0" encoding="UTF-8"?>
@@ -52,8 +52,7 @@ describe('EvernoteConvertor', () => {
         <note-attributes>
         </note-attributes>
         <content>
-          <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-    <!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note><div>Viera je pre&nbsp; mňa zodpovednosť pred Bohom.</div></en-note>      ]]>
+          <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note><div>foo ${entity} bar</div></en-note>      ]]>
         </content>
       </note>
     </en-export>`
@@ -62,6 +61,6 @@ describe('EvernoteConvertor', () => {
     const [{subject, html}] = notes
 
     expect(subject).toEqual('failing nbsp')
-    expect(html).toMatchInlineSnapshot()
+    expect(html).toEqual(`<div>foo ${entity} bar</div>`)
   })
 })
