@@ -1,8 +1,7 @@
-import parse from 'date-fns/parse'
-
-import {toNoteId} from 'helpers/to-id'
 import {parseXml} from 'helpers/xml'
 import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from 'types'
+
+import {parseTime, toEvernoteId} from './evernote-helpers'
 
 export class EvernoteConvertor implements Convertor {
   accept = {'application/enex': ['.enex']}
@@ -21,13 +20,9 @@ export class EvernoteConvertor implements Convertor {
     const subject = this.extractSubject(noteDoc)
     const html = this.extractHtml(noteDoc)
     const timestamps = this.extractTimestamps(noteDoc)
-    const id = this.buildId(index, subject)
+    const id = toEvernoteId(index, subject)
 
     return {id, html, subject, ...timestamps}
-  }
-
-  private buildId(index: number, subject?: string) {
-    return `enex-${index}-${toNoteId(`${subject}`)}`
   }
 
   private extractSubject(noteDoc: Element): string | undefined {
@@ -48,14 +43,9 @@ export class EvernoteConvertor implements Convertor {
     const createdAtString = noteDoc.querySelector('created')?.textContent
     const updatedAtString = noteDoc.querySelector('updated')?.textContent
 
-    const createdAt = createdAtString ? this.parseTime(createdAtString) : undefined
-    const updatedAt = updatedAtString ? this.parseTime(updatedAtString) : undefined
+    const createdAt = createdAtString ? parseTime(createdAtString) : undefined
+    const updatedAt = updatedAtString ? parseTime(updatedAtString) : undefined
 
     return {createdAt, updatedAt}
-  }
-
-  private parseTime(dateString: string): number {
-    // Format is 20221124T000557Z
-    return parse(dateString, "yyyyMMdd'T'HHmmss'Z'", new Date()).getTime()
   }
 }

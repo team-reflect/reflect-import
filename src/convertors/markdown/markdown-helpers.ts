@@ -13,3 +13,7 @@ export const dailyDateFromFilename = (filename: string): Date | undefined => {
 
   return
 }
+
+export const toMarkdownId = (filename: string) => {
+  return `md${filename}`
+}

@@ -1,9 +1,9 @@
 import {DOM, domArrayToHtml} from 'helpers/dom'
 import {header1, list, listItem, paragraph} from 'helpers/generators'
-import {toNoteId} from 'helpers/to-id'
 import {parseXml} from 'helpers/xml'
 
 import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
+import {toOpmlId} from './opml-helpers'
 
 export class OpmlConvertor implements Convertor {
   accept = {'application/opml': ['.opml']}
@@ -26,7 +26,7 @@ export class OpmlConvertor implements Convertor {
     const html = domArrayToHtml([header1(subject), rootList])
 
     return {
-      id: `opml-${index}-${toNoteId(subject)}`,
+      id: toOpmlId(index, subject),
       subject,
       html,
     }
