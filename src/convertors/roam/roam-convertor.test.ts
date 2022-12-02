@@ -61,7 +61,7 @@ describe('RoamConvertor', () => {
         <li>
           <p>
             Author::
-            <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/roamuuid123\\"
+            <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/roam-uuid123\\"
               >Matt Mochary</a
             >
           </p>

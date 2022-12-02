@@ -8,5 +8,5 @@ export const parseTime = (dateString: string): number => {
 }
 
 export const toEvernoteId = (index: number, subject?: string) => {
-  return `enex${index}${toNoteId(`${subject}`)}`
+  return `enex-${index}${toNoteId(`${subject}`)}`
 }
