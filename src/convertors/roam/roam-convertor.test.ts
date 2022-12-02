@@ -332,7 +332,7 @@ describe('RoamConvertor', () => {
     const html = htmlFromRoamNote(note, '123')
 
     expect(html).toMatchInlineSnapshot(
-      '"<h1>note1</h1><ul><li><p>link to <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/anothernote\\">another note</a></p><ul></ul></li></ul>"',
+      '"<h1>note1</h1><ul><li><p>link to <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/another note\\">another note</a></p><ul></ul></li></ul>"',
     )
   })
 

@@ -8,7 +8,6 @@ import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../.
 import {
   extractBacklinks,
   parseDateFromSubject,
-  parseNoteIdFromSubject,
   toRoamId,
   validateTime,
 } from './roam-helpers'
@@ -105,19 +104,16 @@ export class RoamConvertor implements Convertor {
     // Extract backlinks surrounded by [[ ]]
     const noteBacklinks = extractBacklinks(string)
     const noteRefs = noteString.refs?.map((ref) => ref.uid) ?? []
+    const noteRefsToIds = noteRefs.map((ref) => toRoamId(ref))
 
     // Associate backlinks with their refs
-    const backlinksToRefs = Object.fromEntries(zip(noteBacklinks, noteRefs))
+    const backlinksToRefs = Object.fromEntries(zip(noteBacklinks, noteRefsToIds))
 
     const {html: itemContent, backlinkNoteIds} = markdownToHtml(string, {
       graphId: this.graphId,
       linkHost: this.linkHost,
       constructsToDisable: ['thematicBreak', 'list', 'headingAtx'],
-      pageResolver: (pageName) => {
-        return backlinksToRefs[pageName]
-          ? toRoamId(backlinksToRefs[pageName])
-          : parseNoteIdFromSubject(pageName)
-      },
+      pageResolver: (pageName) => backlinksToRefs[pageName] ?? pageName,
     })
 
     // Go through the backlinks extracted from the markdown and add them to the
