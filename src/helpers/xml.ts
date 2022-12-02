@@ -9,7 +9,7 @@ export const parseXml = (xml: string) => {
   // XML shouldn't contain entities, and yet Evernote export may do that. We'll
   // manually remove them.
 
-  xml = xml.replace('&nbsp;', '&#160;')
+  xml = xml.replace(/&nbsp;/g, '&#160;')
 
   const parser = new DOMParser()
   const doc = parser.parseFromString(xml.trim(), 'text/xml')
