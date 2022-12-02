@@ -1,10 +1,17 @@
+import {zip} from 'lodash'
 import first from 'lodash/first'
 
 import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
 import {markdownToHtml} from '../../helpers/markdown'
 import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../../types'
-import {parseDateFromSubject, parseNoteIdFromSubject, validateTime} from './roam-helpers'
+import {
+  extractBacklinks,
+  parseDateFromSubject,
+  parseNoteIdFromSubject,
+  toRoamId,
+  validateTime,
+} from './roam-helpers'
 import {RoamConversionError, RoamConvertedNote, RoamNote, RoamNoteString} from './types'
 
 export class RoamConvertor implements Convertor {
@@ -46,7 +53,7 @@ export class RoamConvertor implements Convertor {
     const titleDate = parseDateFromSubject(note.title)
 
     return {
-      id: `roam-${note.uid}`,
+      id: toRoamId(note.uid),
       html,
       subject: note.title,
       backlinkNoteIds,
@@ -95,13 +102,26 @@ export class RoamConvertor implements Convertor {
       taskChecked = true
     }
 
+    // Extract backlinks surrounded by [[ ]]
+    const noteBacklinks = extractBacklinks(string)
+    const noteRefs = noteString.refs?.map((ref) => ref.uid) ?? []
+
+    // Associate backlinks with their refs
+    const backlinksToRefs = Object.fromEntries(zip(noteBacklinks, noteRefs))
+
     const {html: itemContent, backlinkNoteIds} = markdownToHtml(string, {
       graphId: this.graphId,
       linkHost: this.linkHost,
       constructsToDisable: ['thematicBreak', 'list', 'headingAtx'],
-      pageResolver: parseNoteIdFromSubject,
+      pageResolver: (pageName) => {
+        return backlinksToRefs[pageName]
+          ? toRoamId(backlinksToRefs[pageName])
+          : parseNoteIdFromSubject(pageName)
+      },
     })
 
+    // Go through the backlinks extracted from the markdown and add them to the
+    // aggregate list of backlinks
     backlinkNoteIds.forEach((id) => aggregNoteIds.add(id))
 
     let itemChildren: DOM = ''

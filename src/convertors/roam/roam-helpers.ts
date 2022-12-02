@@ -34,3 +34,14 @@ export const validateTime = (time: number | undefined): number | undefined => {
 
   return
 }
+
+export const toRoamId = (uid: string) => {
+  return `roam${uid}`
+}
+
+// Takes a string like '[[Example]]' and returns ['Example']
+export const extractBacklinks = (str: string): string[] => {
+  const regex = /(\[\[[^\]]*\]\]|\(\([^)]*\)\))/g
+  const matches = str.match(regex) ?? []
+  return matches.map((match) => match.slice(2, -2))
+}
