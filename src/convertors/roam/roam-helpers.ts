@@ -1,8 +1,6 @@
 import isValid from 'date-fns/isValid'
 import parse from 'date-fns/parse'
 
-import {toDailyNoteId, toNoteId} from '../../helpers/to-id'
-
 // Tries to parse out a date from the subject of a note.
 // Should be in the format of: October 1, 2020
 export const parseDateFromSubject = (str: string): Date | null => {
@@ -13,16 +11,6 @@ export const parseDateFromSubject = (str: string): Date | null => {
   }
 
   return null
-}
-
-export const parseNoteIdFromSubject = (subject: string) => {
-  const subjectDate = parseDateFromSubject(subject)
-
-  if (subjectDate) {
-    return toDailyNoteId(subjectDate)
-  }
-
-  return toNoteId(subject)
 }
 
 export const validateTime = (time: number | undefined): number | undefined => {
@@ -36,7 +24,7 @@ export const validateTime = (time: number | undefined): number | undefined => {
 }
 
 export const toRoamId = (uid: string) => {
-  return `roam${uid}`
+  return `roam-${uid}`
 }
 
 // Takes a string like '[[Example]]' and returns ['Example']
