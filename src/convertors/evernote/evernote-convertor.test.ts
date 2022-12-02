@@ -61,6 +61,6 @@ describe('EvernoteConvertor', () => {
     const [{subject, html}] = notes
 
     expect(subject).toEqual('failing nbsp')
-    expect(html).toEqual(`<div>foo ${entity} bar</div>`)
+    expect(html).toMatchSnapshot()
   })
 })
