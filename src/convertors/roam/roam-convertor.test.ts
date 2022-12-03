@@ -3,6 +3,7 @@ import {describe, it, expect} from 'vitest'
 import {formatHtml} from '../../testing/format-html'
 import dailyNotes from './fixtures/roam-daily-notes.json'
 import exampleGraph from './fixtures/roam-example-graph.json'
+import exampleGraph2 from './fixtures/roam-example-graph2.json'
 import todoNotes from './fixtures/roam-todos.json'
 import urlsNotes from './fixtures/roam-urls.json'
 import {RoamConvertor} from './roam-convertor'
@@ -414,6 +415,13 @@ describe('RoamConvertor', () => {
   it('parses exampleGraph', () => {
     const convertor = new RoamConvertor({graphId: '123'})
     const {notes} = convertor.convert({data: JSON.stringify(exampleGraph)})
+
+    expect(notes).toMatchSnapshot()
+  })
+
+  it('parses exampleGraph2', () => {
+    const convertor = new RoamConvertor({graphId: '123'})
+    const {notes} = convertor.convert({data: JSON.stringify(exampleGraph2)})
 
     expect(notes).toMatchSnapshot()
   })
