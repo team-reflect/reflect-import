@@ -1,4 +1,5 @@
 import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../../types'
+import {RoamBacklinks} from './roam-backlinks'
 import {RoamNoteConvertor} from './roam-note-convertor'
 import {RoamConversionError, RoamConvertedNote, RoamNote} from './types'
 
@@ -26,15 +27,18 @@ export class RoamConvertor implements Convertor {
       throw new RoamConversionError('Roam export must be an array of notes')
     }
 
-    const notes = roamNotes.map((note) => this.convertRoamNote(note))
+    const backlinks = new RoamBacklinks(roamNotes)
+
+    const notes = roamNotes.map((note) => this.convertRoamNote(note, backlinks))
 
     return {notes}
   }
 
-  convertRoamNote(note: RoamNote): RoamConvertedNote {
+  private convertRoamNote(note: RoamNote, backlinks: RoamBacklinks): RoamConvertedNote {
     const convertor = new RoamNoteConvertor({
       graphId: this.graphId,
       linkHost: this.linkHost,
+      backlinks,
       note,
     })
 

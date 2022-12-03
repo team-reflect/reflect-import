@@ -1,8 +1,6 @@
 import isValid from 'date-fns/isValid'
 import parse from 'date-fns/parse'
 
-import {RoamNote, RoamNoteString} from './types'
-
 // Tries to parse out a date from the subject of a note.
 // Should be in the format of: October 1, 2020
 export const parseDateFromSubject = (str: string): Date | null => {
@@ -75,40 +73,6 @@ export const extractTodos = (
     checked: undefined,
     parsed: str,
   }
-}
-
-// We want to iterate deeploy through the note and collect
-// all the titles to their corresponding note IDs.
-export const aggregateBacklinksToNoteIds = (
-  note: RoamNote,
-  result: Map<string, string> = new Map(),
-) => {
-  result.set(note.title, toRoamId(note.uid))
-
-  if (note.children) {
-    note.children.map((child) => {
-      aggregateBlockRefsToNoteIds(note, child, result)
-    })
-  }
-
-  return result
-}
-
-const aggregateBlockRefsToNoteIds = (
-  note: RoamNote,
-  noteString: RoamNoteString,
-  result: Map<string, string> = new Map(),
-) => {
-  // For block references the titles are the block references IDs.
-  result.set(noteString.uid, toRoamId(note.uid))
-
-  if (noteString.children) {
-    noteString.children.map((child) => {
-      aggregateBlockRefsToNoteIds(note, child, result)
-    })
-  }
-
-  return result
 }
 
 export const normalizeNoteString = (noteString: string) => {

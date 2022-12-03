@@ -4,8 +4,8 @@ import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
 import {markdownToHtml} from '../../helpers/markdown'
 import {REFLECT_HOSTNAME} from '../../types'
+import {RoamBacklinks} from './roam-backlinks'
 import {
-  aggregateBacklinksToNoteIds,
   normalizeNoteString,
   parseDateFromSubject,
   toRoamId,
@@ -18,21 +18,23 @@ export class RoamNoteConvertor {
   graphId: string
   linkHost: string
   note: RoamNote
-  backlinkMapping: Map<string, string>
+  backlinks: RoamBacklinks
 
   constructor({
     graphId,
     note,
+    backlinks,
     linkHost = REFLECT_HOSTNAME,
   }: {
     graphId: string
     note: RoamNote
+    backlinks: RoamBacklinks
     linkHost?: string
   }) {
     this.graphId = graphId
     this.linkHost = linkHost
     this.note = note
-    this.backlinkMapping = aggregateBacklinksToNoteIds(note)
+    this.backlinks = backlinks
   }
 
   convert(): RoamConvertedNote {
@@ -81,7 +83,7 @@ export class RoamNoteConvertor {
   }
 
   private backlinkResolver(pageName: string) {
-    return this.backlinkMapping.get(pageName) ?? pageName
+    return this.backlinks.getNoteId(pageName) ?? pageName
   }
 
   private parseListItem(

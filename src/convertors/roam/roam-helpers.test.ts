@@ -1,8 +1,6 @@
 import {describe, it, expect} from 'vitest'
 
-import exampleGraph2 from './fixtures/roam-example-graph2.json'
 import {
-  aggregateBacklinksToNoteIds,
   convertTagsToBacklinks,
   extractBacklinks,
   extractTodos,
@@ -27,37 +25,6 @@ describe('tagsToBacklinks', () => {
     ).toBe(
       'This is a [[tag]] and this is another [[tag]] and this should be left [[alone]]',
     )
-  })
-})
-
-describe('aggregateBacklinksToNoteIds', () => {
-  it('should aggregate backlinks to note ids', () => {
-    expect(aggregateBacklinksToNoteIds(exampleGraph2[0])).toMatchInlineSnapshot(`
-      Map {
-        "Anonymous" => "roam-kfEoMevXn",
-      }
-    `)
-
-    expect(aggregateBacklinksToNoteIds(exampleGraph2[1])).toMatchInlineSnapshot(`
-      Map {
-        "December 2nd, 2022" => "roam-12-02-2022",
-        "JCQcHmeGl" => "roam-12-02-2022",
-        "XEzJ_5YZw" => "roam-12-02-2022",
-        "J-p7gSCLd" => "roam-12-02-2022",
-        "P3TaGjdYU" => "roam-12-02-2022",
-        "uWA-r0mgd" => "roam-12-02-2022",
-        "Sy3Zn4PK-" => "roam-12-02-2022",
-        "L8RjVb-BQ" => "roam-12-02-2022",
-      }
-    `)
-
-    expect(aggregateBacklinksToNoteIds(exampleGraph2[2])).toMatchInlineSnapshot(`
-      Map {
-        "Richard" => "roam-DOBbkj36v",
-        "HscUS9B1m" => "roam-DOBbkj36v",
-        "LcbA2Kdnp" => "roam-DOBbkj36v",
-      }
-    `)
   })
 })
 
