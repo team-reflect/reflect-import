@@ -3,6 +3,14 @@ import {RoamNote, RoamNoteString} from './types'
 
 type TitleToIdMap = Map<string, string>
 
+// This is a private class for the RoamConvertor to use.
+//
+// Roam exports have do not contain enough information to reconstruct the
+// backlinks properly. So we have to build a mapping of title to note ID
+// and use that when resolving the backlinks.
+//
+// This is complicated by the fact that Roam implements block references
+// so we also have to build a mapping of block references to note IDs.
 export class RoamBacklinks {
   titleToIdMap: TitleToIdMap
 
@@ -28,7 +36,7 @@ export class RoamBacklinks {
     return titleToIdMap
   }
 
-  // We want to iterate deeploy through the note and collect
+  // We want to iterate deeply through the note and map
   // all the titles to their corresponding note IDs.
   private getTitleToIdMapFromNote(note: RoamNote, result: TitleToIdMap = new Map()) {
     result.set(note.title, toRoamId(note.uid))
@@ -42,12 +50,12 @@ export class RoamBacklinks {
     return result
   }
 
+  // For block references the titles are the block references IDs.
   private getTitleToIdMapFromNoteString(
     note: RoamNote,
     noteString: RoamNoteString,
     result: TitleToIdMap = new Map(),
   ) {
-    // For block references the titles are the block references IDs.
     result.set(noteString.uid, toRoamId(note.uid))
 
     if (noteString.children) {
