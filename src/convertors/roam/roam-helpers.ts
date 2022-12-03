@@ -41,7 +41,7 @@ export const convertTagsToBacklinks = (str: string): string => {
 
 // Convert ((backlinks)) to [[backlinks]].
 export const convertBlockrefsToBacklinks = (str: string): string => {
-  return str.replace(/\(\(([^)]+)\)\)/g, '[[\\1]]')
+  return str.replace(/\(\(([^)]+)\)\)/g, '[[$1]]')
 }
 
 export const extractTodos = (
@@ -80,6 +80,8 @@ export const normalizeNoteString = (noteString: string) => {
 
   // Convert roam tags (e.g. #tag) to backlinks (e.g. [[tag]])
   string = convertTagsToBacklinks(string)
+
+  string = convertBlockrefsToBacklinks(string)
 
   // Normalize the noteString by parsing out todos
   const {checked, parsed: parsedTasksString} = extractTodos(string)
