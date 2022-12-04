@@ -1,7 +1,6 @@
 import {describe, it, expect} from 'vitest'
 
 import {
-  convertBlockrefsToBacklinks,
   convertTagsToBacklinks,
   extractBacklinks,
   extractTodos,
@@ -63,14 +62,11 @@ describe('extractTodos', () => {
 
 describe('normalizeNoteString', () => {
   it('should normalize a note string', () => {
-    expect(
-      normalizeNoteString(
-        'This is a [[Backlink]] and this is a #backlink and this is a ((backlink))',
-      ),
-    ).toMatchInlineSnapshot(`
+    expect(normalizeNoteString('This is a [[Backlink]] and this is a #backlink'))
+      .toMatchInlineSnapshot(`
       {
         "checked": undefined,
-        "markdown": "This is a [[Backlink]] and this is a [[backlink]] and this is a [[backlink]]",
+        "markdown": "This is a [[Backlink]] and this is a [[backlink]]",
       }
     `)
   })
@@ -83,13 +79,5 @@ describe('normalizeNoteString', () => {
         "markdown": "This is a [[Backlink]] and this is a [[backlink]]",
       }
     `)
-  })
-})
-
-describe('convertBlockrefsToBacklinks', () => {
-  it('should convert blockrefs to backlinks', () => {
-    expect(convertBlockrefsToBacklinks('This is a ((blockref))')).toBe(
-      'This is a [[blockref]]',
-    )
   })
 })
