@@ -1,0 +1,5 @@
+// Vitest Snapshot v1
+
+exports[`EvernoteConvertor > parses note with html entity 1`] = `"<div>foo &gt; bar</div>"`;
+
+exports[`EvernoteConvertor > parses note with html entity 2`] = `"<div>foo   bar</div>"`;

@@ -4,7 +4,7 @@ import {EvernoteConvertor} from './evernote-convertor'
 
 describe('EvernoteConvertor', () => {
   it('converts evernote to HTML', () => {
-    const convertor = new EvernoteConvertor({graphId: '123'})
+    const convertor = new EvernoteConvertor()
 
     const data = `<?xml version="1.0" encoding="UTF-8"?>
   <en-export export-date="20221224T010732Z" application="Evernote" version="10.49.4">
@@ -34,8 +34,33 @@ describe('EvernoteConvertor', () => {
   })
 
   it('raises an error if parsing fails', () => {
-    const convertor = new EvernoteConvertor({graphId: '123'})
+    const convertor = new EvernoteConvertor()
 
     expect(() => convertor.convert({data: ''})).toThrow()
+  })
+
+  it.each(['&gt;', '&nbsp;'])('parses note with html entity', (entity) => {
+    const convertor = new EvernoteConvertor()
+
+    const data = `<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export4.dtd">
+    <en-export export-date="20221230T101804Z" application="Evernote" version="10.49.4">
+      <note>
+        <title>failing nbsp</title>
+        <created>20191201T063018Z</created>
+        <updated>20221130T101752Z</updated>
+        <note-attributes>
+        </note-attributes>
+        <content>
+          <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd"><en-note><div>foo ${entity} bar</div></en-note>      ]]>
+        </content>
+      </note>
+    </en-export>`
+
+    const {notes} = convertor.convert({data})
+    const [{subject, html}] = notes
+
+    expect(subject).toEqual('failing nbsp')
+    expect(html).toMatchSnapshot()
   })
 })

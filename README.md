@@ -18,10 +18,11 @@ const notes = convertor.convert(exexExport)
 ## TODO
 
 - [x] Created at / updated at timestamps
+- [ ] Markdown task support
 
 ## Implementation
 
 - [x] Evernote
 - [x] Roam
 - [x] Markdown
-- [ ] Workflowy
+- [x] Workflowy
