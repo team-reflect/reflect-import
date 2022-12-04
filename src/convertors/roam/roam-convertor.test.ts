@@ -2,6 +2,8 @@ import {describe, it, expect} from 'vitest'
 
 import {formatHtml} from '../../testing/format-html'
 import dailyNotes from './fixtures/roam-daily-notes.json'
+import exampleGraph from './fixtures/roam-example-graph.json'
+import exampleGraph2 from './fixtures/roam-example-graph2.json'
 import todoNotes from './fixtures/roam-todos.json'
 import urlsNotes from './fixtures/roam-urls.json'
 import {RoamConvertor} from './roam-convertor'
@@ -18,6 +20,11 @@ describe('RoamConvertor', () => {
         'create-time': 1599161754087,
         uid: '-rC8kxJH4',
         'edit-time': 1600958531049,
+        refs: [
+          {
+            uid: 'uuid123',
+          },
+        ],
       },
       {
         string: '**Chapter 1: Getting Started**',
@@ -50,32 +57,32 @@ describe('RoamConvertor', () => {
 
     expect(formatHtml(result)).toMatchInlineSnapshot(
       `
-    "<h1>The Great CEO Within</h1>
-    <ul>
-      <li>
-        <p>
-          Author::
-          <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/mattmochary\\"
-            >Matt Mochary</a
-          >
-        </p>
-      </li>
-      <li>
-        <p><strong>Chapter 1: Getting Started</strong></p>
-        <ul>
-          <li>
-            <p>
-              This is explained clearly and thoroughly in Disciplined
-              Entrepreneurship by Bill Aulet. I won’t repeat or even summarize what
-              he wrote. If you haven’t yet launched or achieved more than $1 million
-              of revenue, go read Bill’s book first.
-            </p>
-          </li>
-        </ul>
-      </li>
-    </ul>
-    "
-  `,
+      "<h1>The Great CEO Within</h1>
+      <ul>
+        <li>
+          <p>
+            Author::
+            <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/Matt Mochary\\"
+              >Matt Mochary</a
+            >
+          </p>
+        </li>
+        <li>
+          <p><strong>Chapter 1: Getting Started</strong></p>
+          <ul>
+            <li>
+              <p>
+                This is explained clearly and thoroughly in Disciplined
+                Entrepreneurship by Bill Aulet. I won’t repeat or even summarize what
+                he wrote. If you haven’t yet launched or achieved more than $1 million
+                of revenue, go read Bill’s book first.
+              </p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      "
+    `,
     )
   })
 
@@ -326,7 +333,7 @@ describe('RoamConvertor', () => {
     const html = htmlFromRoamNote(note, '123')
 
     expect(html).toMatchInlineSnapshot(
-      '"<h1>note1</h1><ul><li><p>link to <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/anothernote\\">another note</a></p><ul></ul></li></ul>"',
+      '"<h1>note1</h1><ul><li><p>link to <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/another note\\">another note</a></p><ul></ul></li></ul>"',
     )
   })
 
@@ -403,5 +410,19 @@ describe('RoamConvertor', () => {
       expect(createdAt).toEqual(new Date('2020-10-10T00:00:00.000Z').getTime())
       expect(dailyAt).toEqual(new Date('2020-10-10T00:00:00.000Z').getTime())
     })
+  })
+
+  it('parses exampleGraph', () => {
+    const convertor = new RoamConvertor({graphId: '123'})
+    const {notes} = convertor.convert({data: JSON.stringify(exampleGraph)})
+
+    expect(notes).toMatchSnapshot()
+  })
+
+  it('parses exampleGraph2', () => {
+    const convertor = new RoamConvertor({graphId: '123'})
+    const {notes} = convertor.convert({data: JSON.stringify(exampleGraph2)})
+
+    expect(notes).toMatchSnapshot()
   })
 })

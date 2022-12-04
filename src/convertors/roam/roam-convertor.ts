@@ -1,11 +1,7 @@
-import first from 'lodash/first'
-
-import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
-import {header1, list, listItem, taskListItem} from '../../helpers/generators'
-import {markdownToHtml} from '../../helpers/markdown'
 import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../../types'
-import {parseDateFromSubject, parseNoteIdFromSubject, validateTime} from './roam-helpers'
-import {RoamConversionError, RoamConvertedNote, RoamNote, RoamNoteString} from './types'
+import {RoamBacklinks} from './roam-backlinks'
+import {RoamNoteConvertor} from './roam-note-convertor'
+import {RoamConversionError, RoamConvertedNote, RoamNote} from './types'
 
 export class RoamConvertor implements Convertor {
   graphId: string
@@ -31,109 +27,21 @@ export class RoamConvertor implements Convertor {
       throw new RoamConversionError('Roam export must be an array of notes')
     }
 
-    const notes = roamNotes.map((note) => this.convertRoamNote(note))
+    const backlinks = new RoamBacklinks(roamNotes)
+
+    const notes = roamNotes.map((note) => this.convertRoamNote(note, backlinks))
 
     return {notes}
   }
 
-  private convertRoamNote(note: RoamNote): RoamConvertedNote {
-    const {html, backlinkNoteIds} = this.extractHtmlAndBacklinks(note)
-
-    const updated = note['edit-time']
-    const minChildCreated = first(
-      (note.children ?? []).map((child) => child['create-time']).sort(),
-    )
-    const titleDate = parseDateFromSubject(note.title)
-
-    return {
-      id: `roam-${note.uid}`,
-      html,
-      subject: note.title,
-      backlinkNoteIds,
-      dailyAt: validateTime(titleDate?.getTime()),
-      createdAt: validateTime(titleDate?.getTime() ?? minChildCreated),
-      updatedAt: validateTime(updated),
-    }
-  }
-
-  private extractHtmlAndBacklinks(note: RoamNote) {
-    let dom = list()
-    const aggregBacklinkNoteIds = new Set<string>()
-
-    if (note.children) {
-      const listItems: DOM[] = []
-
-      for (const child of note.children) {
-        const {html, backlinkNoteIds} = this.parseListItem(child)
-
-        listItems.push(html)
-        backlinkNoteIds.forEach((id) => aggregBacklinkNoteIds.add(id))
-      }
-
-      dom = list(listItems)
-    }
-
-    return {
-      html: domArrayToHtml([header1(note.title), dom]),
-      backlinkNoteIds: Array.from(aggregBacklinkNoteIds),
-    }
-  }
-
-  private parseListItem(noteString: RoamNoteString, aggregNoteIds = new Set<string>()) {
-    let string = this.convertRoamTagsToBacklinks(noteString.string?.trim() ?? '')
-
-    let taskChecked: boolean | undefined
-
-    string = string.replace(LINKED_TODO_UNFINISHED_STRING, TODO_UNFINISHED_STRING)
-    string = string.replace(LINKED_TODO_FINISHED_STRING, TODO_FINISHED_STRING)
-
-    if (string.startsWith(TODO_UNFINISHED_STRING)) {
-      string = string.replace(TODO_UNFINISHED_STRING, '')
-      taskChecked = false
-    } else if (string.startsWith(TODO_FINISHED_STRING)) {
-      string = string.replace(TODO_FINISHED_STRING, '')
-      taskChecked = true
-    }
-
-    const {html: itemContent, backlinkNoteIds} = markdownToHtml(string, {
+  private convertRoamNote(note: RoamNote, backlinks: RoamBacklinks): RoamConvertedNote {
+    const convertor = new RoamNoteConvertor({
       graphId: this.graphId,
       linkHost: this.linkHost,
-      constructsToDisable: ['thematicBreak', 'list', 'headingAtx'],
-      pageResolver: parseNoteIdFromSubject,
+      backlinks,
+      note,
     })
 
-    backlinkNoteIds.forEach((id) => aggregNoteIds.add(id))
-
-    let itemChildren: DOM = ''
-
-    if (noteString.children) {
-      const listItems = noteString.children.map((child) => {
-        const {html} = this.parseListItem(child, aggregNoteIds)
-        return html
-      })
-      itemChildren = list(listItems)
-    }
-
-    const dom =
-      taskChecked === undefined
-        ? listItem(domArrayToHtml([itemContent, itemChildren]))
-        : taskListItem(domArrayToHtml([itemContent, itemChildren]), {
-            checked: taskChecked,
-          })
-
-    return {
-      html: domToHtml(dom),
-      backlinkNoteIds: Array.from(aggregNoteIds),
-    }
-  }
-
-  private convertRoamTagsToBacklinks(str: string) {
-    return str.replace(/(^|\s)#\[\[/g, '$1[[').replace(/(^|\s)#([\w-]+)/g, '$1[[$2]]')
+    return convertor.convert()
   }
 }
-
-const LINKED_TODO_UNFINISHED_STRING = '{{[[TODO]]}}'
-const LINKED_TODO_FINISHED_STRING = '{{[[DONE]]}}'
-
-const TODO_UNFINISHED_STRING = '{{TODO}}'
-const TODO_FINISHED_STRING = '{{DONE}}'

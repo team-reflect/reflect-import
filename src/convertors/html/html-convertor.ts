@@ -1,7 +1,8 @@
 import {parseHtml} from 'helpers/html'
 import {stripFileExtension} from 'helpers/path'
-import {toNoteId} from 'helpers/to-id'
 import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from 'types'
+
+import {toHtmlId} from './html-helpers'
 
 export class HtmlConvertor implements Convertor {
   accept = {'text/html': ['.html', '.htm']}
@@ -22,7 +23,7 @@ export class HtmlConvertor implements Convertor {
     const html = doc.body.innerHTML
 
     const note: ConvertedNote = {
-      id: `html-${toNoteId(basename)}`,
+      id: toHtmlId(basename),
       subject,
       html,
     }

@@ -1,8 +1,6 @@
 import isValid from 'date-fns/isValid'
 import parse from 'date-fns/parse'
 
-import {toDailyNoteId, toNoteId} from '../../helpers/to-id'
-
 // Tries to parse out a date from the subject of a note.
 // Should be in the format of: October 1, 2020
 export const parseDateFromSubject = (str: string): Date | null => {
@@ -15,16 +13,6 @@ export const parseDateFromSubject = (str: string): Date | null => {
   return null
 }
 
-export const parseNoteIdFromSubject = (subject: string) => {
-  const subjectDate = parseDateFromSubject(subject)
-
-  if (subjectDate) {
-    return toDailyNoteId(subjectDate)
-  }
-
-  return toNoteId(subject)
-}
-
 export const validateTime = (time: number | undefined): number | undefined => {
   const date = time ? new Date(time) : undefined
 
@@ -33,4 +21,73 @@ export const validateTime = (time: number | undefined): number | undefined => {
   }
 
   return
+}
+
+export const toRoamId = (uid: string) => {
+  return `roam-${uid}`
+}
+
+// Takes a string like '[[Example]]' and returns ['Example']
+export const extractBacklinks = (str: string): string[] => {
+  const regex = /\[\[([^\]]+)\]\]/g
+  const matches = str.match(regex) ?? []
+  return matches.map((match) => match.slice(2, -2))
+}
+
+// Converts tags in the form of #[[tag]] or #tag to Wiki-style backlinks in the form of [[tag]].
+export const convertTagsToBacklinks = (str: string): string => {
+  return str.replace(/(^|\s)#\[\[/g, '$1[[').replace(/(^|\s)#([\w-]+)/g, '$1[[$2]]')
+}
+
+// Convert ((backlinks)) to [[backlinks]].
+export const convertBlockrefsToBacklinks = (str: string): string => {
+  return str.replace(/\(\(([^)]+)\)\)/g, '[[$1]]')
+}
+
+export const extractTodos = (
+  str: string,
+): {checked: boolean | undefined; parsed: string} => {
+  const TODO_CHECKED = '{{DONE}}'
+  const TODO_CHECKED_ALT = '{{[[DONE]]}}'
+
+  const TODO_UNCHECKED = '{{TODO}}'
+  const TODO_UNCHECKED_ALT = '{{[[TODO]]}}'
+
+  if (str.startsWith(TODO_CHECKED_ALT)) {
+    return {checked: true, parsed: str.slice(TODO_CHECKED_ALT.length).trim()}
+  }
+
+  if (str.startsWith(TODO_CHECKED)) {
+    return {checked: true, parsed: str.slice(TODO_CHECKED.length).trim()}
+  }
+
+  if (str.startsWith(TODO_UNCHECKED_ALT)) {
+    return {checked: false, parsed: str.slice(TODO_UNCHECKED_ALT.length).trim()}
+  }
+
+  if (str.startsWith(TODO_UNCHECKED)) {
+    return {checked: false, parsed: str.slice(TODO_UNCHECKED.length).trim()}
+  }
+
+  return {
+    checked: undefined,
+    parsed: str,
+  }
+}
+
+export const normalizeNoteString = (noteString: string) => {
+  let string = noteString
+
+  // Convert roam tags (e.g. #tag) to backlinks (e.g. [[tag]])
+  string = convertTagsToBacklinks(string)
+
+  string = convertBlockrefsToBacklinks(string)
+
+  // Normalize the noteString by parsing out todos
+  const {checked, parsed: parsedTasksString} = extractTodos(string)
+
+  return {
+    checked,
+    markdown: parsedTasksString,
+  }
 }
