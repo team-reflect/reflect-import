@@ -24,7 +24,11 @@ export const validateTime = (time: number | undefined): number | undefined => {
 }
 
 export const toRoamId = (uid: string) => {
-  return `roam-${uid}`
+  if (!uid.startsWith('roam-')) {
+    return `roam-${uid}`
+  } else {
+    return uid
+  }
 }
 
 // Takes a string like '[[Example]]' and returns ['Example']
@@ -39,9 +43,16 @@ export const convertTagsToBacklinks = (str: string): string => {
   return str.replace(/(^|\s)#\[\[/g, '$1[[').replace(/(^|\s)#([\w-]+)/g, '$1[[$2]]')
 }
 
-// Convert ((backlinks)) to [[backlinks]].
-export const convertBlockrefsToBacklinks = (str: string): string => {
-  return str.replace(/\(\(([^)]+)\)\)/g, '[[$1]]')
+// Convert ((backlinks)) to [[backlinks]]. Takes a replacer function to convert the blockref id to a backlink.
+// This is useful for converting blockrefs to backlinks in the same note.
+//
+// Usage:
+//  convertBlockrefsToBacklinks('((blockref-id))', (blockRefId) => blockRefId)
+export const convertBlockrefsToBacklinks = (
+  str: string,
+  replacer: (blockRefId: string) => string,
+): string => {
+  return str.replace(/\(\(([^)]+)\)\)/g, (_, blockRefId) => `[[${replacer(blockRefId)}]]`)
 }
 
 export const extractTodos = (
@@ -80,8 +91,6 @@ export const normalizeNoteString = (noteString: string) => {
 
   // Convert roam tags (e.g. #tag) to backlinks (e.g. [[tag]])
   string = convertTagsToBacklinks(string)
-
-  string = convertBlockrefsToBacklinks(string)
 
   // Normalize the noteString by parsing out todos
   const {checked, parsed: parsedTasksString} = extractTodos(string)

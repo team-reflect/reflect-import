@@ -80,4 +80,30 @@ describe('RoamBacklinks', () => {
       }
     `)
   })
+
+  it('should aggregate note titles', () => {
+    const backlinks = new RoamBacklinks(exampleGraph2)
+    expect(backlinks.idToTitleMap).toMatchInlineSnapshot(`
+      Map {
+        "roam-kfEoMevXn" => "Anonymous",
+        "roam-12-02-2022" => "December 2nd, 2022",
+        "roam-JCQcHmeGl" => "December 2nd, 2022",
+        "roam-XEzJ_5YZw" => "December 2nd, 2022",
+        "roam-J-p7gSCLd" => "December 2nd, 2022",
+        "roam-P3TaGjdYU" => "December 2nd, 2022",
+        "roam-uWA-r0mgd" => "December 2nd, 2022",
+        "roam-Sy3Zn4PK-" => "December 2nd, 2022",
+        "roam-L8RjVb-BQ" => "December 2nd, 2022",
+        "roam-DOBbkj36v" => "Richard",
+        "roam-HscUS9B1m" => "Richard",
+        "roam-LcbA2Kdnp" => "Richard",
+        "roam-KdxCBc-jS" => "Person",
+        "roam-Kj2gqAaIT" => "Person",
+        "roam-OekWfoURN" => "Person",
+        "roam-MH_5XfEZ-" => "ric",
+        "roam-ijCI34X3F" => "TODO",
+        "roam-U4DhTc5Fh" => "DONE",
+      }
+    `)
+  })
 })

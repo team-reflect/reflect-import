@@ -2,6 +2,7 @@ import {toRoamId} from './roam-helpers'
 import {RoamNote, RoamNoteString} from './types'
 
 type TitleToIdMap = Map<string, string>
+type IdToTitleMap = Map<string, string>
 
 // This is a private class for the RoamConvertor to use.
 //
@@ -13,37 +14,37 @@ type TitleToIdMap = Map<string, string>
 // so we also have to build a mapping of block references to note IDs.
 export class RoamBacklinks {
   titleToIdMap: TitleToIdMap
+  idToTitleMap: IdToTitleMap
 
   constructor(notes: RoamNote[]) {
-    this.titleToIdMap = this.getTitleToIdMapFromNotes(notes)
+    this.titleToIdMap = new Map()
+    this.idToTitleMap = new Map()
+    this.processNotes(notes)
   }
 
   getNoteId(title: string) {
     return this.titleToIdMap.get(title)
   }
 
-  private getTitleToIdMapFromNotes(notes: RoamNote[]): TitleToIdMap {
-    const titleToIdMap = new Map<string, string>()
+  getNoteTitle(id: string) {
+    return this.idToTitleMap.get(toRoamId(id))
+  }
 
+  private processNotes(notes: RoamNote[]) {
     for (const note of notes) {
-      const noteMap = this.getTitleToIdMapFromNote(note)
-
-      for (const [title, id] of noteMap) {
-        titleToIdMap.set(title, id)
-      }
+      this.processNote(note)
     }
-
-    return titleToIdMap
   }
 
   // We want to iterate deeply through the note and map
   // all the titles to their corresponding note IDs.
-  private getTitleToIdMapFromNote(note: RoamNote, result: TitleToIdMap = new Map()) {
-    result.set(note.title, toRoamId(note.uid))
+  private processNote(note: RoamNote, result: TitleToIdMap = new Map()) {
+    this.titleToIdMap.set(note.title, toRoamId(note.uid))
+    this.idToTitleMap.set(toRoamId(note.uid), note.title)
 
     if (note.children) {
       note.children.map((child) => {
-        this.getTitleToIdMapFromNoteString(note, child, result)
+        this.processNoteString(note, child, result)
       })
     }
 
@@ -51,19 +52,19 @@ export class RoamBacklinks {
   }
 
   // For block references the titles are the block references IDs.
-  private getTitleToIdMapFromNoteString(
+  private processNoteString(
     note: RoamNote,
     noteString: RoamNoteString,
     result: TitleToIdMap = new Map(),
   ) {
-    result.set(noteString.uid, toRoamId(note.uid))
+    // We are treating noteString.uid as the block ref title
+    this.titleToIdMap.set(noteString.uid, toRoamId(note.uid))
+    this.idToTitleMap.set(toRoamId(noteString.uid), note.title)
 
     if (noteString.children) {
       noteString.children.map((child) => {
-        this.getTitleToIdMapFromNoteString(note, child, result)
+        this.processNoteString(note, child, result)
       })
     }
-
-    return result
   }
 }

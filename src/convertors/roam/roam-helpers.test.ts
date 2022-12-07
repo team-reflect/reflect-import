@@ -1,6 +1,7 @@
 import {describe, it, expect} from 'vitest'
 
 import {
+  convertBlockrefsToBacklinks,
   convertTagsToBacklinks,
   extractBacklinks,
   extractTodos,
@@ -79,5 +80,16 @@ describe('normalizeNoteString', () => {
         "markdown": "This is a [[Backlink]] and this is a [[backlink]]",
       }
     `)
+  })
+})
+
+describe('convertBlockrefsToBacklinks', () => {
+  it('should convert blockrefs to backlinks', () => {
+    expect(
+      convertBlockrefsToBacklinks(
+        'This is a ((blockref)) and this is another ((blockref))',
+        (blockRefId) => blockRefId,
+      ),
+    ).toBe('This is a [[blockref]] and this is another [[blockref]]')
   })
 })
