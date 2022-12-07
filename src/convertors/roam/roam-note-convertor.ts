@@ -96,7 +96,7 @@ export class RoamNoteConvertor {
     // Convert ((blockrefs)) to [[backlinks]] (Reflect doesn't support blockrefs)
     markdown = convertBlockrefsToBacklinks(
       markdown,
-      (blockRef) => this.backlinks.getNoteTitle(blockRef) ?? 'FUCK',
+      (blockRef) => this.backlinks.getNoteTitle(blockRef) ?? blockRef,
     )
 
     // Parse out todos and tags
