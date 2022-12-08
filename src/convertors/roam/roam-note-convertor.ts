@@ -6,6 +6,7 @@ import {markdownToHtml} from '../../helpers/markdown'
 import {REFLECT_HOSTNAME} from '../../types'
 import {RoamBacklinks} from './roam-backlinks'
 import {
+  convertBlockrefsToBacklinks,
   normalizeNoteString,
   parseDateFromSubject,
   toRoamId,
@@ -90,9 +91,19 @@ export class RoamNoteConvertor {
     noteString: RoamNoteString,
     aggregateBacklinkNoteIds = new Set<string>(),
   ) {
-    const {markdown, checked} = normalizeNoteString(noteString.string)
+    let markdown = noteString.string
 
-    const {html: itemContent, backlinkNoteIds} = markdownToHtml(markdown, {
+    // Convert ((blockrefs)) to [[backlinks]] (Reflect doesn't support blockrefs)
+    markdown = convertBlockrefsToBacklinks(
+      markdown,
+      (blockRef) => this.backlinks.getNoteTitle(blockRef) ?? blockRef,
+    )
+
+    // Parse out todos and tags
+    const {markdown: normalizedMarkdown, checked} = normalizeNoteString(markdown)
+
+    // Generate the html
+    const {html: itemContent, backlinkNoteIds} = markdownToHtml(normalizedMarkdown, {
       graphId: this.graphId,
       linkHost: this.linkHost,
       constructsToDisable: ['thematicBreak', 'list', 'headingAtx'],
