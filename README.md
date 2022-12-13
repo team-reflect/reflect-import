@@ -2,8 +2,8 @@
 
 Converts a format into html.
 
-Convertors either implement `Convertor` or `ListConvertor`.
-They implement a `convert(data: string)` function and return either a note or an array of notes respectively.
+Convertors implement `Convertor`.
+They implement a `convert(options: ConvertOptions)` function and returns an array of notes.
 
 # Example
 
@@ -17,8 +17,8 @@ const notes = convertor.convert(exexExport)
 
 ## TODO
 
-- [x] Created at / updated at timestamps
 - [ ] Markdown task support
+- [ ] Markdown tags support
 
 ## Implementation
 
