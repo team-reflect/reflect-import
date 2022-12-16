@@ -53,12 +53,21 @@ This is a test
 [[another backlink]]
 `
 
-    const {backlinkNoteIds: ids} = markdownToHtml(markdown, {
+    const {backlinks: ids} = markdownToHtml(markdown, {
       graphId: 'testgraph',
       linkHost: 'reflect.app',
     })
 
-    expect(ids).toEqual(['mybacklink', 'anotherbacklink'])
+    expect(ids).toEqual([
+      {
+        id: 'mybacklink',
+        label: 'my backlink',
+      },
+      {
+        id: 'anotherbacklink',
+        label: 'another backlink',
+      },
+    ])
   })
 })
 
