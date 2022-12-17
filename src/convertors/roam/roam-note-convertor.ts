@@ -3,7 +3,7 @@ import first from 'lodash/first'
 import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
 import {markdownToHtml} from '../../helpers/markdown'
-import {REFLECT_HOSTNAME} from '../../types'
+import {Backlink, REFLECT_HOSTNAME} from '../../types'
 import {RoamBacklinks} from './roam-backlinks'
 import {
   convertBlockrefsToBacklinks,
@@ -39,7 +39,7 @@ export class RoamNoteConvertor {
   }
 
   convert(): RoamConvertedNote {
-    const {html, backlinkNoteIds} = this.extractHtmlAndBacklinks()
+    const {html, backlinks} = this.extractHtmlAndBacklinks()
 
     const updated = this.note['edit-time']
     const minChildCreated = first(
@@ -51,7 +51,7 @@ export class RoamNoteConvertor {
       id: toRoamId(this.note.uid),
       html,
       subject: this.note.title,
-      backlinkNoteIds,
+      backlinks,
       dailyAt: validateTime(titleDate?.getTime()),
       createdAt: validateTime(titleDate?.getTime() ?? minChildCreated),
       updatedAt: validateTime(updated),
@@ -77,9 +77,14 @@ export class RoamNoteConvertor {
       dom = list(listItems)
     }
 
+    const backlinks: Backlink[] = Array.from(aggregBacklinkNoteIds).map((id) => ({
+      id,
+      label: this.backlinks.getNoteTitle(id) ?? id,
+    }))
+
     return {
       html: domArrayToHtml([header1(this.note.title), dom]),
-      backlinkNoteIds: Array.from(aggregBacklinkNoteIds),
+      backlinks,
     }
   }
 
@@ -103,7 +108,7 @@ export class RoamNoteConvertor {
     const {markdown: normalizedMarkdown, checked} = normalizeNoteString(markdown)
 
     // Generate the html
-    const {html: itemContent, backlinkNoteIds} = markdownToHtml(normalizedMarkdown, {
+    const {html: itemContent, backlinks} = markdownToHtml(normalizedMarkdown, {
       graphId: this.graphId,
       linkHost: this.linkHost,
       constructsToDisable: ['thematicBreak', 'list', 'headingAtx'],
@@ -112,7 +117,7 @@ export class RoamNoteConvertor {
 
     // Go through the backlinks extracted from the markdown and add them to the
     // aggregate list of backlinks
-    backlinkNoteIds.forEach((id) => aggregateBacklinkNoteIds.add(id))
+    backlinks.forEach((backlink) => aggregateBacklinkNoteIds.add(backlink.id))
 
     let itemChildren: DOM = ''
 

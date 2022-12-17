@@ -7,9 +7,10 @@ import wikiLinkPlugin from 'remark-wiki-link'
 import {unified} from 'unified'
 
 import {toNoteId} from 'helpers/to-id'
+import {Backlink} from 'types'
 
 import {buildBacklinkUrl} from '../backlink'
-import {hydrateBacklinkNoteIds} from './plugins/hydrate-backlink-note-ids'
+import {hydrateBacklinks} from './plugins/hydrate-backlink-note-ids'
 import {hydrateSubject} from './plugins/hydrate-subject'
 
 export const markdownToHtml = (
@@ -44,13 +45,13 @@ export const markdownToHtml = (
     })
     .use(hydrateSubject)
     .use(pipeToRehype)
-    .use(hydrateBacklinkNoteIds, {graphId, linkHost})
+    .use(hydrateBacklinks, {graphId, linkHost})
     .use(pipeToHtml)
     .processSync(content)
 
   return {
     html: processor.toString(),
     subject: processor.data.subject as string | undefined,
-    backlinkNoteIds: processor.data.backlinkNoteIds as string[],
+    backlinks: processor.data.backlinks as Backlink[],
   }
 }

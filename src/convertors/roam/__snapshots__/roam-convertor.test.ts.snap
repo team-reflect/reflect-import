@@ -7,7 +7,7 @@ exports[`RoamConvertor > generateContentFromRoamNote > handles list with mixed b
 exports[`RoamConvertor > parses exampleGraph 1`] = `
 [
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1600041600000,
     "dailyAt": 1600041600000,
     "html": "<h1>September 14th, 2020</h1><ul><li><p>Test</p></li><li></li></ul>",
@@ -16,8 +16,11 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1600057101270,
   },
   {
-    "backlinkNoteIds": [
-      "roam-j6wBG1tYR",
+    "backlinks": [
+      {
+        "id": "roam-j6wBG1tYR",
+        "label": "hid",
+      },
     ],
     "createdAt": 1600128000000,
     "dailyAt": 1600128000000,
@@ -27,7 +30,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1600139707013,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": undefined,
     "dailyAt": undefined,
     "html": "<h1>hid</h1><ul></ul>",
@@ -36,8 +39,11 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1600150462125,
   },
   {
-    "backlinkNoteIds": [
-      "roam-09-16-2020",
+    "backlinks": [
+      {
+        "id": "roam-09-16-2020",
+        "label": "September 16th, 2020",
+      },
     ],
     "createdAt": 1600214400000,
     "dailyAt": 1600214400000,
@@ -47,9 +53,15 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1600171206515,
   },
   {
-    "backlinkNoteIds": [
-      "roam-20vV-tWxq",
-      "roam-JSdjtHezQ",
+    "backlinks": [
+      {
+        "id": "roam-20vV-tWxq",
+        "label": "Page",
+      },
+      {
+        "id": "roam-JSdjtHezQ",
+        "label": "Another one",
+      },
     ],
     "createdAt": 1600560000000,
     "dailyAt": 1600560000000,
@@ -59,8 +71,11 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1600566771305,
   },
   {
-    "backlinkNoteIds": [
-      "roam-20vV-tWxq",
+    "backlinks": [
+      {
+        "id": "roam-20vV-tWxq",
+        "label": "Page",
+      },
     ],
     "createdAt": 1600566888904,
     "dailyAt": undefined,
@@ -70,7 +85,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1600566782912,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1600566843402,
     "dailyAt": undefined,
     "html": "<h1>Another one</h1><ul><li></li></ul>",
@@ -79,8 +94,11 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1600566787181,
   },
   {
-    "backlinkNoteIds": [
-      "roam-20vV-tWxq",
+    "backlinks": [
+      {
+        "id": "roam-20vV-tWxq",
+        "label": "Page",
+      },
     ],
     "createdAt": 1601510400000,
     "dailyAt": 1601510400000,
@@ -90,8 +108,11 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1601547790265,
   },
   {
-    "backlinkNoteIds": [
-      "roam-20vV-tWxq",
+    "backlinks": [
+      {
+        "id": "roam-20vV-tWxq",
+        "label": "Page",
+      },
     ],
     "createdAt": 1601596800000,
     "dailyAt": 1601596800000,
@@ -101,7 +122,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1601603710972,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1601683200000,
     "dailyAt": 1601683200000,
     "html": "<h1>October 3rd, 2020</h1><ul></ul>",
@@ -110,7 +131,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1601636405186,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1601856000000,
     "dailyAt": 1601856000000,
     "html": "<h1>October 5th, 2020</h1><ul><li></li></ul>",
@@ -119,7 +140,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1601865293407,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1602028800000,
     "dailyAt": 1602028800000,
     "html": "<h1>October 7th, 2020</h1><ul></ul>",
@@ -128,7 +149,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1602030149795,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1602547200000,
     "dailyAt": 1602547200000,
     "html": "<h1>October 13th, 2020</h1><ul><li><p>It's a daily note</p><ul><li><p>asdfasdf <strong>bold</strong> sdf</p></li><li></li></ul></li></ul>",
@@ -137,7 +158,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1602564338609,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1602633600000,
     "dailyAt": 1602633600000,
     "html": "<h1>October 14th, 2020</h1><ul></ul>",
@@ -146,7 +167,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1602598553692,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1602720000000,
     "dailyAt": 1602720000000,
     "html": "<h1>October 15th, 2020</h1><ul></ul>",
@@ -155,7 +176,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1602673203764,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1605312000000,
     "dailyAt": 1605312000000,
     "html": "<h1>November 14th, 2020</h1><ul><li></li></ul>",
@@ -164,7 +185,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1605310990419,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1606089600000,
     "dailyAt": 1606089600000,
     "html": "<h1>November 23rd, 2020</h1><ul><li><p>test</p></li><li><p>asdf</p><ul><li><p>asdf</p></li><li><p>asdf</p></li><li></li><li><p>asdfasdf</p></li><li><ul><li><p>dasdfasdf</p><ul><li><p>asdf</p></li></ul></li></ul></li></ul></li><li><p>asdf</p></li><li></li></ul>",
@@ -173,7 +194,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1606096906114,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1607385600000,
     "dailyAt": 1607385600000,
     "html": "<h1>December 8th, 2020</h1><ul></ul>",
@@ -182,8 +203,11 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1607401158714,
   },
   {
-    "backlinkNoteIds": [
-      "roam-JSdjtHezQ",
+    "backlinks": [
+      {
+        "id": "roam-JSdjtHezQ",
+        "label": "Another one",
+      },
     ],
     "createdAt": 1607817600000,
     "dailyAt": 1607817600000,
@@ -193,7 +217,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1607800050272,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1607800116658,
     "dailyAt": undefined,
     "html": "<h1>Roam</h1><ul><li></li></ul>",
@@ -202,8 +226,11 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1607800090084,
   },
   {
-    "backlinkNoteIds": [
-      "roam-pTKChrTZg",
+    "backlinks": [
+      {
+        "id": "roam-pTKChrTZg",
+        "label": "Richard",
+      },
     ],
     "createdAt": 1612569600000,
     "dailyAt": 1612569600000,
@@ -213,7 +240,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1612558450851,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": undefined,
     "dailyAt": undefined,
     "html": "<h1>Richard</h1><ul></ul>",
@@ -222,7 +249,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1612558460650,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1612828800000,
     "dailyAt": 1612828800000,
     "html": "<h1>February 9th, 2021</h1><ul></ul>",
@@ -231,7 +258,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1612811843299,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1616112000000,
     "dailyAt": 1616112000000,
     "html": "<h1>March 19th, 2021</h1><ul><li><p>one</p><ul><li><p>asdf</p></li><li><p>asdf</p><ul><li></li></ul></li></ul></li></ul>",
@@ -240,7 +267,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1616138582207,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1618185600000,
     "dailyAt": 1618185600000,
     "html": "<h1>April 12th, 2021</h1><ul><li><p>asdf</p><ul><li><p>asdf</p><ul><li></li></ul></li></ul></li></ul>",
@@ -249,7 +276,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1618185082951,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1622937600000,
     "dailyAt": 1622937600000,
     "html": "<h1>June 6th, 2021</h1><ul></ul>",
@@ -258,7 +285,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1623029435620,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1624406400000,
     "dailyAt": 1624406400000,
     "html": "<h1>June 23rd, 2021</h1><ul><li><p>one</p><ul><li><p>two</p></li><li><p><em>three</em></p></li><li></li></ul></li></ul>",
@@ -267,7 +294,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
     "updatedAt": 1624463476606,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1627257600000,
     "dailyAt": 1627257600000,
     "html": "<h1>July 26th, 2021</h1><ul><li><p>Daily note</p></li></ul>",
@@ -281,7 +308,7 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
 exports[`RoamConvertor > parses exampleGraph2 1`] = `
 [
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": undefined,
     "dailyAt": undefined,
     "html": "<h1>Anonymous</h1><ul></ul>",
@@ -290,9 +317,15 @@ exports[`RoamConvertor > parses exampleGraph2 1`] = `
     "updatedAt": 1669965625215,
   },
   {
-    "backlinkNoteIds": [
-      "roam-DOBbkj36v",
-      "roam-KdxCBc-jS",
+    "backlinks": [
+      {
+        "id": "roam-DOBbkj36v",
+        "label": "Richard",
+      },
+      {
+        "id": "roam-KdxCBc-jS",
+        "label": "Person",
+      },
     ],
     "createdAt": 1669939200000,
     "dailyAt": 1669939200000,
@@ -302,7 +335,7 @@ exports[`RoamConvertor > parses exampleGraph2 1`] = `
     "updatedAt": 1669965625219,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1669965645817,
     "dailyAt": undefined,
     "html": "<h1>Richard</h1><ul><li><p>test</p></li><li><p>Is my brother</p></li></ul>",
@@ -311,7 +344,7 @@ exports[`RoamConvertor > parses exampleGraph2 1`] = `
     "updatedAt": 1669965639615,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": 1669965651533,
     "dailyAt": undefined,
     "html": "<h1>Person</h1><ul><li><p>Something excellent about people</p></li><li><p>A person is a person</p></li></ul>",
@@ -320,7 +353,7 @@ exports[`RoamConvertor > parses exampleGraph2 1`] = `
     "updatedAt": 1669965644221,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": undefined,
     "dailyAt": undefined,
     "html": "<h1>ric</h1><ul></ul>",
@@ -329,7 +362,7 @@ exports[`RoamConvertor > parses exampleGraph2 1`] = `
     "updatedAt": 1669965841744,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": undefined,
     "dailyAt": undefined,
     "html": "<h1>TODO</h1><ul></ul>",
@@ -338,7 +371,7 @@ exports[`RoamConvertor > parses exampleGraph2 1`] = `
     "updatedAt": 1669973027789,
   },
   {
-    "backlinkNoteIds": [],
+    "backlinks": [],
     "createdAt": undefined,
     "dailyAt": undefined,
     "html": "<h1>DONE</h1><ul></ul>",

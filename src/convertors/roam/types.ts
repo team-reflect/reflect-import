@@ -1,4 +1,4 @@
-import {ConversionError, ConvertedNote} from '../../types'
+import {Backlink, ConversionError, ConvertedNote} from '../../types'
 
 export interface RoamNote {
   title: string
@@ -23,7 +23,7 @@ export interface RoamConvertedNote extends ConvertedNote {
   html: string
   // Make these properties required
   subject: string
-  backlinkNoteIds: string[]
+  backlinks: Backlink[]
 }
 
 export class RoamConversionError extends ConversionError {

@@ -44,6 +44,6 @@ export const parseBacklinkUrl = ({
   linkHost: string
   graphId: string
   url: string
-}) => {
+}): string | null => {
   return buildBacklinkParser({linkHost, graphId})(url)
 }
