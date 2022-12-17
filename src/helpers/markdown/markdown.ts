@@ -7,11 +7,11 @@ import wikiLinkPlugin from 'remark-wiki-link'
 import {unified} from 'unified'
 
 import {toNoteId} from 'helpers/to-id'
+import {Backlink} from 'types'
 
 import {buildBacklinkUrl} from '../backlink'
 import {hydrateBacklinks} from './plugins/hydrate-backlink-note-ids'
 import {hydrateSubject} from './plugins/hydrate-subject'
-import {Backlink} from 'types'
 
 export const markdownToHtml = (
   content: string,
