@@ -1,5 +1,7 @@
 import first from 'lodash/first'
 
+import {assertString} from 'helpers/assert'
+
 import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
 import {markdownToHtml} from '../../helpers/markdown'
@@ -39,6 +41,8 @@ export class RoamNoteConvertor {
   }
 
   convert(): RoamConvertedNote {
+    assertString(this.note.uid, 'Roam note must have a uid')
+
     const {html, backlinks} = this.extractHtmlAndBacklinks()
 
     const updated = this.note['edit-time']
