@@ -2,7 +2,7 @@ import {parseHtml} from 'helpers/html'
 import {stripFileExtension} from 'helpers/path'
 import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from 'types'
 
-import {toHtmlId} from './html-helpers'
+import {basenameToSubject, toHtmlId} from './html-helpers'
 
 export class HtmlConvertor implements Convertor {
   accept = {'text/html': ['.html', '.htm']}
@@ -13,9 +13,9 @@ export class HtmlConvertor implements Convertor {
     const doc = parseHtml(data)
 
     const subject =
-      doc.querySelector('title')?.textContent ??
-      doc.querySelector('h1')?.textContent ??
-      basename
+      doc.querySelector('title')?.textContent ||
+      doc.querySelector('h1')?.textContent ||
+      basenameToSubject(basename)
 
     // Remove <br /> tags
     doc.querySelectorAll('br').forEach((br) => br.remove())
