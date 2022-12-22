@@ -1,4 +1,4 @@
-import format from 'date-fns/format'
+import {format} from 'date-fns'
 
 // Valid IDs are lowercase and only include letters, numbers, or dashes
 export const toNoteId = (value: string) => {

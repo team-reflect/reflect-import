@@ -1,5 +1,4 @@
-import isValid from 'date-fns/isValid'
-import parse from 'date-fns/parse'
+import {parse, isValid} from 'date-fns'
 
 import {stripFileExtension} from 'helpers/path'
 
