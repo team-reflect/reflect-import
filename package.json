@@ -1,7 +1,7 @@
 {
   "name": "@team-reflect/reflect-import",
   "type": "module",
-  "version": "0.3.2-1",
+  "version": "0.3.2-2",
   "author": "Alex MacCaw",
   "license": "MIT",
   "repository": "git://github.com/team-reflect/reflect-import.git",
@@ -27,7 +27,7 @@
   "dependencies": {
     "date-fns": "^2.29.3",
     "jsdom": "^20.0.3",
-    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "mdast-util-gfm-autolink-literal": "^1.0.2",
     "mdast-util-to-string": "^3.1.0",
     "micromark-extension-gfm-autolink-literal": "^1.0.3",
@@ -44,7 +44,7 @@
     "@ocavue/eslint-config": "^0.4.5",
     "@size-limit/preset-small-lib": "^8.1.0",
     "@types/js-yaml": "^4.0.5",
-    "@types/lodash": "^4.14.189",
+    "@types/lodash-es": "^4.17.6",
     "eslint": "^8.28.0",
     "prettier": "^2.8.0",
     "size-limit": "^8.1.0",
