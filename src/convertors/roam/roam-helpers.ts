@@ -1,5 +1,4 @@
-import isValid from 'date-fns/isValid'
-import parse from 'date-fns/parse'
+import {parse, isValid} from 'date-fns'
 
 // Tries to parse out a date from the subject of a note.
 // Should be in the format of: October 1, 2020

@@ -1,4 +1,4 @@
-import first from 'lodash/first'
+import {first} from 'lodash'
 
 import {assertString} from 'helpers/assert'
 
