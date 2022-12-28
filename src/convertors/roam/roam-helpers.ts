@@ -1,5 +1,7 @@
 import {parse, isValid} from 'date-fns'
 
+import {toDailyNoteId} from '../../helpers/to-id'
+
 // Tries to parse out a date from the subject of a note.
 // Should be in the format of: October 1, 2020
 export const parseDateFromSubject = (str: string): Date | null => {
@@ -97,5 +99,27 @@ export const normalizeNoteString = (noteString: string) => {
   return {
     checked,
     markdown: parsedTasksString,
+  }
+}
+
+export const parseDateFromUid = (str: string): Date | null => {
+  // Roam links to daily-notes look like: 03-09-2020
+  const date = parse(str, 'MM-dd-yyyy', new Date())
+
+  if (isValid(date)) {
+    return date
+  }
+
+  return null
+}
+
+// If the UID looks like a daily note, return the daily note ID.
+export const normalizeUidToId = (noteId: string) => {
+  const dailyDate = parseDateFromUid(noteId)
+
+  if (dailyDate) {
+    return toDailyNoteId(dailyDate)
+  } else {
+    return noteId
   }
 }

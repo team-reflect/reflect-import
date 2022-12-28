@@ -386,11 +386,11 @@ describe('RoamConvertor', () => {
     })
   })
 
-  describe('createdAt', () => {
-    it('should be extracted from the title', () => {
+  describe('createdAt and dailyAt', () => {
+    it('should be extracted from the uid', () => {
       const note: RoamNote = {
         title: 'October 10th, 2020',
-        uid: '123',
+        uid: '10-10-2020',
         'edit-time': 12345,
         children: [
           {

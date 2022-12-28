@@ -10,9 +10,9 @@ import {RoamBacklinks} from './roam-backlinks'
 import {
   convertBlockrefsToBacklinks,
   normalizeNoteString,
-  parseDateFromSubject,
+  normalizeUidToId,
+  parseDateFromUid,
   toRoamId,
-  validateTime,
 } from './roam-helpers'
 import {RoamConvertedNote, RoamNote, RoamNoteString} from './types'
 
@@ -49,16 +49,16 @@ export class RoamNoteConvertor {
     const minChildCreated = first(
       (this.note.children ?? []).map((child) => child['create-time']).sort(),
     )
-    const titleDate = parseDateFromSubject(this.note.title)
+    const dailyDate = parseDateFromUid(this.note.uid)
 
     return {
       id: toRoamId(this.note.uid),
       html,
       subject: this.note.title,
       backlinks,
-      dailyAt: validateTime(titleDate?.getTime()),
-      createdAt: validateTime(titleDate?.getTime() ?? minChildCreated),
-      updatedAt: validateTime(updated),
+      dailyAt: dailyDate?.getTime(),
+      createdAt: dailyDate?.getTime() ?? minChildCreated,
+      updatedAt: updated,
     }
   }
 
@@ -82,7 +82,7 @@ export class RoamNoteConvertor {
     }
 
     const backlinks: Backlink[] = Array.from(aggregBacklinkNoteIds).map((id) => ({
-      id,
+      id: normalizeUidToId(id),
       label: this.backlinks.getNoteTitle(id) ?? id,
     }))
 

@@ -1,4 +1,5 @@
 import {markdownToHtml} from 'helpers/markdown'
+import {toDailyNoteId} from 'helpers/to-id'
 
 import {
   ConvertedNote,
@@ -35,8 +36,10 @@ export class MarkdownConvertor implements Convertor {
     // Filename matches yyyy-MM-dd.md
     const dailyDate = dailyDateFromFilename(filename)
 
+    const id = dailyDate ? toDailyNoteId(dailyDate) : toMarkdownId(filename)
+
     const note: ConvertedNote = {
-      id: toMarkdownId(filename),
+      id,
       html,
       subject,
       dailyAt: dailyDate?.getTime(),
