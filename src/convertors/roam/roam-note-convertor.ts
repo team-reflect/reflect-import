@@ -15,6 +15,7 @@ import {
   toRoamId,
 } from './roam-helpers'
 import {RoamConvertedNote, RoamNote, RoamNoteString} from './types'
+import {toDailyNoteId} from 'helpers/to-id'
 
 // Private class for the RoamConvertor to use
 export class RoamNoteConvertor {
@@ -50,9 +51,10 @@ export class RoamNoteConvertor {
       (this.note.children ?? []).map((child) => child['create-time']).sort(),
     )
     const dailyDate = parseDateFromUid(this.note.uid)
+    const id = dailyDate ? toDailyNoteId(dailyDate) : toRoamId(this.note.uid)
 
     return {
-      id: toRoamId(this.note.uid),
+      id,
       html,
       subject: this.note.title,
       backlinks,
