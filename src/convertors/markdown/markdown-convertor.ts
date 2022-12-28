@@ -8,7 +8,11 @@ import {
   ConvertResponse,
   REFLECT_HOSTNAME,
 } from '../../types'
-import {dailyDateFromFilename, toMarkdownId} from './markdown-helpers'
+import {
+  normalizeBacklink,
+  parseDailyDateFromFilename,
+  toMarkdownId,
+} from './markdown-helpers'
 
 export class MarkdownConvertor implements Convertor {
   graphId: string
@@ -28,15 +32,25 @@ export class MarkdownConvertor implements Convertor {
   accept = {'text/markdown': ['.md']}
 
   convert({data, filename}: ConvertOptions & {filename: string}): ConvertResponse {
-    const {html, subject, backlinks} = markdownToHtml(data, {
+    const {
+      html,
+      subject,
+      backlinks: unnormalizedBacklinks,
+    } = markdownToHtml(data, {
       graphId: this.graphId,
       linkHost: this.linkHost,
     })
 
     // Filename matches yyyy-MM-dd.md
-    const dailyDate = dailyDateFromFilename(filename)
+    const dailyDate = parseDailyDateFromFilename(filename)
 
     const id = dailyDate ? toDailyNoteId(dailyDate) : toMarkdownId(filename)
+
+    // Turn any backlinks that look like daily-note filenames into daily-note ids
+    const backlinks = unnormalizedBacklinks.map((backlink) => ({
+      ...backlink,
+      id: normalizeBacklink(backlink.id),
+    }))
 
     const note: ConvertedNote = {
       id,
