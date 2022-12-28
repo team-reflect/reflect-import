@@ -41,13 +41,13 @@ exports[`RoamConvertor > parses exampleGraph 1`] = `
   {
     "backlinks": [
       {
-        "id": "roam-09-16-2020",
-        "label": "September 16th, 2020",
+        "id": "16092020",
+        "label": "16092020",
       },
     ],
     "createdAt": 1600214400000,
     "dailyAt": 1600214400000,
-    "html": "<h1>September 16th, 2020</h1><ul><li><p>New page:</p><ul><li><p>Hi there</p></li></ul></li><li><p>asdf</p></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/roam-09-16-2020\\">September 16th, 2020</a></p></li><li><ul><li><p>asdfs</p></li></ul></li></ul>",
+    "html": "<h1>September 16th, 2020</h1><ul><li><p>New page:</p><ul><li><p>Hi there</p></li></ul></li><li><p>asdf</p></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/16092020\\">September 16th, 2020</a></p></li><li><ul><li><p>asdfs</p></li></ul></li></ul>",
     "id": "16092020",
     "subject": "September 16th, 2020",
     "updatedAt": 1600171206515,

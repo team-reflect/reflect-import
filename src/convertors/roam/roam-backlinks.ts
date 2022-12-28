@@ -1,4 +1,4 @@
-import {toRoamId} from './roam-helpers'
+import {normalizeUidToId} from './roam-helpers'
 import {RoamNote, RoamNoteString} from './types'
 
 type TitleToIdMap = Map<string, string>
@@ -27,7 +27,7 @@ export class RoamBacklinks {
   }
 
   getNoteTitle(id: string) {
-    return this.idToTitleMap.get(toRoamId(id))
+    return this.idToTitleMap.get(normalizeUidToId(id))
   }
 
   private processNotes(notes: RoamNote[]) {
@@ -39,8 +39,8 @@ export class RoamBacklinks {
   // We want to iterate deeply through the note and map
   // all the titles to their corresponding note IDs.
   private processNote(note: RoamNote, result: TitleToIdMap = new Map()) {
-    this.titleToIdMap.set(note.title, toRoamId(note.uid))
-    this.idToTitleMap.set(toRoamId(note.uid), note.title)
+    this.titleToIdMap.set(note.title, normalizeUidToId(note.uid))
+    this.idToTitleMap.set(normalizeUidToId(note.uid), note.title)
 
     if (note.children) {
       note.children.map((child) => {
@@ -58,8 +58,8 @@ export class RoamBacklinks {
     result: TitleToIdMap = new Map(),
   ) {
     // We are treating noteString.uid as the block ref title
-    this.titleToIdMap.set(noteString.uid, toRoamId(note.uid))
-    this.idToTitleMap.set(toRoamId(noteString.uid), note.title)
+    this.titleToIdMap.set(noteString.uid, normalizeUidToId(note.uid))
+    this.idToTitleMap.set(normalizeUidToId(noteString.uid), note.title)
 
     if (noteString.children) {
       noteString.children.map((child) => {
