@@ -1,6 +1,7 @@
 import {first} from 'lodash-es'
 
 import {assertString} from 'helpers/assert'
+import {toDailyNoteId} from 'helpers/to-id'
 
 import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
 import {header1, list, listItem, taskListItem} from '../../helpers/generators'
@@ -10,12 +11,10 @@ import {RoamBacklinks} from './roam-backlinks'
 import {
   convertBlockrefsToBacklinks,
   normalizeNoteString,
-  normalizeUidToId,
   parseDateFromUid,
   toRoamId,
 } from './roam-helpers'
 import {RoamConvertedNote, RoamNote, RoamNoteString} from './types'
-import {toDailyNoteId} from 'helpers/to-id'
 
 // Private class for the RoamConvertor to use
 export class RoamNoteConvertor {
@@ -84,7 +83,7 @@ export class RoamNoteConvertor {
     }
 
     const backlinks: Backlink[] = Array.from(aggregBacklinkNoteIds).map((id) => ({
-      id: normalizeUidToId(id),
+      id,
       label: this.backlinks.getNoteTitle(id) ?? id,
     }))
 

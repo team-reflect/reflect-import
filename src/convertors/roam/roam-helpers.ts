@@ -2,36 +2,6 @@ import {parse, isValid} from 'date-fns'
 
 import {toDailyNoteId} from '../../helpers/to-id'
 
-// Tries to parse out a date from the subject of a note.
-// Should be in the format of: October 1, 2020
-export const parseDateFromSubject = (str: string): Date | null => {
-  const date = parse(str, 'MMMM do, yyyy', new Date())
-
-  if (isValid(date)) {
-    return date
-  }
-
-  return null
-}
-
-export const validateTime = (time: number | undefined): number | undefined => {
-  const date = time ? new Date(time) : undefined
-
-  if (date && isValid(date)) {
-    return time
-  }
-
-  return
-}
-
-export const toRoamId = (uid: string) => {
-  if (!uid.startsWith('roam-')) {
-    return `roam-${uid}`
-  } else {
-    return uid
-  }
-}
-
 // Takes a string like '[[Example]]' and returns ['Example']
 export const extractBacklinks = (str: string): string[] => {
   const regex = /\[\[([^\]]+)\]\]/g
@@ -113,13 +83,21 @@ export const parseDateFromUid = (str: string): Date | null => {
   return null
 }
 
-// If the UID looks like a daily note, return the daily note ID.
 export const normalizeUidToId = (noteId: string) => {
   const dailyDate = parseDateFromUid(noteId)
 
   if (dailyDate) {
+    // If the UID looks like a daily note, return the daily note ID.
     return toDailyNoteId(dailyDate)
   } else {
-    return noteId
+    return toRoamId(noteId)
+  }
+}
+
+export const toRoamId = (uid: string) => {
+  if (!uid.startsWith('roam-')) {
+    return `roam-${uid}`
+  } else {
+    return uid
   }
 }
