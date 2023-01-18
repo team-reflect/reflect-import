@@ -27,7 +27,11 @@ export class MarkdownConvertor implements Convertor {
 
   accept = {'text/markdown': ['.md']}
 
-  convert({data, filename}: ConvertOptions & {filename: string}): ConvertResponse {
+  convert({
+    data,
+    filename,
+    lastModified,
+  }: ConvertOptions & {filename: string}): ConvertResponse {
     const {html, subject, backlinks} = markdownToHtml(data, {
       graphId: this.graphId,
       linkHost: this.linkHost,
@@ -44,6 +48,7 @@ export class MarkdownConvertor implements Convertor {
       subject,
       dailyAt: dailyDate?.getTime(),
       backlinks,
+      updatedAt: lastModified,
     }
 
     return {notes: [note]}

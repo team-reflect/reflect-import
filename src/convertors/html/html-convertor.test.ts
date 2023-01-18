@@ -52,4 +52,22 @@ describe('HtmlConvertor', () => {
         "
     `)
   })
+
+  it('returns updatedAt from lastModified', () => {
+    const convertor = new HtmlConvertor()
+
+    const data = `<ul>
+    <li>Ground beef</li>
+    </ul>
+  `
+    const {notes} = convertor.convert({
+      data,
+      filename: 'p1-My Recipe.html',
+      lastModified: 123456789,
+    })
+
+    const [{updatedAt}] = notes
+
+    expect(updatedAt).toEqual(123456789)
+  })
 })

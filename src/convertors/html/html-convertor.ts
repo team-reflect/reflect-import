@@ -7,7 +7,11 @@ import {basenameToSubject, toHtmlId} from './html-helpers'
 export class HtmlConvertor implements Convertor {
   accept = {'text/html': ['.html', '.htm']}
 
-  convert({data, filename}: ConvertOptions & {filename: string}): ConvertResponse {
+  convert({
+    data,
+    filename,
+    lastModified,
+  }: ConvertOptions & {filename: string}): ConvertResponse {
     const basename = stripFileExtension(filename)
 
     const doc = parseHtml(data)
@@ -26,6 +30,7 @@ export class HtmlConvertor implements Convertor {
       id: toHtmlId(basename),
       subject,
       html,
+      updatedAt: lastModified,
     }
 
     return {notes: [note]}

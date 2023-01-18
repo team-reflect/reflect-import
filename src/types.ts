@@ -25,6 +25,7 @@ export interface ConvertedNote {
 export interface ConvertOptions {
   data: string
   filename?: string
+  lastModified?: number
 }
 
 export interface ConvertResponse {
