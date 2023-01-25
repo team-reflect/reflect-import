@@ -25,6 +25,13 @@ export class HtmlConvertor implements Convertor {
     // Remove <br /> tags
     doc.querySelectorAll('br').forEach((br) => br.remove())
 
+    // Remove <img /> tags with base64 data
+    doc.querySelectorAll('img').forEach((img) => {
+      if (img.src.startsWith('data:image')) {
+        img.remove()
+      }
+    })
+
     const html = doc.body.innerHTML
 
     const note: ConvertedNote = {
