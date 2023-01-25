@@ -1,4 +1,4 @@
-import {parseHtml} from 'helpers/html'
+import {parseHtml, removeBrs, removeImgsWithDataSrcs} from 'helpers/html'
 import {stripFileExtension} from 'helpers/path'
 import {validateNotes} from 'helpers/validate'
 
@@ -22,15 +22,8 @@ export class HtmlConvertor implements Convertor {
       doc.querySelector('h1')?.textContent ||
       basenameToSubject(basename)
 
-    // Remove <br /> tags
-    doc.querySelectorAll('br').forEach((br) => br.remove())
-
-    // Remove <img /> tags with base64 data
-    doc.querySelectorAll('img').forEach((img) => {
-      if (img.src.startsWith('data:image')) {
-        img.remove()
-      }
-    })
+    removeBrs(doc)
+    removeImgsWithDataSrcs(doc)
 
     const html = doc.body.innerHTML
 

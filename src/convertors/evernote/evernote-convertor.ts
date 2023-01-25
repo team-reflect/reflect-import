@@ -3,6 +3,7 @@ import {parseXml} from 'helpers/xml'
 
 import {parseTime, toEvernoteId} from './evernote-helpers'
 import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
+import {parseHtml, removeImgsWithDataSrcs} from 'helpers/html'
 
 export class EvernoteConvertor implements Convertor {
   accept = {'application/enex': ['.enex']}
@@ -36,8 +37,11 @@ export class EvernoteConvertor implements Convertor {
     const contentDoc = parseXml(content)
     const contentNoteDoc = contentDoc.querySelector('en-note')
     const html = contentNoteDoc?.innerHTML ?? ''
+    const doc = parseHtml(html)
 
-    return html
+    removeImgsWithDataSrcs(doc)
+
+    return doc.body.innerHTML
   }
 
   private extractTimestamps(noteDoc: Element) {
