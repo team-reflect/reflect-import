@@ -1,8 +1,8 @@
 import {validateNotes} from 'helpers/validate'
 import {parseXml} from 'helpers/xml'
-import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from 'types'
 
 import {parseTime, toEvernoteId} from './evernote-helpers'
+import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
 
 export class EvernoteConvertor implements Convertor {
   accept = {'application/enex': ['.enex']}

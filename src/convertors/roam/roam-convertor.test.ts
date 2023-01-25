@@ -1,7 +1,5 @@
 import {describe, it, expect} from 'vitest'
 
-import {formatHtml} from 'testing/format-html'
-
 import dailyNotes from './fixtures/roam-daily-notes.json'
 import exampleGraph from './fixtures/roam-example-graph.json'
 import exampleGraph2 from './fixtures/roam-example-graph2.json'
@@ -9,6 +7,7 @@ import todoNotes from './fixtures/roam-todos.json'
 import urlsNotes from './fixtures/roam-urls.json'
 import {RoamConvertor} from './roam-convertor'
 import {RoamNote} from './types'
+import {formatHtml} from '../../testing/format-html'
 
 describe('RoamConvertor', () => {
   const ROAM_SAMPLE: RoamNote = {

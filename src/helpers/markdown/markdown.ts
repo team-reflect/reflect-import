@@ -8,10 +8,10 @@ import {unified} from 'unified'
 
 import {buildBacklinkUrl} from 'helpers/backlink'
 import {toNoteId} from 'helpers/to-id'
-import {Backlink} from 'types'
 
 import {hydrateBacklinks} from './plugins/hydrate-backlink-note-ids'
 import {hydrateSubject} from './plugins/hydrate-subject'
+import {Backlink} from '../../types'
 
 export const markdownToHtml = (
   content: string,

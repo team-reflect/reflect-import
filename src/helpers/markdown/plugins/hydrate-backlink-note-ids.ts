@@ -4,9 +4,8 @@ import {toString} from 'mdast-util-to-string'
 import {Plugin} from 'unified'
 import {visit} from 'unist-util-visit'
 
-import {Backlink} from 'types'
-
 import {buildBacklinkParser} from '../../../helpers/backlink'
+import {Backlink} from '../../../types'
 
 type HydrateBacklinkOptions = {
   graphId: string

@@ -1,9 +1,9 @@
 import {parseHtml} from 'helpers/html'
 import {stripFileExtension} from 'helpers/path'
 import {validateNotes} from 'helpers/validate'
-import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from 'types'
 
 import {basenameToSubject, toHtmlId} from './html-helpers'
+import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
 
 export class HtmlConvertor implements Convertor {
   accept = {'text/html': ['.html', '.htm']}
