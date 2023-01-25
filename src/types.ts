@@ -28,8 +28,15 @@ export interface ConvertOptions {
   lastModified?: number
 }
 
+export interface ConvertedNoteError {
+  id: string
+  type: string
+  message: string
+}
+
 export interface ConvertResponse {
   notes: ConvertedNote[]
+  errors: ConvertedNoteError[]
 }
 
 export type ConvertorAcceptType = Record<string, string | string[]>

@@ -1,8 +1,9 @@
-import {parseHtml} from 'helpers/html'
+import {parseHtml, removeBrs, removeImgsWithDataSrcs} from 'helpers/html'
 import {stripFileExtension} from 'helpers/path'
-import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from 'types'
+import {validateNotes} from 'helpers/validate'
 
 import {basenameToSubject, toHtmlId} from './html-helpers'
+import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
 
 export class HtmlConvertor implements Convertor {
   accept = {'text/html': ['.html', '.htm']}
@@ -21,8 +22,8 @@ export class HtmlConvertor implements Convertor {
       doc.querySelector('h1')?.textContent ||
       basenameToSubject(basename)
 
-    // Remove <br /> tags
-    doc.querySelectorAll('br').forEach((br) => br.remove())
+    removeBrs(doc)
+    removeImgsWithDataSrcs(doc)
 
     const html = doc.body.innerHTML
 
@@ -33,6 +34,6 @@ export class HtmlConvertor implements Convertor {
       updatedAt: lastModified,
     }
 
-    return {notes: [note]}
+    return validateNotes([note])
   }
 }

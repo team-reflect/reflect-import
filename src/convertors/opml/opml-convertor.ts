@@ -1,9 +1,10 @@
 import {DOM, domArrayToHtml} from 'helpers/dom'
 import {header1, list, listItem, paragraph} from 'helpers/generators'
+import {validateNotes} from 'helpers/validate'
 import {parseXml} from 'helpers/xml'
 
-import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
 import {toOpmlId} from './opml-helpers'
+import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
 
 export class OpmlConvertor implements Convertor {
   accept = {'application/opml': ['.opml']}
@@ -17,7 +18,7 @@ export class OpmlConvertor implements Convertor {
       this.convertOutlineDocToNote(doc, index),
     )
 
-    return {notes}
+    return validateNotes(notes)
   }
 
   private convertOutlineDocToNote(doc: Element, index: number): ConvertedNote {

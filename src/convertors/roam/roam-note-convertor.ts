@@ -1,12 +1,11 @@
 import {first} from 'lodash-es'
 
 import {assertString} from 'helpers/assert'
+import {DOM, domArrayToHtml, domToHtml} from 'helpers/dom'
+import {header1, list, listItem, taskListItem} from 'helpers/generators'
+import {markdownToHtml} from 'helpers/markdown'
 import {toDailyNoteId} from 'helpers/to-id'
 
-import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
-import {header1, list, listItem, taskListItem} from '../../helpers/generators'
-import {markdownToHtml} from '../../helpers/markdown'
-import {Backlink, REFLECT_HOSTNAME} from '../../types'
 import {RoamBacklinks} from './roam-backlinks'
 import {
   convertBlockrefsToBacklinks,
@@ -15,6 +14,7 @@ import {
   toRoamId,
 } from './roam-helpers'
 import {RoamConvertedNote, RoamNote, RoamNoteString} from './types'
+import {Backlink, REFLECT_HOSTNAME} from '../../types'
 
 // Private class for the RoamConvertor to use
 export class RoamNoteConvertor {
