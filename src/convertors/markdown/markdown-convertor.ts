@@ -1,5 +1,6 @@
 import {markdownToHtml} from 'helpers/markdown'
 import {toDailyNoteId} from 'helpers/to-id'
+import {validateNotes} from 'helpers/validate'
 
 import {
   ConvertedNote,
@@ -51,6 +52,6 @@ export class MarkdownConvertor implements Convertor {
       updatedAt: lastModified,
     }
 
-    return {notes: [note]}
+    return validateNotes([note])
   }
 }

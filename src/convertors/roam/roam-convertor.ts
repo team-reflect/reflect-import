@@ -1,3 +1,5 @@
+import {validateNotes} from 'helpers/validate'
+
 import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../../types'
 import {RoamBacklinks} from './roam-backlinks'
 import {RoamNoteConvertor} from './roam-note-convertor'
@@ -31,7 +33,7 @@ export class RoamConvertor implements Convertor {
 
     const notes = roamNotes.map((note) => this.convertRoamNote(note, backlinks))
 
-    return {notes}
+    return validateNotes(notes)
   }
 
   private convertRoamNote(note: RoamNote, backlinks: RoamBacklinks): RoamConvertedNote {

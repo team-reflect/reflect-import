@@ -1,3 +1,4 @@
+import {validateNotes} from 'helpers/validate'
 import {parseXml} from 'helpers/xml'
 import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from 'types'
 
@@ -13,7 +14,7 @@ export class EvernoteConvertor implements Convertor {
 
     const notes = noteDocs.map((noteDoc, index) => this.convertNoteDoc(noteDoc, index))
 
-    return {notes}
+    return validateNotes(notes)
   }
 
   private convertNoteDoc(noteDoc: Element, index: number): ConvertedNote {
