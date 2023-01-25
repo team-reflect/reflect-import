@@ -1,9 +1,9 @@
+import {parseHtml, removeImgsWithDataSrcs} from 'helpers/html'
 import {validateNotes} from 'helpers/validate'
 import {parseXml} from 'helpers/xml'
 
 import {parseTime, toEvernoteId} from './evernote-helpers'
 import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
-import {parseHtml, removeImgsWithDataSrcs} from 'helpers/html'
 
 export class EvernoteConvertor implements Convertor {
   accept = {'application/enex': ['.enex']}
