@@ -1,5 +1,6 @@
 import {describe, it, expect} from 'vitest'
 
+import brokenUidGraph from './fixtures/roam-broken-uid-graph.json'
 import exampleGraph2 from './fixtures/roam-example-graph2.json'
 import {RoamBacklinks} from './roam-backlinks'
 import {RoamNote} from './types'
@@ -103,6 +104,16 @@ describe('RoamBacklinks', () => {
         "roam-MH_5XfEZ-" => "ric",
         "roam-ijCI34X3F" => "TODO",
         "roam-U4DhTc5Fh" => "DONE",
+      }
+    `)
+  })
+
+  it('should not error when uids are missing', () => {
+    const backlinks = getTitleToIdMapFromNotes(brokenUidGraph as any)
+    expect(backlinks).toMatchInlineSnapshot(`
+      Map {
+        "Anonymous" => "roam-kfEoMevXn",
+        "December 2nd, 2022" => "roam-kfEoMevXn",
       }
     `)
   })
