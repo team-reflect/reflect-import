@@ -57,6 +57,11 @@ export class RoamBacklinks {
     noteString: RoamNoteString,
     result: TitleToIdMap = new Map(),
   ) {
+    if (!noteString.uid) {
+      // Roam exports have a bug where some note strings don't have a uid
+      return
+    }
+
     // We are treating noteString.uid as the block ref title
     this.titleToIdMap.set(noteString.uid, normalizeUidToId(note.uid))
     this.idToTitleMap.set(normalizeUidToId(noteString.uid), note.title)
