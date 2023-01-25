@@ -70,4 +70,28 @@ describe('HtmlConvertor', () => {
 
     expect(updatedAt).toEqual(123456789)
   })
+
+  it('returns invalid notes when the html is too long', () => {
+    const convertor = new HtmlConvertor()
+
+    // Make a lot of html
+    const data = Array.from({length: 10000}, () => '<p>foo</p>').join('')
+
+    const {notes, errors} = convertor.convert({
+      data,
+      filename: 'p1-My Recipe.html',
+    })
+
+    expect(notes.length).toEqual(0)
+    expect(errors.length).toEqual(1)
+
+    const [error] = errors
+
+    expect(error).toEqual({
+      id: 'p1-My Recipe',
+      type: 'note-too-big',
+      message:
+        'The HTML for this note is too long. It must be less than 1000000 characters.',
+    })
+  })
 })

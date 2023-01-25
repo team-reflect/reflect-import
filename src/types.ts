@@ -36,7 +36,7 @@ export interface ConvertedNoteError {
 
 export interface ConvertResponse {
   notes: ConvertedNote[]
-  errors?: ConvertedNoteError[]
+  errors: ConvertedNoteError[]
 }
 
 export type ConvertorAcceptType = Record<string, string | string[]>
