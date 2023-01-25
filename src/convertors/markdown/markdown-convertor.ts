@@ -1,14 +1,14 @@
 import {markdownToHtml} from 'helpers/markdown'
 import {toDailyNoteId} from 'helpers/to-id'
 import {validateNotes} from 'helpers/validate'
-
 import {
   ConvertedNote,
   ConvertOptions,
   Convertor,
   ConvertResponse,
   REFLECT_HOSTNAME,
-} from '../../types'
+} from 'types'
+
 import {dailyDateFromFilename, toMarkdownId} from './markdown-helpers'
 
 export class MarkdownConvertor implements Convertor {

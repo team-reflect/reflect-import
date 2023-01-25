@@ -1,6 +1,6 @@
 import {validateNotes} from 'helpers/validate'
+import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from 'types'
 
-import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../../types'
 import {RoamBacklinks} from './roam-backlinks'
 import {RoamNoteConvertor} from './roam-note-convertor'
 import {RoamConversionError, RoamConvertedNote, RoamNote} from './types'

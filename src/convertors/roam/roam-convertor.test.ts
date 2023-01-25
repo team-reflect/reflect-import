@@ -1,6 +1,7 @@
 import {describe, it, expect} from 'vitest'
 
-import {formatHtml} from '../../testing/format-html'
+import {formatHtml} from 'testing/format-html'
+
 import dailyNotes from './fixtures/roam-daily-notes.json'
 import exampleGraph from './fixtures/roam-example-graph.json'
 import exampleGraph2 from './fixtures/roam-example-graph2.json'

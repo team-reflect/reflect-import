@@ -1,12 +1,12 @@
 import {first} from 'lodash-es'
 
 import {assertString} from 'helpers/assert'
+import {DOM, domArrayToHtml, domToHtml} from 'helpers/dom'
+import {header1, list, listItem, taskListItem} from 'helpers/generators'
+import {markdownToHtml} from 'helpers/markdown'
 import {toDailyNoteId} from 'helpers/to-id'
+import {Backlink, REFLECT_HOSTNAME} from 'types'
 
-import {DOM, domArrayToHtml, domToHtml} from '../../helpers/dom'
-import {header1, list, listItem, taskListItem} from '../../helpers/generators'
-import {markdownToHtml} from '../../helpers/markdown'
-import {Backlink, REFLECT_HOSTNAME} from '../../types'
 import {RoamBacklinks} from './roam-backlinks'
 import {
   convertBlockrefsToBacklinks,
