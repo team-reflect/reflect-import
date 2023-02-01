@@ -1,5 +1,3 @@
-import 'urlpattern-polyfill'
-
 export const buildTagUrl = ({
   linkHost,
   graphId,
