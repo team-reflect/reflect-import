@@ -1,5 +1,4 @@
-import {isValid, parse} from 'date-fns'
-import {kebabCase} from 'lodash-es'
+import {parse, isValid} from 'date-fns'
 
 import {stripFileExtension} from 'helpers/path'
 
@@ -15,5 +14,5 @@ export const dailyDateFromFilename = (filename: string): Date | undefined => {
 }
 
 export const toMarkdownId = (filename: string) => {
-  return kebabCase(`md-${filename}`)
+  return `md-${filename}`
 }
