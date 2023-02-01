@@ -2,7 +2,6 @@ import {markdownToHtml} from 'helpers/markdown'
 import {toDailyNoteId} from 'helpers/to-id'
 import {validateNotes} from 'helpers/validate'
 
-import {dailyDateFromFilename, toMarkdownId} from './markdown-helpers'
 import {
   ConvertedNote,
   ConvertOptions,
@@ -10,6 +9,7 @@ import {
   ConvertResponse,
   REFLECT_HOSTNAME,
 } from '../../types'
+import {dailyDateFromFilename, toMarkdownId} from './markdown-helpers'
 
 export class MarkdownConvertor implements Convertor {
   graphId: string
