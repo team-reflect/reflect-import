@@ -1,4 +1,4 @@
-import {describe, it, expect} from 'vitest'
+import {describe, expect, it} from 'vitest'
 
 import {markdownToHtml} from './markdown'
 
@@ -53,7 +53,7 @@ This is a test
 [[another backlink]]
 `
 
-    const {backlinks} = markdownToHtml(markdown, {
+    const {backlinks, html} = markdownToHtml(markdown, {
       graphId: 'testgraph',
       linkHost: 'reflect.app',
     })
@@ -68,6 +68,76 @@ This is a test
         label: 'another backlink',
       },
     ])
+
+    // Backlinks should be converted to links
+    expect(html).toMatchInlineSnapshot(`
+      "<h1>Hello World</h1>
+      <p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/testgraph/mybacklink\\">my backlink</a>
+      <a class=\\"backlink new\\" href=\\"https://reflect.app/g/testgraph/anotherbacklink\\">another backlink</a></p>"
+    `)
+  })
+
+  it('should extract tags from the markdown', () => {
+    const markdown = `
+# this_is_a_heading
+
+## this_is_a_heading_too
+
+#This-Is-A-Tag, #chinese_tag_你好世界 #korean_tag_헬로월드
+
+#tag_with_unix_subpath/subpath and #tag_with_windows_subpath\\subpath
+
+Invalid tags: #!this_is_not_a_tag, nor # this_is_not_a_tag, nor #!/usr/bin/env
+
+Duplicate tags should be removed: #this-is-a-tag, #THIS-IS-A-TAG, #tHIS-iS-A-tAG
+
+Link should be ignored: 
+
+- [Link](https://example.com#this_is_not_a_tag) 
+- [#Link](https://example.com#this_is_not_a_tag)
+- https://example.com#this_is_not_a_tag
+- <https://example.com#this_is_not_a_tag>
+
+Code should be ignored: \`#this_is_not_a_tag\`
+
+\`\`\`
+#this_is_not_a_tag
+\`\`\`
+
+`
+
+    const {tags, html} = markdownToHtml(markdown, {
+      graphId: 'testgraph',
+      linkHost: 'reflect.app',
+    })
+
+    expect(tags).toEqual([
+      'this-is-a-tag',
+      'chinese_tag_你好世界',
+      'korean_tag_헬로월드',
+      'tag_with_unix_subpath',
+      'tag_with_windows_subpath',
+    ])
+
+    // Tags should be converted to links
+    expect(html).toMatchInlineSnapshot(`
+      "<h1>this_is_a_heading</h1>
+      <h2>this_is_a_heading_too</h2>
+      <p><a href=\\"https://reflect.app/g/testgraph/tag/this-is-a-tag\\">#this-is-a-tag</a>, <a href=\\"https://reflect.app/g/testgraph/tag/chinese_tag_%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C\\">#chinese_tag_你好世界</a> <a href=\\"https://reflect.app/g/testgraph/tag/korean_tag_%ED%97%AC%EB%A1%9C%EC%9B%94%EB%93%9C\\">#korean_tag_헬로월드</a></p>
+      <p><a href=\\"https://reflect.app/g/testgraph/tag/tag_with_unix_subpath\\">#tag_with_unix_subpath</a>/subpath and <a href=\\"https://reflect.app/g/testgraph/tag/tag_with_windows_subpath\\">#tag_with_windows_subpath</a>\\\\subpath</p>
+      <p>Invalid tags: #!this_is_not_a_tag, nor # this_is_not_a_tag, nor #!/usr/bin/env</p>
+      <p>Duplicate tags should be removed: <a href=\\"https://reflect.app/g/testgraph/tag/this-is-a-tag\\">#this-is-a-tag</a>, <a href=\\"https://reflect.app/g/testgraph/tag/this-is-a-tag\\">#this-is-a-tag</a>, <a href=\\"https://reflect.app/g/testgraph/tag/this-is-a-tag\\">#this-is-a-tag</a></p>
+      <p>Link should be ignored:</p>
+      <ul>
+      <li><a href=\\"https://example.com#this_is_not_a_tag\\">Link</a></li>
+      <li><a href=\\"https://example.com#this_is_not_a_tag\\">#Link</a></li>
+      <li><a href=\\"https://example.com#this_is_not_a_tag\\">https://example.com#this_is_not_a_tag</a></li>
+      <li><a href=\\"https://example.com#this_is_not_a_tag\\">https://example.com#this_is_not_a_tag</a></li>
+      </ul>
+      <p>Code should be ignored: <code>#this_is_not_a_tag</code></p>
+      <pre><code>#this_is_not_a_tag
+      </code></pre>"
+    `)
   })
 })
 
