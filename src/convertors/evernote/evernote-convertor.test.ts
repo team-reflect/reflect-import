@@ -39,10 +39,12 @@ describe('EvernoteConvertor', () => {
     expect(() => convertor.convert({data: ''})).toThrow()
   })
 
-  it.each(['&gt;', '&nbsp;'])('parses note with html entity', (entity) => {
-    const convertor = new EvernoteConvertor()
+  it.each(['&gt;', '&nbsp;', '&mdash;', '&ndash;'])(
+    'parses note with html entity',
+    (entity) => {
+      const convertor = new EvernoteConvertor()
 
-    const data = `<?xml version="1.0" encoding="UTF-8"?>
+      const data = `<?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export4.dtd">
     <en-export export-date="20221230T101804Z" application="Evernote" version="10.49.4">
       <note>
@@ -57,10 +59,11 @@ describe('EvernoteConvertor', () => {
       </note>
     </en-export>`
 
-    const {notes} = convertor.convert({data})
-    const [{subject, html}] = notes
+      const {notes} = convertor.convert({data})
+      const [{subject, html}] = notes
 
-    expect(subject).toEqual('failing nbsp')
-    expect(html).toMatchSnapshot()
-  })
+      expect(subject).toEqual('failing nbsp')
+      expect(html).toMatchSnapshot()
+    },
+  )
 })

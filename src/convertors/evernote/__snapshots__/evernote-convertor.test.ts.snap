@@ -3,3 +3,7 @@
 exports[`EvernoteConvertor > parses note with html entity 1`] = `"<div>foo &gt; bar</div>"`;
 
 exports[`EvernoteConvertor > parses note with html entity 2`] = `"<div>foo &nbsp; bar</div>"`;
+
+exports[`EvernoteConvertor > parses note with html entity 3`] = `"<div>foo — bar</div>"`;
+
+exports[`EvernoteConvertor > parses note with html entity 4`] = `"<div>foo – bar</div>"`;
