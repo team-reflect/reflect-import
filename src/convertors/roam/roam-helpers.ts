@@ -1,5 +1,7 @@
 import {parse, isValid} from 'date-fns'
 
+import {assertString} from 'helpers/assert'
+
 import {toDailyNoteId} from '../../helpers/to-id'
 
 // Takes a string like '[[Example]]' and returns ['Example']
@@ -84,6 +86,8 @@ export const parseDateFromUid = (str: string): Date | null => {
 }
 
 export const normalizeUidToId = (noteId: string) => {
+  assertString(noteId, 'noteId must be a string')
+
   const dailyDate = parseDateFromUid(noteId)
 
   if (dailyDate) {
@@ -95,6 +99,8 @@ export const normalizeUidToId = (noteId: string) => {
 }
 
 export const toRoamId = (uid: string) => {
+  assertString(uid, 'uid must be a string')
+
   if (!uid.startsWith('roam-')) {
     return `roam-${uid}`
   } else {
