@@ -11,7 +11,8 @@ import {toNoteId} from 'helpers/to-id'
 
 import {hydrateBacklinks} from './plugins/hydrate-backlink-note-ids'
 import {hydrateSubject} from './plugins/hydrate-subject'
-import {Backlink} from '../../types'
+import {parseTags} from './plugins/parse-tags'
+import {type Backlink} from '../../types'
 
 export const markdownToHtml = (
   content: string,
@@ -43,6 +44,7 @@ export const markdownToHtml = (
         return [pageResolver(pageName)]
       },
     })
+    .use(parseTags, {graphId, linkHost})
     .use(hydrateSubject)
     .use(pipeToRehype)
     .use(hydrateBacklinks, {graphId, linkHost})
@@ -53,5 +55,6 @@ export const markdownToHtml = (
     html: processor.toString(),
     subject: processor.data.subject as string | undefined,
     backlinks: processor.data.backlinks as Backlink[],
+    tags: processor.data.tags as string[],
   }
 }
