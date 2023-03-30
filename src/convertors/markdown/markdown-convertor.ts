@@ -33,11 +33,7 @@ export class MarkdownConvertor implements Convertor {
     filename,
     lastModified,
   }: ConvertOptions & {filename: string}): ConvertResponse {
-    const {
-      html,
-      subject: markdownSubject,
-      backlinks,
-    } = markdownToHtml(data, {
+    const {html, subject: markdownSubject, backlinks, tags} = markdownToHtml(data, {
       graphId: this.graphId,
       linkHost: this.linkHost,
     })
@@ -54,6 +50,7 @@ export class MarkdownConvertor implements Convertor {
       subject,
       dailyAt: dailyDate?.getTime(),
       backlinks,
+      tags,
       updatedAt: lastModified,
     }
 

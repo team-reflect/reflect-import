@@ -1,7 +1,7 @@
 {
   "name": "@team-reflect/reflect-import",
   "type": "module",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "author": "Alex MacCaw",
   "license": "MIT",
   "repository": "git://github.com/team-reflect/reflect-import.git",
@@ -28,6 +28,7 @@
     "date-fns": "^2.29.3",
     "jsdom": "^20.0.3",
     "lodash-es": "^4.17.21",
+    "mdast-util-find-and-replace": "^2.2.2",
     "mdast-util-gfm-autolink-literal": "^1.0.2",
     "mdast-util-to-string": "^3.1.0",
     "micromark-extension-gfm-autolink-literal": "^1.0.3",

@@ -14,6 +14,8 @@ export interface ConvertedNote {
   subject?: string
   // A list of note ids that are references from inside this note
   backlinks?: Backlink[]
+  // A list of tag strings
+  tags?: string[]
   // The date the note was created
   createdAt?: number
   // The date the note was updated
