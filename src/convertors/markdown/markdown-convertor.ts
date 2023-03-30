@@ -2,7 +2,7 @@ import {markdownToHtml} from 'helpers/markdown'
 import {toDailyNoteId} from 'helpers/to-id'
 import {validateNotes} from 'helpers/validate'
 
-import {dailyDateFromFilename, toMarkdownId} from './markdown-helpers'
+import {dailyDateFromFilename, filenameToId, filenameToSubject} from './markdown-helpers'
 import {
   ConvertedNote,
   ConvertOptions,
@@ -33,15 +33,20 @@ export class MarkdownConvertor implements Convertor {
     filename,
     lastModified,
   }: ConvertOptions & {filename: string}): ConvertResponse {
-    const {html, subject, backlinks} = markdownToHtml(data, {
+    const {
+      html,
+      subject: markdownSubject,
+      backlinks,
+    } = markdownToHtml(data, {
       graphId: this.graphId,
       linkHost: this.linkHost,
     })
 
     // Filename matches yyyy-MM-dd.md
     const dailyDate = dailyDateFromFilename(filename)
+    const id = dailyDate ? toDailyNoteId(dailyDate) : filenameToId(filename)
 
-    const id = dailyDate ? toDailyNoteId(dailyDate) : toMarkdownId(filename)
+    const subject = markdownSubject || filenameToSubject(filename)
 
     const note: ConvertedNote = {
       id,
