@@ -69,7 +69,7 @@ export class LogseqConvertor implements Convertor {
     // Update the backlinks with the note ids from the page name to id map
     const updatedBacklinks = backlinks.map((b) => ({
       label: b.label,
-      id: this.noteIds[b.label],
+      id: toLogseqId(this.noteIds[b.label], b.label),
     }))
 
     return {
@@ -130,7 +130,7 @@ export class LogseqConvertor implements Convertor {
     let {html, backlinks} = markdownToHtml(blockContent, {
       graphId: this.graphId,
       linkHost: this.linkHost,
-      pageResolver: (pageName) => this.noteIds[pageName] ?? pageName,
+      pageResolver: (pageName) => toLogseqId(this.noteIds[pageName], pageName),
     })
 
     // If the block has children then we need to get the html for the children

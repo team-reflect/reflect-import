@@ -16,5 +16,7 @@ describe('LogseqHelpers', () => {
     expect(toLogseqId('123-abc', 'Another Page')).toEqual('logseq-123-abc')
     expect(toLogseqId('abc-123', '05/04/2023')).toEqual('04052023')
     expect(toLogseqId('abc-123', 'September 14th, 2020')).toEqual('14092020')
+    expect(toLogseqId(undefined, 'September 14th, 2020')).toEqual('14092020')
+    expect(toLogseqId(undefined, 'Page Title')).toEqual('pagetitle')
   })
 })

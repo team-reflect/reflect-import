@@ -1,5 +1,5 @@
 import {parse, isValid} from 'date-fns'
-import {toDailyNoteId} from 'helpers/to-id'
+import {toDailyNoteId, toNoteId} from 'helpers/to-id'
 
 // This is a subset of the formats that logseq supports.  I don't think we can
 // support every format because we can't differentiate between mm-dd-yyy and
@@ -58,13 +58,18 @@ export const tryParseTime = (date: string): number | undefined => {
 }
 
 /**
- * Returns either the guid or the date format for a daily note
+ * Generates a page id based on uid and title. We try our best to generate
+ * a valid page id.
  */
-export const toLogseqId = (uid: string, title: string) => {
+export const toLogseqId = (uid: string | undefined, title: string) => {
+  // If the title is a daily note we can always generate an id
   const date = tryParseDate(title)
-  if (date) {
-    return toDailyNoteId(date)
-  } else {
-    return `logseq-${uid}`
-  }
+  if (date) return toDailyNoteId(date)
+  // If this id has already been converted, just return it
+  if (uid && uid.startsWith('logseq-')) return uid
+  // We append loqseq to all ids to identify imported pages
+  if (uid) return `logseq-${uid}`
+  // If we the page does not have an id because it does not exist, we generate
+  // one based on the title
+  return toNoteId(title)
 }
