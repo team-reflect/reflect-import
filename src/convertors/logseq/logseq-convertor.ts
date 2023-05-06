@@ -3,14 +3,8 @@ import {markdownToHtml} from 'helpers/markdown'
 import {validateNotes} from 'helpers/validate'
 import {header1, list, listItem} from 'helpers/generators'
 
-import {tryParseDate} from './logseq-helpers'
-import {
-  LogseqBlock,
-  LogseqConversionError,
-  LogseqExport,
-  LogseqNote,
-  LogseqProperties,
-} from './types'
+import {tryParseTime, toLogseqId} from './logseq-helpers'
+import {LogseqBlock, LogseqConversionError, LogseqExport, LogseqNote} from './types'
 import {
   Backlink,
   ConvertedNote,
@@ -19,6 +13,7 @@ import {
   ConvertResponse,
   REFLECT_HOSTNAME,
 } from '../../types'
+import {logseqPropertiesToMarkdown} from './logseq-properties'
 
 export class LogseqConvertor implements Convertor {
   graphId: string
@@ -48,7 +43,10 @@ export class LogseqConvertor implements Convertor {
     // Create a map of page names to ids.  We use this for the link resolver and adding
     // ids to backlinks.
     this.noteIds = parsed.blocks.reduce(
-      (acc, note) => ({...acc, [note['page-name']]: note.id}),
+      (acc, note) => ({
+        ...acc,
+        [note['page-name']]: toLogseqId(note.id, note['page-name']),
+      }),
       {},
     )
 
@@ -75,11 +73,11 @@ export class LogseqConvertor implements Convertor {
     }))
 
     return {
-      id,
+      id: toLogseqId(id, subject),
       html: domArrayToHtml([header1(subject), html]),
       subject,
       backlinks: updatedBacklinks,
-      dailyAt: tryParseDate(subject),
+      dailyAt: tryParseTime(subject),
     }
   }
 
@@ -125,7 +123,7 @@ export class LogseqConvertor implements Convertor {
     // have both.  But we will ignore the properties and just use the frontmatter
     // as markdown.
     if (!blockContent && block.properties) {
-      blockContent = this.propertiesToMarkdown(block.properties)
+      blockContent = logseqPropertiesToMarkdown(block.properties, this.noteIds)
     }
 
     // Get the data for the current block
@@ -149,41 +147,5 @@ export class LogseqConvertor implements Convertor {
       html,
       backlinks,
     }
-  }
-
-  /**
-   * Converts a logseq block's properties into markdown.  Reflect does not have the
-   * same concept as properties so we are converting it to "key: value" text.
-   *
-   * Here is an example property object:
-   * {"company":["Company Two"],"phone":12345,"jobtitle":["manager"]}
-   *
-   * The thing that is not ideal about this is "Company Two" is a link and "manager"
-   * is a tag.  But there is no indication in this object that those are anything other
-   * than strings.  Also, ordering is lost because the properties are an object.
-   * So, we are just doing our best guess here.  It is better than the properties being lost.
-   *
-   * This is converting to markdown rather than HTML to take advantage of markdown's
-   * handling of backlinks.
-   */
-  propertiesToMarkdown(properties: LogseqProperties): string {
-    const markdown = []
-    for (const [key, value] of Object.entries(properties)) {
-      let displayValue = ''
-      // Values can be arrays.  This is either an array of strings or numbers, or it can
-      // be a single link or an array of links
-      if (Array.isArray(value)) {
-        // Join the array with commas.  If the value is a link then we wrap it in [[]]
-        displayValue = value
-          .map((v) => (v in this.noteIds ? `[[${v}]]` : v.toString()))
-          .join(', ')
-      } else {
-        // Strings and numbers are just converted to strings.  Links are never returned
-        // outside of an array so it is always a standalone string.
-        displayValue = value.toString()
-      }
-      markdown.push(`* ${key}: ${displayValue}`)
-    }
-    return markdown.join('\n')
   }
 }
