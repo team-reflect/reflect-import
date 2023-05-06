@@ -1,8 +1,10 @@
+import {DOM, domArrayToHtml, domToHtml} from 'helpers/dom'
 import {markdownToHtml} from 'helpers/markdown'
 import {validateNotes} from 'helpers/validate'
+import {header1, list, listItem} from 'helpers/generators'
 
 import {tryParseDate} from './logseq-helpers'
-import {LogseqBlock, LogseqConversionError, LogseqNote} from './types'
+import {LogseqBlock, LogseqConversionError, LogseqExport, LogseqNote} from './types'
 import {
   Backlink,
   ConvertedNote,
@@ -31,21 +33,20 @@ export class LogseqConvertor implements Convertor {
   accept = {'application/json': ['.json']}
 
   convert({data}: ConvertOptions): ConvertResponse {
-    const parsed = JSON.parse(data)
+    const parsed: LogseqExport = JSON.parse(data)
 
-    if (parsed.version !== 1) {
+    if (parsed?.version !== 1) {
       throw new LogseqConversionError('Only able to convert Logseq file version 1')
     }
 
-    const notes = parsed.blocks as LogseqNote[]
     // Create a map of page names to ids.  We use this for the link resolver and adding
     // ids to backlinks.
-    this.noteIds = notes.reduce(
+    this.noteIds = parsed.blocks.reduce(
       (acc, note) => ({...acc, [note['page-name']]: note.id}),
       {},
     )
 
-    const convertedNotes = notes.map((note) => this.convertLogseqNote(note))
+    const convertedNotes = parsed.blocks.map((note) => this.convertLogseqNote(note))
 
     return validateNotes(convertedNotes)
   }
@@ -69,7 +70,7 @@ export class LogseqConvertor implements Convertor {
 
     return {
       id,
-      html: `<h1>${subject}</h1>${html}`,
+      html: domArrayToHtml([header1(subject), html]),
       subject,
       backlinks: updatedBacklinks,
       dailyAt: tryParseDate(subject),
@@ -82,18 +83,18 @@ export class LogseqConvertor implements Convertor {
    * li.
    */
   private parseBlocks(blocks: LogseqBlock[]): {html: string; backlinks: Backlink[]} {
-    const blockHtmls: string[] = []
+    const blockItems: DOM[] = []
     const backlinkCollection: Backlink[] = []
 
     // Get the HTML and backlinks for each block
     for (const block of blocks) {
       const {html, backlinks} = this.makeHtml(block)
-      blockHtmls.push(`<li>${html}</li>`)
+      blockItems.push(listItem(html))
       backlinkCollection.push(...backlinks)
     }
 
     return {
-      html: `<ul>${blockHtmls.join('')}</ul>`,
+      html: domToHtml(list(blockItems)),
       backlinks: backlinkCollection,
     }
   }
@@ -112,25 +113,25 @@ export class LogseqConvertor implements Convertor {
     }
 
     // Get the data for the current block
-    const {html, backlinks} = markdownToHtml(block.content, {
+    let {html, backlinks} = markdownToHtml(block.content, {
       graphId: this.graphId,
       linkHost: this.linkHost,
       pageResolver: (pageName) => this.noteIds[pageName] ?? pageName,
     })
 
     // If the block has children then we need to get the html for the children
-    let childHtml = ''
-    let childBacklinks: Backlink[] = []
     if (block.children) {
-      const childBlocks = this.parseBlocks(block.children)
-      childHtml = childBlocks.html
-      childBacklinks = childBlocks.backlinks
+      const {html: childHtml, backlinks: childBacklinks} = this.parseBlocks(
+        block.children,
+      )
+      // We just append the child html to this current block HTML
+      html = domArrayToHtml([html, childHtml])
+      backlinks = [...backlinks, ...childBacklinks]
     }
 
-    // We just append the child html to this current block HTML
     return {
-      html: `${html}${childHtml}`,
-      backlinks: [...backlinks, ...childBacklinks],
+      html,
+      backlinks,
     }
   }
 }

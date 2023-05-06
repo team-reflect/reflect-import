@@ -1,5 +1,10 @@
 import {ConversionError} from '../../types'
 
+export interface LogseqExport {
+  version: number
+  blocks: LogseqNote[]
+}
+
 export interface LogseqNote {
   'page-name': string
   id: string
