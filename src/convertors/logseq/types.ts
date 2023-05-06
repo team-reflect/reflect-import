@@ -11,10 +11,12 @@ export interface LogseqNote {
   children: LogseqBlock[]
 }
 
+export type LogseqProperties = Record<string, string | number | Array<string>>
+
 export interface LogseqBlock {
   format: string
   content: string
-  properties: Record<string, string>
+  properties: LogseqProperties
   id: string
   children: LogseqBlock[]
 }
