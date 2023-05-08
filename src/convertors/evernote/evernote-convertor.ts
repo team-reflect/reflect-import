@@ -8,7 +8,7 @@ import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../t
 export class EvernoteConvertor implements Convertor {
   accept = {'application/enex': ['.enex']}
 
-  convert({data}: ConvertOptions): ConvertResponse {
+  async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     const doc = parseXml(data)
 
     const noteDocs = Array.from(doc.querySelectorAll('en-export > note'))

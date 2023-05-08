@@ -60,9 +60,9 @@ const opmlData = `<?xml version="1.0"?>
 </opml>`
 
 describe('ompl convert', () => {
-  it('converts ompl to HTML', () => {
+  it('converts ompl to HTML', async () => {
     const convertor = new OpmlConvertor()
-    const {notes} = convertor.convert({data: opmlData})
+    const {notes} = await convertor.convert({data: opmlData})
     const [{html}] = notes
 
     expect(html).toMatchInlineSnapshot(

@@ -1,5 +1,7 @@
 import {parse, isValid, parseJSON} from 'date-fns'
 
+import {Backlink} from 'types'
+
 import {MemExportNote} from './types'
 
 export function parseTimestamp(timestamp: string): Date | undefined {
@@ -18,6 +20,21 @@ export function getDailyDate(memNote: MemExportNote): Date | undefined {
   }
 
   return
+}
+
+export function toMemId(uid: string): string {
+  if (!uid.startsWith('mem-')) {
+    return `mem-${uid}`
+  } else {
+    return uid
+  }
+}
+
+export function backlinkToMemId(backlink: Backlink): Backlink {
+  return {
+    ...backlink,
+    id: toMemId(backlink.id),
+  }
 }
 
 const DAILY_NOTE_TAG = 'daily-mem'

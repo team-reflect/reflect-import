@@ -8,11 +8,11 @@ import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../t
 export class HtmlConvertor implements Convertor {
   accept = {'text/html': ['.html', '.htm']}
 
-  convert({
+  async convert({
     data,
     filename,
     lastModified,
-  }: ConvertOptions & {filename: string}): ConvertResponse {
+  }: ConvertOptions & {filename: string}): Promise<ConvertResponse> {
     const basename = stripFileExtension(filename)
 
     const doc = parseHtml(data)
