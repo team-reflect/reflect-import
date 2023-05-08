@@ -1,9 +1,10 @@
 import {DOM, domArrayToHtml, domToHtml} from 'helpers/dom'
+import {header1, list, listItem} from 'helpers/generators'
 import {markdownToHtml} from 'helpers/markdown'
 import {validateNotes} from 'helpers/validate'
-import {header1, list, listItem} from 'helpers/generators'
 
 import {tryParseTime, toLogseqId} from './logseq-helpers'
+import {logseqPropertiesToMarkdown} from './logseq-properties'
 import {LogseqBlock, LogseqConversionError, LogseqExport, LogseqNote} from './types'
 import {
   Backlink,
@@ -13,7 +14,6 @@ import {
   ConvertResponse,
   REFLECT_HOSTNAME,
 } from '../../types'
-import {logseqPropertiesToMarkdown} from './logseq-properties'
 
 export class LogseqConvertor implements Convertor {
   graphId: string
@@ -33,7 +33,7 @@ export class LogseqConvertor implements Convertor {
 
   accept = {'application/json': ['.json']}
 
-  convert({data}: ConvertOptions): ConvertResponse {
+  async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     const parsed: LogseqExport = JSON.parse(data)
 
     if (parsed?.version !== 1) {
