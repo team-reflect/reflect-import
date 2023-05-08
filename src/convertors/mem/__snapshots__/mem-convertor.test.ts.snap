@@ -16,7 +16,7 @@ exports[`MemConvertor > converts mem JSON export to HTML 1`] = `
 <li>This is my daily mem for May 8th</li>
 <li>pppp</li>
 </ul>",
-    "id": "mem-jpzawD9wcV5uS94vNoKP",
+    "id": "mem-jpzaw-d9wc-v5u-s94v-no-kp",
     "subject": "May 8, 2023",
     "tags": [
       "daily-mem",
@@ -31,7 +31,7 @@ exports[`MemConvertor > converts mem JSON export to HTML 1`] = `
 asdf
 [[add
 <a href=\\"https://mem.ai/m/YcSftKQEQpU3dtwGk8yt\\">hi there</a></p>",
-    "id": "mem-aheMBOKWG2BtBoarltHY",
+    "id": "mem-ahe-mbokwg-2-bt-boarlt-hy",
     "subject": "Hello there",
     "tags": [],
     "updatedAt": 1666987962768,
@@ -59,7 +59,7 @@ Just like humans, machines can learn to solve similar problems (occasionally out
 <p>Paper : <a href=\\"https://t.co/EupipO3rC2\\">https://t.co/EupipO3rC2</a>
 Code : <a href=\\"https://t.co/OevdJM8u41\\">https://t.co/OevdJM8u41</a></p>
 <p>Thanks a lot to all my collaborators - @A_v_i__S, @EBorgnia, @zeyademam, @furongh, @micahgoldblum and @tomgoldsteincs.</p>",
-    "id": "mem-jE9SRArYyc5pc0vjdwtN",
+    "id": "mem-j-e9-sr-ar-yyc5pc0vjdwt-n",
     "subject": "A neural network trained to solve a simple problem like a 9x9 maze can extrapolate extraordinarily and can solve harder problems like a maze as big as 201",
     "tags": [],
     "updatedAt": 1666765445416,
@@ -73,7 +73,7 @@ Code : <a href=\\"https://t.co/OevdJM8u41\\">https://t.co/OevdJM8u41</a></p>
 <li>[x] new task</li>
 <li>[ ] blah</li>
 </ul>",
-    "id": "mem-YcSftKQEQpU3dtwGk8yt",
+    "id": "mem-yc-sft-kqe-qp-u3dtw-gk8yt",
     "subject": "hi there",
     "tags": [],
     "updatedAt": 1665023998401,
@@ -153,7 +153,7 @@ This thread discusses how Steve Jobs' philosophy of saying \\"no\\" to 1000 thin
 /
 /
 /</p>",
-    "id": "mem-hcty8edpEZqaDBZWRjdt",
+    "id": "mem-hcty8edp-e-zqa-dbzw-rjdt",
     "subject": "The Picasso Way: How Apple Uses Simplicity to Drive Innovation",
     "tags": [],
     "updatedAt": 1658872811155,
@@ -165,7 +165,7 @@ This thread discusses how Steve Jobs' philosophy of saying \\"no\\" to 1000 thin
     "html": "<ul>
 <li>[x] another task</li>
 </ul>",
-    "id": "mem-nIsPW2VrEwFnXLbrhNDT",
+    "id": "mem-n-is-pw-2-vr-ew-fn-x-lbrh-ndt",
     "subject": "another task",
     "tags": [],
     "updatedAt": 1645569473186,
@@ -178,7 +178,7 @@ This thread discusses how Steve Jobs' philosophy of saying \\"no\\" to 1000 thin
 <li>[ ] new task</li>
 <li>[x] another</li>
 </ul>",
-    "id": "mem-1gEbNHueO5HjpFt8KVqY",
+    "id": "mem-1g-eb-n-hue-o5-hjp-ft8-k-vq-y",
     "subject": "new task",
     "tags": [],
     "updatedAt": 1634207014135,
@@ -194,7 +194,7 @@ This thread discusses how Steve Jobs' philosophy of saying \\"no\\" to 1000 thin
     "dailyAt": undefined,
     "html": "<p>hi there</p>
 <p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/test/mem-alex\\">alex</a></p>",
-    "id": "mem-V4GpN6sSEqzlfiuuZyh5",
+    "id": "mem-v4-gp-n6ss-eqzlfiuu-zyh5",
     "subject": "hi there",
     "tags": [],
     "updatedAt": 1627245869756,
@@ -204,7 +204,7 @@ This thread discusses how Steve Jobs' philosophy of saying \\"no\\" to 1000 thin
     "createdAt": 1621456382300,
     "dailyAt": undefined,
     "html": "",
-    "id": "mem-6M8YxXkrK12pYizT8BlX",
+    "id": "mem-6-m8-yx-xkr-k12p-yiz-t8-bl-x",
     "subject": "#hi there",
     "tags": [
       "hi there",
@@ -216,7 +216,7 @@ This thread discusses how Steve Jobs' philosophy of saying \\"no\\" to 1000 thin
     "createdAt": 1617917267782,
     "dailyAt": undefined,
     "html": "",
-    "id": "mem-jh52QDfU9PsO1y8y0MFy",
+    "id": "mem-jh52-q-df-u9-ps-o1y8y0-m-fy",
     "subject": "New Supernote",
     "tags": [],
     "updatedAt": 1617917267782,
@@ -238,7 +238,7 @@ This thread discusses how Steve Jobs' philosophy of saying \\"no\\" to 1000 thin
 <p>For product feedback and feature requests, share a new mem with <strong>@Mem Feedback</strong>.</p>
 <p>Happy memming!</p>
 <p>–The Mem Team</p>",
-    "id": "mem-sbj0DiENNZBV1wkxNX7S",
+    "id": "mem-sbj0-di-ennzbv-1wkx-nx-7s",
     "subject": "Welcome to Mem (Beta)!",
     "tags": [
       "GettingStarted﻿",
@@ -257,7 +257,7 @@ This thread discusses how Steve Jobs' philosophy of saying \\"no\\" to 1000 thin
 <li>Check your Inbox, you'll see a new unread note appear.</li>
 </ol>
 <p><a href=\\"https://reflect.app/g/test/tag/gettingstarted\\">#gettingstarted</a></p>",
-    "id": "mem-2VEB40KUWq2OoEkTRKhT",
+    "id": "mem-2-veb-40-ku-wq2-oo-ek-tr-kht",
     "subject": "Setting up SMS (mobile)",
     "tags": [
       "gettingstarted",
@@ -276,7 +276,7 @@ To go back: 								press <strong>ESC</strong>
 To navigate/search: 					press **⌘ <strong>+</strong> K **<em>(Note: use <strong>ctrl</strong> instead of <strong>⌘</strong> on PC)</em></p>
 <p><em>Hover over the ⌨️ icon in the top right of the app to discover more shortcuts.</em></p>
 <p><a href=\\"https://reflect.app/g/test/tag/gettingstarted\\">#gettingstarted</a></p>",
-    "id": "mem-MfpYDMDhkhB8BrUOwNsU",
+    "id": "mem-mfp-ydm-dhkh-b8-br-u-ow-ns-u",
     "subject": "Keyboard Shortcuts",
     "tags": [
       "gettingstarted",

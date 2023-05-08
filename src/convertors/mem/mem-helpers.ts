@@ -1,3 +1,4 @@
+import slugify from '@sindresorhus/slugify'
 import {parse, isValid, parseJSON} from 'date-fns'
 
 import {Backlink} from 'types'
@@ -24,7 +25,7 @@ export function getDailyDate(memNote: MemExportNote): Date | undefined {
 
 export function toMemId(uid: string): string {
   if (!uid.startsWith('mem-')) {
-    return `mem-${uid}`
+    return `mem-${slugify(uid)}`
   } else {
     return uid
   }
