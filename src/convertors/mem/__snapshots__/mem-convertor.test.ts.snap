@@ -1,0 +1,288 @@
+// Vitest Snapshot v1
+
+exports[`MemConvertor > converts mem JSON export to HTML 1`] = `
+[
+  {
+    "backlinks": [],
+    "createdAt": 1683546416352,
+    "dailyAt": 1683504000000,
+    "html": "<h1>May 8, 2023</h1>
+<p>My tasks</p>
+<ul>
+<li>[ ]</li>
+</ul>
+<p>Schedule</p>
+<ul>
+<li>This is my daily mem for May 8th</li>
+<li>pppp</li>
+</ul>",
+    "id": "mem-jpzaw-d9wc-v5u-s94v-no-kp",
+    "subject": "May 8, 2023",
+    "tags": [
+      "daily-mem",
+    ],
+    "updatedAt": 1683546430798,
+  },
+  {
+    "backlinks": [],
+    "createdAt": 1666987955226,
+    "dailyAt": undefined,
+    "html": "<p>Hello there
+asdf
+[[add
+<a href=\\"https://mem.ai/m/YcSftKQEQpU3dtwGk8yt\\">hi there</a></p>",
+    "id": "mem-ahe-mbokwg-2-bt-boarlt-hy",
+    "subject": "Hello there",
+    "tags": [],
+    "updatedAt": 1666987962768,
+  },
+  {
+    "backlinks": [],
+    "createdAt": 1666765445416,
+    "dailyAt": undefined,
+    "html": "<h2>A neural network trained to solve a simple problem like a 9x9 maze can extrapolate extraordinarily and can solve harder problems like a maze as big as 201</h2>
+<p><a href=\\"https://twitter.com/arpitbansal297/status/1580922302543167488\\">https://twitter.com/arpitbansal297/status/1580922302543167488</a></p>
+<h2><strong>🪄Smart summary:</strong>
+A neural network trained to solve a simple problem like a 9x9 maze can extrapolate extraordinarily and can solve harder problems like a maze as big as 201x201.</h2>
+<p>TLDR - A neural network trained to solve a simple problem like a 9x9 maze can extrapolate extraordinarily and can solve harder problems like a maze as big as 201x201.
+To Appear in Neurips 2022 !!!</p>
+<p><img src=\\"https://pbs.twimg.com/media/FfCQXdEXwAcj4Nb.png\\" alt=\\"\\"></p>
+<p>With math textbooks full of solved examples, humans can learn to solve similar math problems.
+Just like humans, machines can learn to solve similar problems (occasionally outperforming humans) -- this is what we often call \\"generalization.\\"</p>
+<p>But unlike humans, machines struggle to tackle problems that are more complex than the ones they have seen before. Hence, machines do not learn a scalable algorithm. People, on the other hand, when faced with a harder problem, are capable of solving it by using more time &#x26; effort</p>
+<p>The original paper on Deep-Thinking (<a href=\\"https://t.co/PmiBKWxqQQ\\">https://t.co/PmiBKWxqQQ)</a>) suggests that machines can solve harder problems with more computation using recurrence. However, the proposed method fails to extrapolate beyond a particular hardness level.</p>
+<p>Additionally, when given more compute time, early models fail to maintain the correct solution; we refer to this as the \\"overthinking\\" phenomenon. It is because the proposed recurrence doesn't converge to a fixed-point. In our work, we propose 2 solutions to solve this problem.</p>
+<p>(a) a recall mechanism that keeps track of the actual problem at hand. (b) a loss that encourages learning agnostic to the number of iterations. With these changes, NNs extrapolate the knowledge learned on input-output pairs of simple problems to problems of harder complexity.</p>
+<p>The following figure shows the performance of the maze and chess solver, and we can see that in both cases the recall and the proposed loss improve the performance. Along with this, we discuss in detail the editing property of our network.</p>
+<p><img src=\\"https://pbs.twimg.com/media/FfCRsHAWQAAAJ_e.png\\" alt=\\"\\"></p>
+<p>The maze solver learns a classical parallel algorithm - the \\"dead-end filling\\" algorithm. This observation is interesting on its own, as the NN was never asked to learn this particular algorithm. This was learned by NN on its own based on the input/output pairs. <a href=\\"https://t.co/HUJreoGTeb\\">https://t.co/HUJreoGTeb</a></p>
+<p>Paper : <a href=\\"https://t.co/EupipO3rC2\\">https://t.co/EupipO3rC2</a>
+Code : <a href=\\"https://t.co/OevdJM8u41\\">https://t.co/OevdJM8u41</a></p>
+<p>Thanks a lot to all my collaborators - @A_v_i__S, @EBorgnia, @zeyademam, @furongh, @micahgoldblum and @tomgoldsteincs.</p>",
+    "id": "mem-j-e9-sr-ar-yyc5pc0vjdwt-n",
+    "subject": "A neural network trained to solve a simple problem like a 9x9 maze can extrapolate extraordinarily and can solve harder problems like a maze as big as 201",
+    "tags": [],
+    "updatedAt": 1666765445416,
+  },
+  {
+    "backlinks": [],
+    "createdAt": 1645569478772,
+    "dailyAt": undefined,
+    "html": "<ul>
+<li>[ ] hi there</li>
+<li>[x] new task</li>
+<li>[ ] blah</li>
+</ul>",
+    "id": "mem-yc-sft-kqe-qp-u3dtw-gk8yt",
+    "subject": "hi there",
+    "tags": [],
+    "updatedAt": 1665023998401,
+  },
+  {
+    "backlinks": [],
+    "createdAt": 1658872811155,
+    "dailyAt": undefined,
+    "html": "<h2>The Picasso Way: How Apple Uses Simplicity to Drive Innovation</h2>
+<p><a href=\\"https://twitter.com/TrungTPhan/status/1545413798588141569\\">https://twitter.com/TrungTPhan/status/1545413798588141569</a></p>
+<h2><strong>🪄Smart summary:</strong>
+This thread discusses how Steve Jobs' philosophy of saying \\"no\\" to 1000 things before you say yes was inspired by Pablo Picasso's Bull series. Picasso's goal was to find the \\"spirit of the beast\\" through abstraction, and Apple has used this philosophy to drive its own innovation.</h2>
+<p>Steve Jobs famously said innovation is \\"saying no to 1000 things\\" before you say yes.</p>
+<p>For more than a decade, Apple has used Pablo Picasso's Bull to drive home the lesson.</p>
+<p>Here's a breakdown 🧵 <a href=\\"https://t.co/eCt6fdHpix\\">https://t.co/eCt6fdHpix</a></p>
+<p>Picasso said of the abstraction process:</p>
+<p>\\"Two holes. That’s the symbol for the face, enough to evoke it without representing it. But isn’t it strange that it can be done through such simple means? Whatever is most abstract may perhaps be the summit of reality.”</p>
+<p><img src=\\"https://pbs.twimg.com/media/FXJonSHUUAMFdos.png\\" alt=\\"\\"></p>
+<p>Enter Apple University.</p>
+<p>In 2008, Steve Jobs tapped the dean of Yale School of Management to create an internal training curriculum for Apple.</p>
+<p>The program was meant to teach new employees Apple's culture and design philosophy (the teachings are rarely shared with the public).</p>
+<p><img src=\\"https://pbs.twimg.com/media/FXJo8DiUIAA0yjr.jpg\\" alt=\\"\\"></p>
+<p>Picasso's Bull is a popular topic at Apple University.</p>
+<p>Apple uses the evolution of its mouse as an example of the philosophy (e.g., the buttons were \\"abstracted\\" away).</p>
+<p><img src=\\"https://pbs.twimg.com/media/FXJpALxUEAAJENS.png\\" alt=\\"\\"></p>
+<p>For new employees, Apple also taught the lesson by contrasting its Apple TV remote with existing smart controllers (significantly fewer buttons).</p>
+<p><img src=\\"https://pbs.twimg.com/media/FXJpB4GUUAALrkY.jpg\\" alt=\\"\\"></p>
+<p>The Picasso way of saying \\"no\\" and capturing \\"the essence\\" extends to business strategy.</p>
+<p>When Steve Jobs returned as CEO in 1997, Apple was near bankruptcy and on a streak of failed products including a gaming machine (Pippin) and a personal digital assistant (Newton).</p>
+<p><img src=\\"https://pbs.twimg.com/media/FXJpDSdVUAAmdBx.png\\" alt=\\"\\"></p>
+<p>During one meeting that discussed all of Apple's products (way too many), Jobs shouted \\"stop...this is crazy\\" and got up to draw something on the whiteboard.</p>
+<p>It was a 2x2 matrix laying out his product line:</p>
+<p>• Desktop / Portable
+• Consumer / Pro</p>
+<p><img src=\\"https://pbs.twimg.com/media/FXJpHNbVsAAHH5w.png\\" alt=\\"\\"></p>
+<p>By saying \\"no\\" to a ton of fluff and simplifying the product offerings, Apple would start its legendary resurgence.</p>
+<p>Its market cap was &#x3C;$5B upon Jobs' return...</p>
+<p><img src=\\"https://pbs.twimg.com/media/FXJpJBiVEAAlJhU.jpg\\" alt=\\"\\"></p>
+<p>...and reached~$350B by the time he passed in 2011.</p>
+<p>The evolution of the iPod/iPhone followed the Picasso Way, especially with the removal of the trackpad (and introduction of touchscreen).</p>
+<p><img src=\\"https://pbs.twimg.com/media/FXJpLGuUcAAfOVy.jpg\\" alt=\\"\\"></p>
+<p>Per Jobs, “You have to deeply understand the essence of a product in order to be able to get rid of the parts that are not essential,”</p>
+<p>Sounds like Picasso.</p>
+<p>Speaking of which, check out Picasso drawing the Bull at the end of Apple's legendary \\"Think Different\\" advertisement. <a href=\\"https://t.co/V71jeXawyZ\\">https://t.co/V71jeXawyZ</a></p>
+<p>If you enjoyed that, I write interesting threads 1-2x a week.</p>
+<p>Follow @TrungTPhan to catch them in your feed.</p>
+<p>Here's another one: <a href=\\"https://t.co/Lu35yc7X6x\\">https://t.co/Lu35yc7X6x</a></p>
+<p>PS. I also write a Saturday newsletter on glorious tech, business and internet topics like:</p>
+<p>• Why is Linkedin so cringe?
+• Buffett's $152 bet on Apple
+• McDonald's $42B real estate empire</p>
+<p>Sub here: <a href=\\"https://t.co/jGZs8brnVR\\">https://t.co/jGZs8brnVR</a></p>
+<p>Additional Reading</p>
+<p>Draw Academy: <a href=\\"https://t.co/oPOKmWGgk7\\">https://t.co/oPOKmWGgk7</a></p>
+<p>BI: <a href=\\"https://t.co/Qilj6P8K6Y\\">https://t.co/Qilj6P8K6Y</a></p>
+<p>NYT: <a href=\\"https://t.co/5SGpKgXEEJ\\">https://t.co/5SGpKgXEEJ</a></p>
+<p>Artsy: <a href=\\"https://t.co/8QEGukTmcB\\">https://t.co/8QEGukTmcB</a></p>
+<p>Here’s a clip of Jony Ive explaining Steve Jobs philosophy of saying “no” and how Jobs’ superpower was “focus” <a href=\\"https://t.co/WqJ97kC1mE\\">https://t.co/WqJ97kC1mE</a></p>
+<p>The SpaceX engineering process has a similar philosophy of simply getting rid of unnecessary parts. @elonmusk <a href=\\"https://t.co/Mix4szCOv5\\">https://t.co/Mix4szCOv5</a></p>
+<p>Very cool: The intro for Apple’s 2013 WWDC has an animation that touches on the exact points of “focus” and “1000 nos for every yes” (h/t @t87) <a href=\\"https://t.co/DWc9zsOwbk\\">https://t.co/DWc9zsOwbk</a></p>
+<p>Here’s a video of Steve Jobs talking about focus and saying “no” (h/t @HowtoStartupYC)</p>
+<p><a href=\\"https://t.co/t7JqhQDfiQ\\">https://t.co/t7JqhQDfiQ</a></p>
+<p>Last (related) tweet: Just got back from Spain and saw Picasso’s Guernica for the first time in person.</p>
+<p>Wrote about it here: <a href=\\"https://t.co/0NhbZq20Ol\\">https://t.co/0NhbZq20Ol</a></p>
+<p>In Dec. 1945, Picasso created \\"The Bull\\", a series of 11 lithographs (stone prints).</p>
+<p>With each successive print, a bull is simplified and abstracted. Picasso's goal was to find \\"spirit of the beast\\".</p>
+<p>At Apple, employees are taught this philosophy.</p>
+<p><img src=\\"https://pbs.twimg.com/media/FXJob07VsAU0xgX.jpg\\" alt=\\"\\"></p>
+<p>Below are the 1st, 4th and last stone print.</p>
+<p>The bull progresses from:
+◻️a realistic drawing
+◻️to a deconstructed image w/ the famous \\"abstract\\" style
+◻️to lines outlining a shape</p>
+<p>Through 11 iterations, Picasso simplified the image until it captured the \\"essence\\" of the bull.</p>
+<p><img src=\\"https://pbs.twimg.com/media/FXJoj_AUYAEIAh4.png\\" alt=\\"\\">
+/
+/
+/
+/</p>",
+    "id": "mem-hcty8edp-e-zqa-dbzw-rjdt",
+    "subject": "The Picasso Way: How Apple Uses Simplicity to Drive Innovation",
+    "tags": [],
+    "updatedAt": 1658872811155,
+  },
+  {
+    "backlinks": [],
+    "createdAt": 1632342788081,
+    "dailyAt": undefined,
+    "html": "<ul>
+<li>[x] another task</li>
+</ul>",
+    "id": "mem-n-is-pw-2-vr-ew-fn-x-lbrh-ndt",
+    "subject": "another task",
+    "tags": [],
+    "updatedAt": 1645569473186,
+  },
+  {
+    "backlinks": [],
+    "createdAt": 1634206945239,
+    "dailyAt": undefined,
+    "html": "<ul>
+<li>[ ] new task</li>
+<li>[x] another</li>
+</ul>",
+    "id": "mem-1g-eb-n-hue-o5-hjp-ft8-k-vq-y",
+    "subject": "new task",
+    "tags": [],
+    "updatedAt": 1634207014135,
+  },
+  {
+    "backlinks": [
+      {
+        "id": "mem-alex",
+        "label": "alex",
+      },
+    ],
+    "createdAt": 1627245849561,
+    "dailyAt": undefined,
+    "html": "<p>hi there</p>
+<p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/test/mem-alex\\">alex</a></p>",
+    "id": "mem-v4-gp-n6ss-eqzlfiuu-zyh5",
+    "subject": "hi there",
+    "tags": [],
+    "updatedAt": 1627245869756,
+  },
+  {
+    "backlinks": [],
+    "createdAt": 1621456382300,
+    "dailyAt": undefined,
+    "html": "",
+    "id": "mem-6-m8-yx-xkr-k12p-yiz-t8-bl-x",
+    "subject": "#hi there",
+    "tags": [
+      "hi there",
+    ],
+    "updatedAt": 1621456388765,
+  },
+  {
+    "backlinks": [],
+    "createdAt": 1617917267782,
+    "dailyAt": undefined,
+    "html": "",
+    "id": "mem-jh52-q-df-u9-ps-o1y8y0-m-fy",
+    "subject": "New Supernote",
+    "tags": [],
+    "updatedAt": 1617917267782,
+  },
+  {
+    "backlinks": [],
+    "createdAt": 1611880849306,
+    "dailyAt": undefined,
+    "html": "<h1>Welcome to Mem (Beta)!</h1>
+<p>**﻿**</p>
+<p>Mem is the fastest way to capture, share and make use of information.</p>
+<p>Here, we call the fundamental unit of information a \\"mem\\" (lowercase m), each of which is a flexible container of information. A mem can be a short reminder (which you can snooze), a meeting note, a product design doc, or a codified piece of knowledge.</p>
+<p>On the surface, we've tried to build something as simple and lightweight as Apple Notes. In the background, Mem is powered by a collaborative knowledge graph — which helps you form relationships between the information you capture, generate relevant insights, and share with anyone.</p>
+<h3></h3>
+<h2>Get started with this 7 minute video</h2>
+<h3><a href=\\"https://mem.ai/onboarding/getting-started-video\\">https://mem.ai/onboarding/getting-started-video</a></h3>
+<h2>Need help, or want to share a feature request?</h2>
+<p>If you have any questions or spot an issue with Mem, share a new mem with <strong>@Mem Support</strong> — we try to respond within 24 hours.</p>
+<p>For product feedback and feature requests, share a new mem with <strong>@Mem Feedback</strong>.</p>
+<p>Happy memming!</p>
+<p>–The Mem Team</p>",
+    "id": "mem-sbj0-di-ennzbv-1wkx-nx-7s",
+    "subject": "Welcome to Mem (Beta)!",
+    "tags": [
+      "GettingStarted﻿",
+    ],
+    "updatedAt": 1611880849306,
+  },
+  {
+    "backlinks": [],
+    "createdAt": 1611880789306,
+    "dailyAt": undefined,
+    "html": "<h2>Setting up SMS (mobile)</h2>
+<p><em>Note: this only works if you submitted your phone number during the <a href=\\"https://memlabs.typeform.com/to/yY8vI4\\">request access</a> flow. If you've never gone through that flow, send us a note (just type <strong>@Mem Support</strong>) with your # and we'll get you set up.</em></p>
+<ol>
+<li>Save <strong>(+1) 219-247-7722</strong> as \\"Mem\\" on your phone.</li>
+<li>Send Mem a text.</li>
+<li>Check your Inbox, you'll see a new unread note appear.</li>
+</ol>
+<p><a href=\\"https://reflect.app/g/test/tag/gettingstarted\\">#gettingstarted</a></p>",
+    "id": "mem-2-veb-40-ku-wq2-oo-ek-tr-kht",
+    "subject": "Setting up SMS (mobile)",
+    "tags": [
+      "gettingstarted",
+      "GettingStarted",
+    ],
+    "updatedAt": 1611880789306,
+  },
+  {
+    "backlinks": [],
+    "createdAt": 1611880729306,
+    "dailyAt": undefined,
+    "html": "<h2><strong>Keyboard Shortcuts</strong></h2>
+<p>To create a <strong>Task</strong>: 						type <strong>[] <strong>+</strong> SPACE</strong>_ on an empty line_
+To create a <strong>bulleted list</strong>:			type <strong>- <strong>+</strong> SPACE</strong> on an empty line
+To go back: 								press <strong>ESC</strong>
+To navigate/search: 					press **⌘ <strong>+</strong> K **<em>(Note: use <strong>ctrl</strong> instead of <strong>⌘</strong> on PC)</em></p>
+<p><em>Hover over the ⌨️ icon in the top right of the app to discover more shortcuts.</em></p>
+<p><a href=\\"https://reflect.app/g/test/tag/gettingstarted\\">#gettingstarted</a></p>",
+    "id": "mem-mfp-ydm-dhkh-b8-br-u-ow-ns-u",
+    "subject": "Keyboard Shortcuts",
+    "tags": [
+      "gettingstarted",
+      "GettingStarted",
+    ],
+    "updatedAt": 1611880729306,
+  },
+]
+`;

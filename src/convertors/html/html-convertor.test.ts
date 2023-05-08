@@ -3,7 +3,7 @@ import {describe, expect, it} from 'vitest'
 import {HtmlConvertor} from './html-convertor'
 
 describe('HtmlConvertor', () => {
-  it('converts html', () => {
+  it('converts html', async () => {
     const convertor = new HtmlConvertor()
 
     const data = `<ul>
@@ -25,7 +25,7 @@ describe('HtmlConvertor', () => {
     <li><br></li>
     </ul>
   `
-    const {notes} = convertor.convert({data, filename: 'p1-My Recipe.html'})
+    const {notes} = await convertor.convert({data, filename: 'p1-My Recipe.html'})
 
     const [{subject, html}] = notes
 
@@ -53,14 +53,14 @@ describe('HtmlConvertor', () => {
     `)
   })
 
-  it('returns updatedAt from lastModified', () => {
+  it('returns updatedAt from lastModified', async () => {
     const convertor = new HtmlConvertor()
 
     const data = `<ul>
     <li>Ground beef</li>
     </ul>
   `
-    const {notes} = convertor.convert({
+    const {notes} = await convertor.convert({
       data,
       filename: 'p1-My Recipe.html',
       lastModified: 123456789,
@@ -71,7 +71,7 @@ describe('HtmlConvertor', () => {
     expect(updatedAt).toEqual(123456789)
   })
 
-  it('removes images with base64 data', () => {
+  it('removes images with base64 data', async () => {
     const convertor = new HtmlConvertor()
 
     const data = `<ul>
@@ -79,7 +79,7 @@ describe('HtmlConvertor', () => {
     <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR42mP8z8BQDwAEhQGAhKmMIwAAAABJRU5ErkJggg==" /></li>
     </ul>
   `
-    const {notes} = convertor.convert({data, filename: 'p1-My Recipe.html'})
+    const {notes} = await convertor.convert({data, filename: 'p1-My Recipe.html'})
 
     const [{html}] = notes
 
@@ -92,13 +92,13 @@ describe('HtmlConvertor', () => {
     `)
   })
 
-  it('returns invalid notes when the html is too long', () => {
+  it('returns invalid notes when the html is too long', async () => {
     const convertor = new HtmlConvertor()
 
     // Make a lot of chars
     const data = 'x'.repeat(10 * 1024 * 1024)
 
-    const {notes, errors} = convertor.convert({
+    const {notes, errors} = await convertor.convert({
       data,
       filename: 'p1-My Recipe.html',
     })

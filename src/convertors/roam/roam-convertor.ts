@@ -22,7 +22,7 @@ export class RoamConvertor implements Convertor {
 
   accept = {'application/json': ['.json']}
 
-  convert({data}: ConvertOptions): ConvertResponse {
+  async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     const roamNotes = JSON.parse(data) as RoamNote[]
 
     if (!Array.isArray(roamNotes)) {

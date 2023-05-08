@@ -9,7 +9,7 @@ import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../t
 export class OpmlConvertor implements Convertor {
   accept = {'application/opml': ['.opml']}
 
-  convert({data}: ConvertOptions): ConvertResponse {
+  async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     const doc = parseXml(data)
 
     const outlineDocs = Array.from(doc.querySelectorAll('opml > body > outline'))

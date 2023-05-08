@@ -28,11 +28,11 @@ export class MarkdownConvertor implements Convertor {
 
   accept = {'text/markdown': ['.md']}
 
-  convert({
+  async convert({
     data,
     filename,
     lastModified,
-  }: ConvertOptions & {filename: string}): ConvertResponse {
+  }: ConvertOptions & {filename: string}): Promise<ConvertResponse> {
     const {
       html,
       subject: markdownSubject,

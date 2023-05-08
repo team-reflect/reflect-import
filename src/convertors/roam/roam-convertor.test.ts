@@ -44,16 +44,16 @@ describe('RoamConvertor', () => {
     ],
   }
 
-  const htmlFromRoamNote = (note: RoamNote, graphId: string): string => {
+  const htmlFromRoamNote = async (note: RoamNote, graphId: string): Promise<string> => {
     const notesJson = JSON.stringify([note])
     const convertor = new RoamConvertor({graphId})
-    const {notes} = convertor.convert({data: notesJson})
+    const {notes} = await convertor.convert({data: notesJson})
     const [{html}] = notes
     return html
   }
 
-  it('parseContentFromHTML', () => {
-    const result = htmlFromRoamNote(ROAM_SAMPLE, '123')
+  it('parseContentFromHTML', async () => {
+    const result = await htmlFromRoamNote(ROAM_SAMPLE, '123')
 
     expect(formatHtml(result)).toMatchInlineSnapshot(
       `
@@ -87,7 +87,7 @@ describe('RoamConvertor', () => {
   })
 
   describe('generateContentFromRoamNote', () => {
-    it('handles both formats of todos', () => {
+    it('handles both formats of todos', async () => {
       const note: RoamNote = {
         title: 'note1',
         uid: '123',
@@ -118,11 +118,11 @@ describe('RoamConvertor', () => {
         ],
       }
 
-      const doc = htmlFromRoamNote(note, '123')
+      const doc = await htmlFromRoamNote(note, '123')
       expect(doc).toMatchSnapshot()
     })
 
-    it('handles list with mixed bullets and tasks', () => {
+    it('handles list with mixed bullets and tasks', async () => {
       const note: RoamNote = {
         title: 'note1',
         uid: '123',
@@ -174,13 +174,13 @@ describe('RoamConvertor', () => {
         ],
       }
 
-      const doc = htmlFromRoamNote(note, '123')
+      const doc = await htmlFromRoamNote(note, '123')
 
       expect(doc).toMatchSnapshot()
     })
   })
 
-  it('handles code blocks', () => {
+  it('handles code blocks', async () => {
     const node: RoamNote = {
       title: 'note1',
       uid: '123',
@@ -195,7 +195,7 @@ describe('RoamConvertor', () => {
       ],
     }
 
-    const html = htmlFromRoamNote(node, '123')
+    const html = await htmlFromRoamNote(node, '123')
 
     expect(html).toMatchInlineSnapshot(`
     "<h1>note1</h1><ul><li><pre><code class=\\"language-javascript\\">longer code snippet
@@ -203,7 +203,7 @@ describe('RoamConvertor', () => {
   `)
   })
 
-  it('handles ordered lists', () => {
+  it('handles ordered lists', async () => {
     const node: RoamNote = {
       title: 'note1',
       uid: '123',
@@ -219,13 +219,13 @@ describe('RoamConvertor', () => {
       ],
     }
 
-    const html = htmlFromRoamNote(node, '123')
+    const html = await htmlFromRoamNote(node, '123')
     expect(html).toMatchInlineSnapshot(
       '"<h1>note1</h1><ul><li><p>1. foo</p><ul></ul></li></ul>"',
     )
   })
 
-  it('handles blockquotes', () => {
+  it('handles blockquotes', async () => {
     const node: RoamNote = {
       title: 'note1',
       uid: '123',
@@ -241,7 +241,7 @@ describe('RoamConvertor', () => {
       ],
     }
 
-    const html = htmlFromRoamNote(node, '123')
+    const html = await htmlFromRoamNote(node, '123')
     expect(formatHtml(html)).toMatchInlineSnapshot(`
     "<h1>note1</h1>
     <ul>
@@ -256,7 +256,7 @@ describe('RoamConvertor', () => {
   `)
   })
 
-  it('generates content with the roam note', () => {
+  it('generates content with the roam note', async () => {
     const note: RoamNote = {
       title: 'note1',
       uid: '123',
@@ -287,7 +287,7 @@ describe('RoamConvertor', () => {
       ],
     }
 
-    const html = htmlFromRoamNote(note, '123')
+    const html = await htmlFromRoamNote(note, '123')
 
     expect(formatHtml(html)).toMatchInlineSnapshot(`
     "<h1>note1</h1>
@@ -314,7 +314,7 @@ describe('RoamConvertor', () => {
   `)
   })
 
-  it('handles backlinks', () => {
+  it('handles backlinks', async () => {
     const note: RoamNote = {
       title: 'note1',
       uid: '123',
@@ -330,34 +330,34 @@ describe('RoamConvertor', () => {
       ],
     }
 
-    const html = htmlFromRoamNote(note, '123')
+    const html = await htmlFromRoamNote(note, '123')
 
     expect(html).toMatchInlineSnapshot(
       '"<h1>note1</h1><ul><li><p>link to <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/another note\\">another note</a></p><ul></ul></li></ul>"',
     )
   })
 
-  it('parses todo', () => {
+  it('parses todo', async () => {
     const roamNote = todoNotes[0]
-    const html = htmlFromRoamNote(roamNote, '123')
+    const html = await htmlFromRoamNote(roamNote, '123')
 
     expect(html).toMatchInlineSnapshot(
       '"<h1>test1</h1><ul><li><input type=\\"checkbox\\" ><p>item 1</p></li><li><input type=\\"checkbox\\" checked><p>item 2</p></li><li></li></ul>"',
     )
   })
 
-  it('parses urls', () => {
+  it('parses urls', async () => {
     const roamNote = urlsNotes[0]
-    const html = htmlFromRoamNote(roamNote, '123')
+    const html = await htmlFromRoamNote(roamNote, '123')
 
     expect(html).toMatchInlineSnapshot(
       '"<h1>urls</h1><ul><li><p><a href=\\"https://reflect.app\\">https://reflect.app</a></p></li><li></li></ul>"',
     )
   })
 
-  it('parses daily notes', () => {
+  it('parses daily notes', async () => {
     const convertor = new RoamConvertor({graphId: '123'})
-    const {notes} = convertor.convert({data: JSON.stringify(dailyNotes)})
+    const {notes} = await convertor.convert({data: JSON.stringify(dailyNotes)})
     const [note] = notes
 
     expect(note.subject).toEqual('September 14th, 2020')
@@ -365,7 +365,7 @@ describe('RoamConvertor', () => {
   })
 
   describe('generateListFromRoamNoteString', () => {
-    it('doesnt fail with empty string', () => {
+    it('doesnt fail with empty string', async () => {
       const note: RoamNote = {
         title: 'note1',
         uid: '123',
@@ -380,14 +380,14 @@ describe('RoamConvertor', () => {
         ],
       }
 
-      const html = htmlFromRoamNote(note, '123')
+      const html = await htmlFromRoamNote(note, '123')
 
       expect(html).toMatchInlineSnapshot('"<h1>note1</h1><ul><li></li></ul>"')
     })
   })
 
   describe('createdAt and dailyAt', () => {
-    it('should be extracted from the uid', () => {
+    it('should be extracted from the uid', async () => {
       const note: RoamNote = {
         title: 'October 10th, 2020',
         uid: '10-10-2020',
@@ -403,7 +403,7 @@ describe('RoamConvertor', () => {
       }
 
       const convertor = new RoamConvertor({graphId: '123'})
-      const {notes} = convertor.convert({data: JSON.stringify([note])})
+      const {notes} = await convertor.convert({data: JSON.stringify([note])})
 
       const [{createdAt, dailyAt}] = notes
 
@@ -412,16 +412,16 @@ describe('RoamConvertor', () => {
     })
   })
 
-  it('parses exampleGraph', () => {
+  it('parses exampleGraph', async () => {
     const convertor = new RoamConvertor({graphId: '123'})
-    const {notes} = convertor.convert({data: JSON.stringify(exampleGraph)})
+    const {notes} = await convertor.convert({data: JSON.stringify(exampleGraph)})
 
     expect(notes).toMatchSnapshot()
   })
 
-  it('parses exampleGraph2', () => {
+  it('parses exampleGraph2', async () => {
     const convertor = new RoamConvertor({graphId: '123'})
-    const {notes} = convertor.convert({data: JSON.stringify(exampleGraph2)})
+    const {notes} = await convertor.convert({data: JSON.stringify(exampleGraph2)})
 
     expect(notes).toMatchSnapshot()
   })
