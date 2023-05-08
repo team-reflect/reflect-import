@@ -7,32 +7,14 @@ import {tryParseTime, toLogseqId} from './logseq-helpers'
 import {logseqPropertiesToMarkdown} from './logseq-properties'
 import {exportSchema} from './schema'
 import {LogseqBlock, LogseqConversionError, LogseqExport, LogseqNote} from './types'
-import {
-  Backlink,
-  ConvertedNote,
-  ConvertOptions,
-  Convertor,
-  ConvertResponse,
-  REFLECT_HOSTNAME,
-} from '../../types'
+import {Convertor} from '../../convertor'
+import {Backlink, ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
-export class LogseqConvertor implements Convertor {
-  graphId: string
-  linkHost: string
-  noteIds: Record<string, string> = {}
-
-  constructor({
-    graphId,
-    linkHost = REFLECT_HOSTNAME,
-  }: {
-    graphId: string
-    linkHost?: string
-  }) {
-    this.graphId = graphId
-    this.linkHost = linkHost
-  }
-
+export class LogseqConvertor extends Convertor {
   accept = {'application/json': ['.json']}
+  description = 'Logseq JSON'
+
+  noteIds: Record<string, string> = {}
 
   async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     const parsed: LogseqExport = JSON.parse(data)

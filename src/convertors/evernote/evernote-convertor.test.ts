@@ -4,7 +4,7 @@ import {EvernoteConvertor} from './evernote-convertor'
 
 describe('EvernoteConvertor', () => {
   it('converts evernote to HTML', async () => {
-    const convertor = new EvernoteConvertor()
+    const convertor = new EvernoteConvertor({graphId: '123'})
 
     const data = `<?xml version="1.0" encoding="UTF-8"?>
   <en-export export-date="20221224T010732Z" application="Evernote" version="10.49.4">
@@ -34,7 +34,7 @@ describe('EvernoteConvertor', () => {
   })
 
   it('raises an error if parsing fails', () => {
-    const convertor = new EvernoteConvertor()
+    const convertor = new EvernoteConvertor({graphId: '123'})
 
     expect(async () => await convertor.convert({data: ''})).rejects.toThrow()
   })
@@ -42,7 +42,7 @@ describe('EvernoteConvertor', () => {
   it.each(['&gt;', '&nbsp;', '&mdash;', '&ndash;'])(
     'parses note with html entity',
     async (entity) => {
-      const convertor = new EvernoteConvertor()
+      const convertor = new EvernoteConvertor({graphId: '123'})
 
       const data = `<?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export4.dtd">

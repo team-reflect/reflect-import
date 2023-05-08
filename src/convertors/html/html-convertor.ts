@@ -3,10 +3,12 @@ import {stripFileExtension} from 'helpers/path'
 import {validateNotes} from 'helpers/validate'
 
 import {basenameToSubject, toHtmlId} from './html-helpers'
-import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
+import {Convertor} from '../../convertor'
+import {ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
-export class HtmlConvertor implements Convertor {
+export class HtmlConvertor extends Convertor {
   accept = {'text/html': ['.html', '.htm']}
+  description = 'HTML files'
 
   async convert({
     data,

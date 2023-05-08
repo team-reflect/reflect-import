@@ -5,30 +5,12 @@ import {validateNotes} from 'helpers/validate'
 
 import {backlinkToMemId, getDailyDate, parseTimestamp, toMemId} from './mem-helpers'
 import {MemExport, MemExportNote} from './types'
-import {
-  ConvertedNote,
-  ConvertOptions,
-  Convertor,
-  ConvertResponse,
-  REFLECT_HOSTNAME,
-} from '../../types'
+import {Convertor} from '../../convertor'
+import {ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
-export class MemConvertor implements Convertor {
-  graphId: string
-  linkHost: string
-
-  constructor({
-    graphId,
-    linkHost = REFLECT_HOSTNAME,
-  }: {
-    graphId: string
-    linkHost?: string
-  }) {
-    this.graphId = graphId
-    this.linkHost = linkHost
-  }
-
+export class MemConvertor extends Convertor {
   accept = {'application/json': ['.json']}
+  description = 'Mem JSON'
 
   async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     // 1. Parse JSON

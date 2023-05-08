@@ -61,7 +61,7 @@ const opmlData = `<?xml version="1.0"?>
 
 describe('ompl convert', () => {
   it('converts ompl to HTML', async () => {
-    const convertor = new OpmlConvertor()
+    const convertor = new OpmlConvertor({graphId: '123'})
     const {notes} = await convertor.convert({data: opmlData})
     const [{html}] = notes
 
