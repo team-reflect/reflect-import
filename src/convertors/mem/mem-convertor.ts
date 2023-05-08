@@ -48,6 +48,7 @@ export class MemConvertor implements Convertor {
     } = markdownToHtml(memNote.markdown, {
       graphId: this.graphId,
       linkHost: this.linkHost,
+      pageResolver: toMemId,
     })
 
     const dailyDate = getDailyDate(memNote)
