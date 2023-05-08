@@ -1,11 +1,9 @@
-import {HtmlConvertor} from 'convertors/html'
-import {LogseqConvertor} from 'convertors/logseq'
-import {MemConvertor} from 'convertors/mem/mem-convertor'
-import {OpmlConvertor} from 'convertors/opml'
-
-import {Convertor} from './convertor'
 import {EvernoteConvertor} from './convertors/evernote'
+import {HtmlConvertor} from './convertors/html'
+import {LogseqConvertor} from './convertors/logseq'
 import {MarkdownConvertor} from './convertors/markdown'
+import {MemConvertor} from './convertors/mem/mem-convertor'
+import {OpmlConvertor} from './convertors/opml'
 import {RoamConvertor} from './convertors/roam'
 
 export * from './types'
@@ -16,7 +14,7 @@ export * from './convertors/roam'
 
 export type Format = 'evernote' | 'html' | 'logseq' | 'markdown' | 'mem' | 'opml' | 'roam'
 
-export const convertors: Record<Format, typeof Convertor> = {
+export const convertors = {
   evernote: EvernoteConvertor,
   html: HtmlConvertor,
   logseq: LogseqConvertor,
@@ -25,3 +23,26 @@ export const convertors: Record<Format, typeof Convertor> = {
   opml: OpmlConvertor,
   roam: RoamConvertor,
 }
+
+// Returns something like:
+// {
+//   "evernote": [
+//     {
+//       "description": "Evernote ENEX",
+//       "accept": {
+//         "application/enex": [
+//           ".enex"
+//         ]
+//       }
+//     }
+//   ],
+export const convertorTypes: Record<Format, FilePickerAcceptType[]> = Object.entries(
+  convertors,
+).reduce((acc, [key, convertor]) => {
+  const instance = new convertor({graphId: 'test'})
+
+  return {
+    ...acc,
+    [key as Format]: [{description: instance.description, accept: instance.accept}],
+  }
+}, {} as Record<Format, FilePickerAcceptType[]>)
