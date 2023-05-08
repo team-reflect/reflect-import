@@ -1,0 +1,173 @@
+// Vitest Snapshot v1
+
+exports[`LogseqConvertor > parses TODO example 1`] = `
+[
+  {
+    "backlinks": [],
+    "dailyAt": undefined,
+    "html": "<h1>Contents</h1><ul><li></li></ul>",
+    "id": "logseq-6456a448-562e-4481-b7d9-3609f5271d5e",
+    "subject": "Contents",
+  },
+  {
+    "backlinks": [],
+    "dailyAt": 1683331200000,
+    "html": "<h1>May 6th, 2023</h1><ul><li><p>TODO Thing 1
+:LOGBOOK:
+CLOCK: [2023-05-06 Sat 14:02:38]--[2023-05-06 Sat 14:02:40] =>  00:00:02
+:END:</p></li><li><p>DOING Thing 2
+:LOGBOOK:
+CLOCK: [2023-05-06 Sat 14:03:11]
+:END:</p></li><li><p>DONE Thing 3
+:LOGBOOK:
+CLOCK: [2023-05-06 Sat 14:03:14]--[2023-05-06 Sat 14:03:15] =>  00:00:01
+CLOCK: [2023-05-06 Sat 14:03:16]--[2023-05-06 Sat 14:03:19] =>  00:00:03
+CLOCK: [2023-05-06 Sat 14:03:22]--[2023-05-06 Sat 14:03:26] =>  00:00:04
+CLOCK: [2023-05-06 Sat 14:03:28]--[2023-05-06 Sat 14:03:29] =>  00:00:01
+:END:</p></li><li></li><li></li><li><p>TODO</p></li><li></li></ul>",
+    "id": "06052023",
+    "subject": "May 6th, 2023",
+  },
+]
+`;
+
+exports[`LogseqConvertor > parses example 1`] = `
+[
+  {
+    "backlinks": [],
+    "dailyAt": undefined,
+    "html": "<h1>Contents</h1><ul><li></li></ul>",
+    "id": "logseq-048b84ca-e374-40c9-90ba-1129207b1d88",
+    "subject": "Contents",
+  },
+  {
+    "backlinks": [
+      {
+        "id": "02052023",
+        "label": "May 2nd, 2023",
+      },
+      {
+        "id": "04052023",
+        "label": "May 4th, 2023",
+      },
+    ],
+    "dailyAt": 1683072000000,
+    "html": "<h1>May 3rd, 2023</h1><ul><li><p>This is a test graph</p></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/02052023\\">May 2nd, 2023</a></p><ul><li><p>This is some notes for yesterday</p></li></ul></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/04052023\\">May 4th, 2023</a></p><ul><li><p>This is some notes for tomorrow</p></li></ul></li></ul>",
+    "id": "03052023",
+    "subject": "May 3rd, 2023",
+  },
+  {
+    "backlinks": [],
+    "dailyAt": 1682985600000,
+    "html": "<h1>May 2nd, 2023</h1><ul><li><p>This is yesterday</p></li></ul>",
+    "id": "02052023",
+    "subject": "May 2nd, 2023",
+  },
+  {
+    "backlinks": [
+      {
+        "id": "logseq-645304ab-3a8e-41f6-996c-3e023a731b63",
+        "label": "Another Page",
+      },
+    ],
+    "dailyAt": undefined,
+    "html": "<h1>New Page</h1><ul><li><p>This is a standalone page.</p></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/logseq-645304ab-3a8e-41f6-996c-3e023a731b63\\">Another Page</a></p></li><li><p>:properties:</p></li><li></li></ul>",
+    "id": "logseq-6453049e-5817-4a48-8ad2-8a64c56295d6",
+    "subject": "New Page",
+  },
+  {
+    "backlinks": [],
+    "dailyAt": undefined,
+    "html": "<h1>Another Page</h1><ul><li><ul>
+<li>property: page</li>
+<li>thing: yes</li>
+</ul></li><li><p>Deeply</p><ul><li><p>Nested</p><ul><li><p>Text</p><ul><li><p>Is</p><ul><li><p>Here</p></li></ul></li></ul></li></ul></li></ul></li><li><p><a href=\\"http://example.com\\">external link</a></p></li><li><p><img src=\\"../assets/SuccessKid_1683162562594_0.jpg\\" alt=\\"SuccessKid.jpg\\"></p></li><li><p>By Originally from the mother's Flickr page, found on Know Your Meme, Fair use, <a href=\\"https://en.wikipedia.org/w/index.php?curid=46523616\\">https://en.wikipedia.org/w/index.php?curid=46523616</a></p></li></ul>",
+    "id": "logseq-645304ab-3a8e-41f6-996c-3e023a731b63",
+    "subject": "Another Page",
+  },
+]
+`;
+
+exports[`LogseqConvertor > parses properties example 1`] = `
+[
+  {
+    "backlinks": [],
+    "dailyAt": undefined,
+    "html": "<h1>Contents</h1><ul><li></li></ul>",
+    "id": "logseq-048b84ca-e374-40c9-90ba-1129207b1d88",
+    "subject": "Contents",
+  },
+  {
+    "backlinks": [
+      {
+        "id": "logseq-6455bc66-8886-449b-bddc-12c53f30b1a5",
+        "label": "Company1",
+      },
+    ],
+    "dailyAt": undefined,
+    "html": "<h1>Person1</h1><ul><li><ul>
+<li>company: <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/logseq-6455bc66-8886-449b-bddc-12c53f30b1a5\\">Company1</a></li>
+<li>phone: 12345</li>
+<li>jobtitle: manager</li>
+</ul></li><li><p>This is person 1</p></li><li></li><li></li></ul>",
+    "id": "logseq-6455adda-ef16-45a3-9cb3-bd8a5f6dd831",
+    "subject": "Person1",
+  },
+  {
+    "backlinks": [],
+    "dailyAt": undefined,
+    "html": "<h1>Company1</h1><ul><li><p>This is a page for company one</p></li></ul>",
+    "id": "logseq-6455bc66-8886-449b-bddc-12c53f30b1a5",
+    "subject": "Company1",
+  },
+  {
+    "backlinks": [
+      {
+        "id": "logseq-6455aef4-7231-4932-8679-cce8b3403363",
+        "label": "Company Two",
+      },
+    ],
+    "dailyAt": undefined,
+    "html": "<h1>Person2</h1><ul><li><ul>
+<li>company: <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/logseq-6455aef4-7231-4932-8679-cce8b3403363\\">Company Two</a></li>
+<li>phone: 12345</li>
+<li>jobtitle: manager</li>
+</ul></li><li></li><li><p>This is person 2</p></li></ul>",
+    "id": "logseq-6455ae48-1216-4b6c-bb26-d3e67adde877",
+    "subject": "Person2",
+  },
+  {
+    "backlinks": [],
+    "dailyAt": undefined,
+    "html": "<h1>Company Two</h1><ul><li><p><a href=\\"https://reflect.app/g/123/tag/company\\">#company</a></p></li><li></li></ul>",
+    "id": "logseq-6455aef4-7231-4932-8679-cce8b3403363",
+    "subject": "Company Two",
+  },
+  {
+    "backlinks": [
+      {
+        "id": "logseq-6455aef4-7231-4932-8679-cce8b3403363",
+        "label": "Company Two",
+      },
+      {
+        "id": "logseq-6455bc66-8886-449b-bddc-12c53f30b1a5",
+        "label": "Company1",
+      },
+    ],
+    "dailyAt": undefined,
+    "html": "<h1>Person3</h1><ul><li><ul>
+<li>company: <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/logseq-6455aef4-7231-4932-8679-cce8b3403363\\">Company Two</a>, <a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/logseq-6455bc66-8886-449b-bddc-12c53f30b1a5\\">Company1</a></li>
+</ul></li><li><p>This person is associated with both companies</p></li></ul>",
+    "id": "logseq-6455b0ff-0bf2-4965-b579-ae86af4801ab",
+    "subject": "Person3",
+  },
+  {
+    "backlinks": [],
+    "dailyAt": undefined,
+    "html": "<h1>Some Page</h1><ul><li><hr>
+<h2>title: sample</h2></li><li></li><li><p>Frontmater properties</p></li></ul>",
+    "id": "logseq-6455b17c-958f-4590-bc17-fe48676ecf23",
+    "subject": "Some Page",
+  },
+]
+`;
