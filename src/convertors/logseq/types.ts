@@ -16,7 +16,7 @@ export type LogseqProperties = Record<string, string | number | Array<string>>
 export interface LogseqBlock {
   format: string
   content: string
-  properties: LogseqProperties
+  properties: LogseqProperties | null
   id: string
   children: LogseqBlock[]
 }
