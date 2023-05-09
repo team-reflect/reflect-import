@@ -4,10 +4,12 @@ import {validateNotes} from 'helpers/validate'
 import {parseXml} from 'helpers/xml'
 
 import {toOpmlId} from './opml-helpers'
-import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
+import {Convertor} from '../../convertor'
+import {ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
-export class OpmlConvertor implements Convertor {
+export class OpmlConvertor extends Convertor {
   accept = {'application/opml': ['.opml']}
+  description = 'OPML (Workflowy)'
 
   async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     const doc = parseXml(data)

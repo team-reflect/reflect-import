@@ -4,7 +4,7 @@ import {HtmlConvertor} from './html-convertor'
 
 describe('HtmlConvertor', () => {
   it('converts html', async () => {
-    const convertor = new HtmlConvertor()
+    const convertor = new HtmlConvertor({graphId: '123'})
 
     const data = `<ul>
     <li>Ground beef</li>
@@ -54,7 +54,7 @@ describe('HtmlConvertor', () => {
   })
 
   it('returns updatedAt from lastModified', async () => {
-    const convertor = new HtmlConvertor()
+    const convertor = new HtmlConvertor({graphId: '123'})
 
     const data = `<ul>
     <li>Ground beef</li>
@@ -72,7 +72,7 @@ describe('HtmlConvertor', () => {
   })
 
   it('removes images with base64 data', async () => {
-    const convertor = new HtmlConvertor()
+    const convertor = new HtmlConvertor({graphId: '123'})
 
     const data = `<ul>
     <li>Ground beef</li>
@@ -93,7 +93,7 @@ describe('HtmlConvertor', () => {
   })
 
   it('returns invalid notes when the html is too long', async () => {
-    const convertor = new HtmlConvertor()
+    const convertor = new HtmlConvertor({graphId: '123'})
 
     // Make a lot of chars
     const data = 'x'.repeat(10 * 1024 * 1024)

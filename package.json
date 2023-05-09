@@ -1,7 +1,7 @@
 {
   "name": "@team-reflect/reflect-import",
   "type": "module",
-  "version": "0.4.5",
+  "version": "0.4.5-beta2",
   "author": "Alex MacCaw",
   "license": "MIT",
   "repository": "git://github.com/team-reflect/reflect-import.git",
@@ -50,6 +50,7 @@
     "@size-limit/preset-small-lib": "^8.1.0",
     "@types/js-yaml": "^4.0.5",
     "@types/lodash-es": "^4.17.6",
+    "@types/wicg-file-system-access": "^2020.9.6",
     "bumpp": "^9.1.0",
     "eslint": "^8.28.0",
     "prettier": "^2.8.0",
