@@ -39,10 +39,8 @@ export const convertors = {
 export const convertorTypes: Record<Format, FilePickerAcceptType[]> = Object.entries(
   convertors,
 ).reduce((acc, [key, convertor]) => {
-  const instance = new convertor({graphId: 'test'})
-
   return {
     ...acc,
-    [key as Format]: [{description: instance.description, accept: instance.accept}],
+    [key as Format]: [{description: convertor.description, accept: convertor.accept}],
   }
 }, {} as Record<Format, FilePickerAcceptType[]>)

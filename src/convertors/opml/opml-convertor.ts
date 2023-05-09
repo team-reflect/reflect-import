@@ -8,8 +8,8 @@ import {Convertor} from '../../convertor'
 import {ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
 export class OpmlConvertor extends Convertor {
-  accept = {'application/opml': ['.opml']}
-  description = 'OPML (Workflowy)'
+  static accept = {'application/opml': ['.opml']}
+  static description = 'OPML (Workflowy)'
 
   async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     const doc = parseXml(data)

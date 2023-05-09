@@ -6,8 +6,8 @@ import {
 } from './types'
 
 export abstract class Convertor {
-  abstract accept: ConvertorAcceptType
-  abstract description: string
+  static accept: ConvertorAcceptType
+  static description: string
 
   graphId: string
   linkHost: string

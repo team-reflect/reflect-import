@@ -7,8 +7,8 @@ import {Convertor} from '../../convertor'
 import {ConvertOptions, ConvertResponse} from '../../types'
 
 export class RoamConvertor extends Convertor {
-  accept = {'application/json': ['.json']}
-  description = 'Roam Research JSON'
+  static accept = {'application/json': ['.json']}
+  static description = 'Roam Research JSON'
 
   async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     const roamNotes = JSON.parse(data) as RoamNote[]
