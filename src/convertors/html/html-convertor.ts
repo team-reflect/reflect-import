@@ -7,8 +7,8 @@ import {Convertor} from '../../convertor'
 import {ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
 export class HtmlConvertor extends Convertor {
-  accept = {'text/html': ['.html', '.htm']}
-  description = 'HTML files'
+  static accept = {'text/html': ['.html', '.htm']}
+  static description = 'HTML files'
 
   async convert({
     data,

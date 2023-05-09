@@ -9,8 +9,8 @@ import {Convertor} from '../../convertor'
 import {ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
 export class MemConvertor extends Convertor {
-  accept = {'application/json': ['.json']}
-  description = 'Mem JSON'
+  static accept = {'application/json': ['.json']}
+  static description = 'Mem JSON'
 
   async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     // 1. Parse JSON

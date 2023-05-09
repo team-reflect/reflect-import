@@ -7,8 +7,8 @@ import {Convertor} from '../../convertor'
 import {ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
 export class MarkdownConvertor extends Convertor {
-  accept = {'text/markdown': ['.md']}
-  description = 'Markdown files'
+  static accept = {'text/markdown': ['.md']}
+  static description = 'Markdown files'
 
   async convert({
     data,

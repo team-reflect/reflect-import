@@ -11,8 +11,8 @@ import {Convertor} from '../../convertor'
 import {Backlink, ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
 export class LogseqConvertor extends Convertor {
-  accept = {'application/json': ['.json']}
-  description = 'Logseq JSON'
+  static accept = {'application/json': ['.json']}
+  static description = 'Logseq JSON'
 
   noteIds: Record<string, string> = {}
 

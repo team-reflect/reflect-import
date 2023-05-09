@@ -7,8 +7,8 @@ import {Convertor} from '../../convertor'
 import {ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
 export class EvernoteConvertor extends Convertor {
-  accept = {'application/enex': ['.enex']}
-  description = 'Evernote ENEX'
+  static accept = {'application/enex': ['.enex']}
+  static description = 'Evernote ENEX'
 
   async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     const doc = parseXml(data)
