@@ -1,3 +1,4 @@
+import {notEmpty} from 'helpers/array-fns'
 import {parseHtml, removeImgsWithDataSrcs} from 'helpers/html'
 import {validateNotes} from 'helpers/validate'
 import {parseXml} from 'helpers/xml'
@@ -15,12 +16,21 @@ export class EvernoteConvertor extends Convertor {
 
     const noteDocs = Array.from(doc.querySelectorAll('en-export > note'))
 
-    const notes = noteDocs.map((noteDoc, index) => this.convertNoteDoc(noteDoc, index))
+    const notes = noteDocs
+      .map((noteDoc, index) => this.convertNoteDoc(noteDoc, index))
+      .filter(notEmpty)
 
     return validateNotes(notes)
   }
 
-  private convertNoteDoc(noteDoc: Element, index: number): ConvertedNote {
+  private convertNoteDoc(noteDoc: Element, index: number): ConvertedNote | undefined {
+    const resource = this.extractResource(noteDoc)
+
+    // Skip notes with resources for now
+    if (resource) {
+      return
+    }
+
     const subject = this.extractSubject(noteDoc)
     const html = this.extractHtml(noteDoc)
     const timestamps = this.extractTimestamps(noteDoc)
@@ -54,5 +64,20 @@ export class EvernoteConvertor extends Convertor {
     const updatedAt = updatedAtString ? parseTime(updatedAtString) : undefined
 
     return {createdAt, updatedAt}
+  }
+
+  private extractResource(noteDoc: Element) {
+    const resourceDoc = noteDoc.querySelector('resource')
+
+    if (!resourceDoc) {
+      return
+    }
+
+    const data = resourceDoc.querySelector('data')?.textContent ?? ''
+    const mime = resourceDoc.querySelector('mime')?.textContent ?? ''
+    const fileName = resourceDoc.querySelector('file-name')?.textContent ?? ''
+    const sourceUrl = resourceDoc.querySelector('source-url')?.textContent ?? ''
+
+    return {data, mime, fileName, sourceUrl}
   }
 }
