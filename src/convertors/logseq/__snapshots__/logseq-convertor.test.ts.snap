@@ -1,5 +1,24 @@
 // Vitest Snapshot v1
 
+exports[`LogseqConvertor > handles and ignores whiteboard pages 1`] = `
+[
+  {
+    "backlinks": [],
+    "dailyAt": undefined,
+    "html": "<h1>Contents</h1><ul><li></li></ul>",
+    "id": "logseq-f543cf64-48b3-440e-816e-cbdeff1db261",
+    "subject": "Contents",
+  },
+  {
+    "backlinks": [],
+    "dailyAt": 1685491200000,
+    "html": "<h1>May 31st, 2023</h1><ul><li><p>This is a test with a whiteboard.</p></li></ul>",
+    "id": "31052023",
+    "subject": "May 31st, 2023",
+  },
+]
+`;
+
 exports[`LogseqConvertor > parses TODO example 1`] = `
 [
   {

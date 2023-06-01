@@ -3,10 +3,10 @@ import {z} from 'zod'
 const propertiesSchema = z.record(z.any())
 
 const baseBlockSchema = z.object({
-  format: z.string(),
-  content: z.string(),
-  properties: propertiesSchema.nullable(),
-  id: z.string(),
+  format: z.string().optional(),
+  content: z.string().optional(),
+  properties: propertiesSchema.nullable().optional(),
+  id: z.string().optional(),
 })
 
 type BlockSchema = z.infer<typeof baseBlockSchema> & {
@@ -20,6 +20,7 @@ const blockSchema: z.ZodType<BlockSchema> = baseBlockSchema.extend({
 const noteSchema = z.object({
   'page-name': z.string(),
   id: z.string(),
+  properties: propertiesSchema.nullable(),
   children: z.array(blockSchema),
 })
 

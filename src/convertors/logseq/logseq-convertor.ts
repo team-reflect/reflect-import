@@ -3,7 +3,7 @@ import {header1, list, listItem} from 'helpers/generators'
 import {markdownToHtml} from 'helpers/markdown'
 import {validateNotes} from 'helpers/validate'
 
-import {tryParseTime, toLogseqId} from './logseq-helpers'
+import {tryParseTime, toLogseqId, assertsLogseqNoteBlock} from './logseq-helpers'
 import {logseqPropertiesToMarkdown} from './logseq-properties'
 import {exportSchema} from './schema'
 import {LogseqBlock, LogseqConversionError, LogseqExport, LogseqNote} from './types'
@@ -30,7 +30,13 @@ export class LogseqConvertor extends Convertor {
       {},
     )
 
-    const convertedNotes = validated.blocks.map((note) => this.convertLogseqNote(note))
+    // Convert all notes except for whiteboard pages
+    const convertedNotes = validated.blocks.flatMap((note) => {
+      if (note?.properties?.['ls-type'] === 'whiteboard-page') {
+        return []
+      }
+      return [this.convertLogseqNote(note)]
+    })
 
     return validateNotes(convertedNotes)
   }
@@ -88,6 +94,7 @@ export class LogseqConvertor extends Convertor {
    * call parseBlocks if the block has children.
    */
   private makeHtml(block: LogseqBlock): {html: string; backlinks: Backlink[]} {
+    assertsLogseqNoteBlock(block)
     // Logseq supports markdown and org.  I think doing the org conversion will be
     // more difficult.  So I'm going to start with markdown.
     if (block.format !== 'markdown') {
@@ -107,7 +114,7 @@ export class LogseqConvertor extends Convertor {
     }
 
     // Get the data for the current block
-    let {html, backlinks} = markdownToHtml(blockContent, {
+    let {html, backlinks} = markdownToHtml(blockContent || '', {
       graphId: this.graphId,
       linkHost: this.linkHost,
       pageResolver: (pageName) => toLogseqId(this.noteIds[pageName], pageName),
