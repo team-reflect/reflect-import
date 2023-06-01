@@ -43,10 +43,6 @@ export interface ConvertResponse {
 
 export type ConvertorAcceptType = Record<string, string | string[]>
 
-export interface Convertor {
-  accept: ConvertorAcceptType
-  convert(options: ConvertOptions): ConvertResponse
-}
 export class ConversionError extends Error {
   constructor(message: string) {
     super(message)

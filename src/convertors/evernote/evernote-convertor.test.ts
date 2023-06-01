@@ -3,8 +3,8 @@ import {describe, expect, it} from 'vitest'
 import {EvernoteConvertor} from './evernote-convertor'
 
 describe('EvernoteConvertor', () => {
-  it('converts evernote to HTML', () => {
-    const convertor = new EvernoteConvertor()
+  it('converts evernote to HTML', async () => {
+    const convertor = new EvernoteConvertor({graphId: '123'})
 
     const data = `<?xml version="1.0" encoding="UTF-8"?>
   <en-export export-date="20221224T010732Z" application="Evernote" version="10.49.4">
@@ -21,7 +21,7 @@ describe('EvernoteConvertor', () => {
     </note>
   </en-export>
   `
-    const {notes} = convertor.convert({data})
+    const {notes} = await convertor.convert({data})
     const [{subject, html, createdAt, updatedAt}] = notes
 
     expect(subject).toEqual('My first note')
@@ -34,15 +34,15 @@ describe('EvernoteConvertor', () => {
   })
 
   it('raises an error if parsing fails', () => {
-    const convertor = new EvernoteConvertor()
+    const convertor = new EvernoteConvertor({graphId: '123'})
 
-    expect(() => convertor.convert({data: ''})).toThrow()
+    expect(async () => await convertor.convert({data: ''})).rejects.toThrow()
   })
 
   it.each(['&gt;', '&nbsp;', '&mdash;', '&ndash;'])(
     'parses note with html entity',
-    (entity) => {
-      const convertor = new EvernoteConvertor()
+    async (entity) => {
+      const convertor = new EvernoteConvertor({graphId: '123'})
 
       const data = `<?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export4.dtd">
@@ -59,7 +59,7 @@ describe('EvernoteConvertor', () => {
       </note>
     </en-export>`
 
-      const {notes} = convertor.convert({data})
+      const {notes} = await convertor.convert({data})
       const [{subject, html}] = notes
 
       expect(subject).toEqual('failing nbsp')

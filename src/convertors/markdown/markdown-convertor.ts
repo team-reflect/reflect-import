@@ -3,36 +3,18 @@ import {toDailyNoteId} from 'helpers/to-id'
 import {validateNotes} from 'helpers/validate'
 
 import {dailyDateFromFilename, filenameToId, filenameToSubject} from './markdown-helpers'
-import {
-  ConvertedNote,
-  ConvertOptions,
-  Convertor,
-  ConvertResponse,
-  REFLECT_HOSTNAME,
-} from '../../types'
+import {Convertor} from '../../convertor'
+import {ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
-export class MarkdownConvertor implements Convertor {
-  graphId: string
-  linkHost: string
+export class MarkdownConvertor extends Convertor {
+  static accept = {'text/markdown': ['.md']}
+  static description = 'Markdown files'
 
-  constructor({
-    graphId,
-    linkHost = REFLECT_HOSTNAME,
-  }: {
-    graphId: string
-    linkHost?: string
-  }) {
-    this.graphId = graphId
-    this.linkHost = linkHost
-  }
-
-  accept = {'text/markdown': ['.md']}
-
-  convert({
+  async convert({
     data,
     filename,
     lastModified,
-  }: ConvertOptions & {filename: string}): ConvertResponse {
+  }: ConvertOptions & {filename: string}): Promise<ConvertResponse> {
     const {
       html,
       subject: markdownSubject,

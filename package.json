@@ -1,7 +1,7 @@
 {
   "name": "@team-reflect/reflect-import",
   "type": "module",
-  "version": "0.4.3",
+  "version": "0.4.7",
   "author": "Alex MacCaw",
   "license": "MIT",
   "repository": "git://github.com/team-reflect/reflect-import.git",
@@ -27,6 +27,7 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
+    "@sindresorhus/slugify": "^2.2.0",
     "date-fns": "^2.29.3",
     "jsdom": "^20.0.3",
     "lodash-es": "^4.17.21",
@@ -40,7 +41,8 @@
     "remark-wiki-link": "^1.0.4",
     "unified": "^10.1.2",
     "unist-util-visit": "^4.1.1",
-    "urlpattern-polyfill": "^6.0.2"
+    "urlpattern-polyfill": "^6.0.2",
+    "zod": "^3.21.4"
   },
   "peerDependencies": {},
   "devDependencies": {
@@ -48,6 +50,7 @@
     "@size-limit/preset-small-lib": "^8.1.0",
     "@types/js-yaml": "^4.0.5",
     "@types/lodash-es": "^4.17.6",
+    "@types/wicg-file-system-access": "^2020.9.6",
     "bumpp": "^9.1.0",
     "eslint": "^8.28.0",
     "prettier": "^2.8.0",

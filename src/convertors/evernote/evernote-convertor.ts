@@ -3,12 +3,14 @@ import {validateNotes} from 'helpers/validate'
 import {parseXml} from 'helpers/xml'
 
 import {parseTime, toEvernoteId} from './evernote-helpers'
-import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
+import {Convertor} from '../../convertor'
+import {ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
-export class EvernoteConvertor implements Convertor {
-  accept = {'application/enex': ['.enex']}
+export class EvernoteConvertor extends Convertor {
+  static accept = {'application/enex': ['.enex']}
+  static description = 'Evernote ENEX'
 
-  convert({data}: ConvertOptions): ConvertResponse {
+  async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     const doc = parseXml(data)
 
     const noteDocs = Array.from(doc.querySelectorAll('en-export > note'))

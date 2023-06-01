@@ -3,26 +3,14 @@ import {validateNotes} from 'helpers/validate'
 import {RoamBacklinks} from './roam-backlinks'
 import {RoamNoteConvertor} from './roam-note-convertor'
 import {RoamConversionError, RoamConvertedNote, RoamNote} from './types'
-import {ConvertOptions, Convertor, ConvertResponse, REFLECT_HOSTNAME} from '../../types'
+import {Convertor} from '../../convertor'
+import {ConvertOptions, ConvertResponse} from '../../types'
 
-export class RoamConvertor implements Convertor {
-  graphId: string
-  linkHost: string
+export class RoamConvertor extends Convertor {
+  static accept = {'application/json': ['.json']}
+  static description = 'Roam Research JSON'
 
-  constructor({
-    graphId,
-    linkHost = REFLECT_HOSTNAME,
-  }: {
-    graphId: string
-    linkHost?: string
-  }) {
-    this.graphId = graphId
-    this.linkHost = linkHost
-  }
-
-  accept = {'application/json': ['.json']}
-
-  convert({data}: ConvertOptions): ConvertResponse {
+  async convert({data}: ConvertOptions): Promise<ConvertResponse> {
     const roamNotes = JSON.parse(data) as RoamNote[]
 
     if (!Array.isArray(roamNotes)) {

@@ -3,16 +3,18 @@ import {stripFileExtension} from 'helpers/path'
 import {validateNotes} from 'helpers/validate'
 
 import {basenameToSubject, toHtmlId} from './html-helpers'
-import {ConvertedNote, ConvertOptions, Convertor, ConvertResponse} from '../../types'
+import {Convertor} from '../../convertor'
+import {ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
 
-export class HtmlConvertor implements Convertor {
-  accept = {'text/html': ['.html', '.htm']}
+export class HtmlConvertor extends Convertor {
+  static accept = {'text/html': ['.html', '.htm']}
+  static description = 'HTML files'
 
-  convert({
+  async convert({
     data,
     filename,
     lastModified,
-  }: ConvertOptions & {filename: string}): ConvertResponse {
+  }: ConvertOptions & {filename: string}): Promise<ConvertResponse> {
     const basename = stripFileExtension(filename)
 
     const doc = parseHtml(data)
