@@ -4,6 +4,7 @@ import exampleExport from './fixtures/logseq-example.json'
 import exampleOrgExport from './fixtures/logseq-org-example.json'
 import examplePropertiesExport from './fixtures/logseq-property-example.json'
 import exampleTodoExport from './fixtures/logseq-todo-example.json'
+import exampleWhiteboardExport from './fixtures/logseq-whiteboard-example.json'
 import {LogseqConvertor} from './logseq-convertor'
 
 describe('LogseqConvertor', () => {
@@ -24,6 +25,14 @@ describe('LogseqConvertor', () => {
   it('parses TODO example', async () => {
     const convertor = new LogseqConvertor({graphId: '123'})
     const {notes} = await convertor.convert({data: JSON.stringify(exampleTodoExport)})
+
+    expect(notes).toMatchSnapshot()
+  })
+  it('handles and ignores whiteboard pages', async () => {
+    const convertor = new LogseqConvertor({graphId: '123'})
+    const {notes} = await convertor.convert({
+      data: JSON.stringify(exampleWhiteboardExport),
+    })
 
     expect(notes).toMatchSnapshot()
   })

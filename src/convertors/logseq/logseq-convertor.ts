@@ -30,7 +30,13 @@ export class LogseqConvertor extends Convertor {
       {},
     )
 
-    const convertedNotes = validated.blocks.map((note) => this.convertLogseqNote(note))
+    // Convert all notes except for whiteboard pages
+    const convertedNotes = validated.blocks.flatMap((note) => {
+      if (note?.properties?.['ls-type'] === 'whiteboard-page') {
+        return []
+      }
+      return [this.convertLogseqNote(note)]
+    })
 
     return validateNotes(convertedNotes)
   }
@@ -107,7 +113,7 @@ export class LogseqConvertor extends Convertor {
     }
 
     // Get the data for the current block
-    let {html, backlinks} = markdownToHtml(blockContent, {
+    let {html, backlinks} = markdownToHtml(blockContent || '', {
       graphId: this.graphId,
       linkHost: this.linkHost,
       pageResolver: (pageName) => toLogseqId(this.noteIds[pageName], pageName),

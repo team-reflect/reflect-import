@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "blocks": [
+    {
+      "id": "f543cf64-48b3-440e-816e-cbdeff1db261",
+      "page-name": "Contents",
+      "properties": null,
+      "children": [
+        {
+          "id": "6477f614-dc86-43d6-91be-1c89a670125d",
+          "properties": null,
+          "format": "markdown",
+          "children": [],
+          "content": ""
+        }
+      ]
+    },
+    {
+      "id": "6477f614-d6f3-4b5c-a7f6-089e7261ae85",
+      "page-name": "May 31st, 2023",
+      "properties": null,
+      "format": "markdown",
+      "children": [
+        {
+          "id": "6477f614-5c1c-4b3d-8308-d2272ce5354a",
+          "properties": null,
+          "format": "markdown",
+          "children": [],
+          "content": "This is a test with a whiteboard."
+        }
+      ]
+    },
+    {
+      "id": "641003d2-17e0-4b11-89aa-245488477b3a",
+      "page-name": "641003d2-17e0-4b11-89aa-245488477b3a",
+      "properties": {
+        "ls-type": "whiteboard-page",
+        "logseq.tldraw.page": {
+          "id": "641003d2-17e0-4b11-89aa-245488477b3a",
+          "name": "641003d2-17e0-4b11-89aa-245488477b3a",
+          "bindings": {
+            "1d329cd1-c228-11ed-a052-f1f9274b7c8a": {
+              "id": "1d329cd1-c228-11ed-a052-f1f9274b7c8a",
+              "type": "line",
+              "fromId": "1d32c3e0-c228-11ed-a052-f1f9274b7c8a",
+              "toId": "d31ba1f0-c227-11ed-a052-f1f9274b7c8a",
+              "handleId": "end",
+              "point": [0.47, 0.68],
+              "distance": 4
+            },
+            "4e499941-c228-11ed-a052-f1f9274b7c8a": {
+              "id": "4e499941-c228-11ed-a052-f1f9274b7c8a",
+              "type": "line",
+              "fromId": "4e49c050-c228-11ed-a052-f1f9274b7c8a",
+              "toId": "24b697e0-c228-11ed-a052-f1f9274b7c8a",
+              "handleId": "end",
+              "point": [0.53, 0.65],
+              "distance": 4
+            },
+            "55c30d01-c228-11ed-a052-f1f9274b7c8a": {
+              "id": "55c30d01-c228-11ed-a052-f1f9274b7c8a",
+              "type": "line",
+              "fromId": "4e49c050-c228-11ed-a052-f1f9274b7c8a",
+              "toId": "c7445250-c227-11ed-a052-f1f9274b7c8a",
+              "handleId": "start",
+              "point": [0.62, 0.18],
+              "distance": 4
+            },
+            "5828e970-c228-11ed-a052-f1f9274b7c8a": {
+              "id": "5828e970-c228-11ed-a052-f1f9274b7c8a",
+              "type": "line",
+              "fromId": "1d32c3e0-c228-11ed-a052-f1f9274b7c8a",
+              "toId": "c7445250-c227-11ed-a052-f1f9274b7c8a",
+              "handleId": "start",
+              "point": [0.36, 0.12],
+              "distance": 4
+            }
+          },
+          "nonce": 1,
+          "assets": [],
+          "shapes-index": [
+            "c7445250-c227-11ed-a052-f1f9274b7c8a",
+            "d31ba1f0-c227-11ed-a052-f1f9274b7c8a",
+            "1d32c3e0-c228-11ed-a052-f1f9274b7c8a",
+            "24b697e0-c228-11ed-a052-f1f9274b7c8a",
+            "4e49c050-c228-11ed-a052-f1f9274b7c8a"
+          ]
+        }
+      },
+      "children": [{"children": []}]
+    },
+    {
+      "id": "6477f767-4d92-40d9-91e6-52dfc01ee8fb",
+      "page-name": "Test board",
+      "properties": {
+        "ls-type": "whiteboard-page",
+        "logseq.tldraw.page": {
+          "id": "6477f767-4d92-40d9-91e6-52dfc01ee8fb",
+          "name": "6477f767-4d92-40d9-91e6-52dfc01ee8fb",
+          "bindings": {},
+          "nonce": 1,
+          "assets": [],
+          "shapes-index": [
+            "83d574c0-001d-11ee-9991-9314c7361095",
+            "8da7cca2-001d-11ee-9991-9314c7361095",
+            "94d78d30-001d-11ee-9991-9314c7361095"
+          ]
+        }
+      },
+      "children": []
+    }
+  ]
+}
