@@ -20,7 +20,7 @@ const blockSchema: z.ZodType<BlockSchema> = baseBlockSchema.extend({
 const noteSchema = z.object({
   'page-name': z.string(),
   id: z.string(),
-  properties: propertiesSchema.nullable().optional(),
+  properties: propertiesSchema.nullable(),
   children: z.array(blockSchema),
 })
 

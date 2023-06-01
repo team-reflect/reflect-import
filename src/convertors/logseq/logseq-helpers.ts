@@ -2,6 +2,8 @@ import {parse, isValid} from 'date-fns'
 
 import {toDailyNoteId, toNoteId} from 'helpers/to-id'
 
+import {LogseqBlock, LogseqNoteBlock} from './types'
+
 // This is a subset of the formats that logseq supports.  I don't think we can
 // support every format because we can't differentiate between mm-dd-yyy and
 // dd-mm-yyyy.  Starting with the default format.
@@ -73,4 +75,15 @@ export const toLogseqId = (uid: string | undefined, title: string) => {
   // If we the page does not have an id because it does not exist, we generate
   // one based on the title
   return toNoteId(title)
+}
+
+export function isLogseqNoteBlock(value: LogseqBlock): asserts value is LogseqNoteBlock {
+  if (
+    !('format' in value) ||
+    !('content' in value) ||
+    !('id' in value) ||
+    !('properties' in value)
+  ) {
+    throw new Error('Invalid block')
+  }
 }

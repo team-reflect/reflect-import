@@ -3,7 +3,7 @@ import {header1, list, listItem} from 'helpers/generators'
 import {markdownToHtml} from 'helpers/markdown'
 import {validateNotes} from 'helpers/validate'
 
-import {tryParseTime, toLogseqId} from './logseq-helpers'
+import {tryParseTime, toLogseqId, isLogseqNoteBlock} from './logseq-helpers'
 import {logseqPropertiesToMarkdown} from './logseq-properties'
 import {exportSchema} from './schema'
 import {LogseqBlock, LogseqConversionError, LogseqExport, LogseqNote} from './types'
@@ -94,6 +94,7 @@ export class LogseqConvertor extends Convertor {
    * call parseBlocks if the block has children.
    */
   private makeHtml(block: LogseqBlock): {html: string; backlinks: Backlink[]} {
+    isLogseqNoteBlock(block)
     // Logseq supports markdown and org.  I think doing the org conversion will be
     // more difficult.  So I'm going to start with markdown.
     if (block.format !== 'markdown') {

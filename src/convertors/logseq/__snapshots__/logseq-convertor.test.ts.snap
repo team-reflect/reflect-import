@@ -1,6 +1,6 @@
 // Vitest Snapshot v1
 
-exports[`LogseqConvertor > handles and ignoreswhiteboard pages 1`] = `
+exports[`LogseqConvertor > handles and ignores whiteboard pages 1`] = `
 [
   {
     "backlinks": [],
