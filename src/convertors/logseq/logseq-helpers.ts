@@ -77,7 +77,9 @@ export const toLogseqId = (uid: string | undefined, title: string) => {
   return toNoteId(title)
 }
 
-export function isLogseqNoteBlock(value: LogseqBlock): asserts value is LogseqNoteBlock {
+export function assertsLogseqNoteBlock(
+  value: LogseqBlock,
+): asserts value is LogseqNoteBlock {
   if (
     !('format' in value) ||
     !('content' in value) ||
