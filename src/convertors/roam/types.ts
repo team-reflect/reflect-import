@@ -1,7 +1,7 @@
 import {Backlink, ConversionError, ConvertedNote} from '../../types'
 
 export interface RoamNote {
-  title: string
+  title?: string
   uid: string
   'edit-time': number
   children?: RoamNoteString[]
@@ -11,7 +11,7 @@ export interface RoamNoteRef {
   uid: string
 }
 export interface RoamNoteString {
-  string: string
+  string?: string
   'create-time': number
   uid: string
   'edit-time': number
