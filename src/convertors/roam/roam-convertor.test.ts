@@ -427,7 +427,7 @@ describe('RoamConvertor', () => {
     expect(notes).toMatchSnapshot()
   })
 
-  it('handles missing uid issue', async () => {
+  it('handles missing string issue', async () => {
     const convertor = new RoamConvertor({graphId: '123'})
     const {notes} = await convertor.convert({data: JSON.stringify(brokenGraph)})
 
