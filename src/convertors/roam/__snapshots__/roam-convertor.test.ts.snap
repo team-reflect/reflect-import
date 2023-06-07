@@ -4,6 +4,20 @@ exports[`RoamConvertor > generateContentFromRoamNote > handles both formats of t
 
 exports[`RoamConvertor > generateContentFromRoamNote > handles list with mixed bullets and tasks 1`] = `"<h1>note1</h1><ul><li><p>parent</p><ul><li><input type=\\"checkbox\\" ><p>todo 1</p><ul></ul></li><li><input type=\\"checkbox\\" checked><p>todo 2</p><ul></ul></li><li><p>bullet 1</p><ul></ul></li><li><p>bullet 2</p><ul></ul></li><li><input type=\\"checkbox\\" ><p>todo 3</p><ul></ul></li></ul></li></ul>"`;
 
+exports[`RoamConvertor > handles missing uid issue 1`] = `
+[
+  {
+    "backlinks": [],
+    "createdAt": 1600198186337,
+    "dailyAt": undefined,
+    "html": "<h1></h1><ul><li><p>New page:</p><ul><li></li></ul></li></ul>",
+    "id": "roam-fVSnYTWX-",
+    "subject": "",
+    "updatedAt": 1600139707013,
+  },
+]
+`;
+
 exports[`RoamConvertor > parses exampleGraph 1`] = `
 [
   {

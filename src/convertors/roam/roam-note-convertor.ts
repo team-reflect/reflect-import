@@ -55,7 +55,7 @@ export class RoamNoteConvertor {
     return {
       id,
       html,
-      subject: this.note.title,
+      subject: this.note.title ?? '',
       backlinks,
       dailyAt: dailyDate?.getTime(),
       createdAt: dailyDate?.getTime() ?? minChildCreated,
@@ -88,7 +88,7 @@ export class RoamNoteConvertor {
     }))
 
     return {
-      html: domArrayToHtml([header1(this.note.title), dom]),
+      html: domArrayToHtml([header1(this.note.title ?? ''), dom]),
       backlinks,
     }
   }
@@ -101,7 +101,7 @@ export class RoamNoteConvertor {
     noteString: RoamNoteString,
     aggregateBacklinkNoteIds = new Set<string>(),
   ) {
-    let markdown = noteString.string
+    let markdown = noteString.string ?? ''
 
     // Convert ((blockrefs)) to [[backlinks]] (Reflect doesn't support blockrefs)
     markdown = convertBlockrefsToBacklinks(

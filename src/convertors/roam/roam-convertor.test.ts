@@ -1,5 +1,6 @@
 import {describe, it, expect} from 'vitest'
 
+import brokenGraph from './fixtures/roam-broken-string-graph.json'
 import dailyNotes from './fixtures/roam-daily-notes.json'
 import exampleGraph from './fixtures/roam-example-graph.json'
 import exampleGraph2 from './fixtures/roam-example-graph2.json'
@@ -422,6 +423,13 @@ describe('RoamConvertor', () => {
   it('parses exampleGraph2', async () => {
     const convertor = new RoamConvertor({graphId: '123'})
     const {notes} = await convertor.convert({data: JSON.stringify(exampleGraph2)})
+
+    expect(notes).toMatchSnapshot()
+  })
+
+  it('handles missing uid issue', async () => {
+    const convertor = new RoamConvertor({graphId: '123'})
+    const {notes} = await convertor.convert({data: JSON.stringify(brokenGraph)})
 
     expect(notes).toMatchSnapshot()
   })
