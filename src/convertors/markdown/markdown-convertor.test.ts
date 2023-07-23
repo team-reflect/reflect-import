@@ -29,3 +29,13 @@ describe('isDaily', () => {
     expect(dailyAt).toBe(undefined)
   })
 })
+
+describe('id', () => {
+  it('slugifies filename', async () => {
+    const convertor = new MarkdownConvertor({graphId: '123'})
+    const {notes} = await convertor.convert({data: '# foo', filename: 'foo wem.md'})
+    const [{id}] = notes
+
+    expect(id).toEqual('md-foo-wem')
+  })
+})
