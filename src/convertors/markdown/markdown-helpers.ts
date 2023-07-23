@@ -15,7 +15,9 @@ export const dailyDateFromFilename = (filename: string): Date | undefined => {
 }
 
 export const filenameToId = (filename: string) => {
-  return `md-${slugify(filename)}`
+  const basename = stripFileExtension(filename)
+
+  return `md-${slugify(basename)}`
 }
 
 export const filenameToSubject = (filename: string) => {
