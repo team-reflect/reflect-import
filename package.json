@@ -1,7 +1,7 @@
 {
   "name": "@team-reflect/reflect-import",
   "type": "module",
-  "version": "0.4.9",
+  "version": "0.5.0",
   "author": "Alex MacCaw",
   "license": "MIT",
   "repository": "git://github.com/team-reflect/reflect-import.git",
