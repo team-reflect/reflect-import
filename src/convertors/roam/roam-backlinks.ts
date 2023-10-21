@@ -39,8 +39,11 @@ export class RoamBacklinks {
   // We want to iterate deeply through the note and map
   // all the titles to their corresponding note IDs.
   private processNote(note: RoamNote, result: TitleToIdMap = new Map()) {
-    this.titleToIdMap.set(note.title, normalizeUidToId(note.uid))
-    this.idToTitleMap.set(normalizeUidToId(note.uid), note.title)
+    const id = normalizeUidToId(note.uid)
+    const title = note.title || id 
+
+    this.titleToIdMap.set(title, id)
+    this.idToTitleMap.set(id, title)
 
     if (note.children) {
       note.children.map((child) => {
@@ -64,7 +67,7 @@ export class RoamBacklinks {
 
     // We are treating noteString.uid as the block ref title
     this.titleToIdMap.set(noteString.uid, normalizeUidToId(note.uid))
-    this.idToTitleMap.set(normalizeUidToId(noteString.uid), note.title)
+    this.idToTitleMap.set(normalizeUidToId(noteString.uid), note.title || "")
 
     if (noteString.children) {
       noteString.children.map((child) => {
