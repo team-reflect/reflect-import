@@ -1,4 +1,4 @@
-import {type Root, type StaticPhrasingContent} from 'mdast'
+import {type Root, type PhrasingContent} from 'mdast'
 import {findAndReplace, type ReplaceFunction} from 'mdast-util-find-and-replace'
 import {Plugin} from 'unified'
 
@@ -26,7 +26,7 @@ export const parseTags: Plugin<[ParseTagOptions], Root> = (options: ParseTagOpti
 
       const url = buildTagUrl({graphId: options.graphId, linkHost: options.linkHost, tag})
 
-      const node: StaticPhrasingContent = {type: 'text', value}
+      const node: PhrasingContent = {type: 'text', value}
 
       return {type: 'link', title: null, url, children: [node]}
     }

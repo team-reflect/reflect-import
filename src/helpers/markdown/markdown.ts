@@ -27,10 +27,10 @@ export const markdownToHtml = (
 
   const processor = unified()
     .data('micromarkExtensions', [
-      gfmAutolinkLiteral,
+      gfmAutolinkLiteral(),
       {disable: {null: constructsToDisable}},
     ])
-    .data('fromMarkdownExtensions', [gfmAutolinkLiteralFromMarkdown])
+    .data('fromMarkdownExtensions', [gfmAutolinkLiteralFromMarkdown()])
     .use(pipeToMarkdown)
     .use(wikiLinkPlugin, {
       wikiLinkClassName: 'backlink',
