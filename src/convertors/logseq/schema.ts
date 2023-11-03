@@ -10,18 +10,18 @@ const baseBlockSchema = z.object({
 })
 
 type BlockSchema = z.infer<typeof baseBlockSchema> & {
-  children: BlockSchema[]
+  children?: BlockSchema[]
 }
 
 const blockSchema: z.ZodType<BlockSchema> = baseBlockSchema.extend({
-  children: z.lazy(() => blockSchema.array()),
+  children: z.lazy(() => blockSchema.array()).optional(),
 })
 
 const noteSchema = z.object({
   'page-name': z.string(),
   id: z.string(),
   properties: propertiesSchema.nullable(),
-  children: z.array(blockSchema),
+  children: z.array(blockSchema).optional(),
 })
 
 export const exportSchema = z.object({

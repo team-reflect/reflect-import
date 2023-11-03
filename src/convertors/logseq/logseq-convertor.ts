@@ -51,7 +51,7 @@ export class LogseqConvertor extends Convertor {
     const subject = note['page-name']
 
     // Get all the HTML and backlinks for the current note
-    const {html, backlinks} = this.parseBlocks(children)
+    const {html, backlinks} = this.parseBlocks(children ?? [])
     // Update the backlinks with the note ids from the page name to id map
     const updatedBacklinks = backlinks.map((b) => ({
       label: b.label,
@@ -121,7 +121,7 @@ export class LogseqConvertor extends Convertor {
     })
 
     // If the block has children then we need to get the html for the children
-    if (block.children.length) {
+    if (block.children?.length) {
       const {html: childHtml, backlinks: childBacklinks} = this.parseBlocks(
         block.children,
       )
