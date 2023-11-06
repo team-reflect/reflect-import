@@ -9,7 +9,7 @@ export interface LogseqNote {
   'page-name': string
   id: string
   properties: LogseqProperties | null
-  children: LogseqBlock[]
+  children?: LogseqBlock[]
 }
 
 export type LogseqProperties = Record<string, string | number | Array<string>>
@@ -21,11 +21,11 @@ export interface LogseqNoteBlock {
   content: string
   properties: LogseqProperties | null
   id: string
-  children: LogseqBlock[]
+  children?: LogseqBlock[]
 }
 
 export interface LogseqWhiteboardBlock {
-  children: LogseqBlock[]
+  children?: LogseqBlock[]
 }
 
 export class LogseqConversionError extends ConversionError {
