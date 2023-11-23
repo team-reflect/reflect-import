@@ -14,6 +14,7 @@ describe('LogseqConvertor', () => {
 
     expect(notes).toMatchSnapshot()
   })
+
   it('parses properties example', async () => {
     const convertor = new LogseqConvertor({graphId: '123'})
     const {notes} = await convertor.convert({
@@ -22,12 +23,14 @@ describe('LogseqConvertor', () => {
 
     expect(notes).toMatchSnapshot()
   })
+
   it('parses TODO example', async () => {
     const convertor = new LogseqConvertor({graphId: '123'})
     const {notes} = await convertor.convert({data: JSON.stringify(exampleTodoExport)})
 
     expect(notes).toMatchSnapshot()
   })
+
   it('handles and ignores whiteboard pages', async () => {
     const convertor = new LogseqConvertor({graphId: '123'})
     const {notes} = await convertor.convert({
@@ -36,10 +39,25 @@ describe('LogseqConvertor', () => {
 
     expect(notes).toMatchSnapshot()
   })
+
   it('exception for Org example', () => {
     const convertor = new LogseqConvertor({graphId: '123'})
     expect(
       async () => await convertor.convert({data: JSON.stringify(exampleOrgExport)}),
     ).rejects.toThrowError()
+  })
+
+  it('does not include daily backlinks', async () => {
+    const data = {
+      ...exampleExport,
+      blocks: exampleExport.blocks.filter((b) => b['page-name'] === 'May 3rd, 2023'),
+    }
+
+    const convertor = new LogseqConvertor({graphId: '123'})
+    const {notes} = await convertor.convert({data: JSON.stringify(data)})
+    expect(notes.length).toBe(1)
+    const note = notes[0]
+
+    expect(note.backlinks).toEqual([])
   })
 })

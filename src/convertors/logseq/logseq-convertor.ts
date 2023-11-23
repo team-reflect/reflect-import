@@ -9,6 +9,7 @@ import {exportSchema} from './schema'
 import {LogseqBlock, LogseqConversionError, LogseqExport, LogseqNote} from './types'
 import {Convertor} from '../../convertor'
 import {Backlink, ConvertedNote, ConvertOptions, ConvertResponse} from '../../types'
+import {isDailyNoteId} from 'helpers/to-id'
 
 export class LogseqConvertor extends Convertor {
   static accept = {'application/json': ['.json']}
@@ -119,6 +120,14 @@ export class LogseqConvertor extends Convertor {
       linkHost: this.linkHost,
       pageResolver: (pageName) => toLogseqId(this.noteIds[pageName], pageName),
     })
+
+    // Remove backlinks to daily notes. Reflect will automatically create the
+    // daily note when daily backlink is clicked. Also, Reflect importing logic
+    // doesn't recognize daily backlinks, so this would create regular note with
+    // daily-like ID, which would break the UI.
+    //
+    // See also: https://height.app/dWwdXWnlP/T-2442
+    backlinks = backlinks.filter((backlink) => !isDailyNoteId(backlink.id))
 
     // If the block has children then we need to get the html for the children
     if (block.children?.length) {
