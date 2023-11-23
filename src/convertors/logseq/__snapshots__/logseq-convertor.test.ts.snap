@@ -60,16 +60,7 @@ exports[`LogseqConvertor > parses example 1`] = `
     "subject": "Contents",
   },
   {
-    "backlinks": [
-      {
-        "id": "02052023",
-        "label": "May 2nd, 2023",
-      },
-      {
-        "id": "04052023",
-        "label": "May 4th, 2023",
-      },
-    ],
+    "backlinks": [],
     "dailyAt": 1683072000000,
     "html": "<h1>May 3rd, 2023</h1><ul><li><p>This is a test graph</p></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/02052023\\">May 2nd, 2023</a></p><ul><li><p>This is some notes for yesterday</p></li></ul></li><li><p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/123/04052023\\">May 4th, 2023</a></p><ul><li><p>This is some notes for tomorrow</p></li></ul></li></ul>",
     "id": "03052023",
