@@ -122,7 +122,7 @@ export class LogseqConvertor extends Convertor {
     })
 
     // Remove backlinks to daily notes. Reflect will automatically create the
-    // daily note when daily baclink is clicked. Also, Reflect importing logic
+    // daily note when daily backlink is clicked. Also, Reflect importing logic
     // doesn't recognize daily backlinks, so this would create regular note with
     // daily-like ID, which would break the UI.
     //
