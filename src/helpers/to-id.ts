@@ -12,3 +12,8 @@ export const toNoteId = (value: string) => {
 export const toDailyNoteId = (date: Date) => {
   return format(date, 'ddMMyyyy')
 }
+
+export const isDailyNoteId = (value: string) => {
+  const match = value.match(/^(\d{2})(\d{2})(\d{4})$/)
+  return !!match
+}
