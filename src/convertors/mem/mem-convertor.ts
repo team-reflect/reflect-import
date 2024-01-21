@@ -62,7 +62,10 @@ export class MemConvertor extends Convertor {
     id: z.string().min(1),
     title: z.string(),
     markdown: z.string(),
-    tags: z.array(z.string()),
+    tags: z
+      .array(z.string().nullable())
+      .transform((tags) => tags.filter((tag) => tag !== null))
+      .pipe(z.array(z.string())),
     created: z.string().min(1),
     updated: z.string().min(1),
   })
