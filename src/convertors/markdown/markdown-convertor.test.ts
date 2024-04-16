@@ -33,9 +33,12 @@ describe('isDaily', () => {
 describe('id', () => {
   it('slugifies filename', async () => {
     const convertor = new MarkdownConvertor({graphId: '123'})
-    const {notes} = await convertor.convert({data: '# foo', filename: 'foo wem.md'})
+    const {notes} = await convertor.convert({
+      data: '# Alex MacCaw',
+      filename: 'Alex MacCaw.md',
+    })
     const [{id}] = notes
 
-    expect(id).toEqual('md-foo-wem')
+    expect(id).toEqual('alexmaccaw')
   })
 })
