@@ -1,6 +1,6 @@
-import slugify from '@sindresorhus/slugify'
 import {parse, isValid} from 'date-fns'
 
+import {toMarkdownNoteId} from 'helpers/markdown/markdown-helpers'
 import {stripFileExtension} from 'helpers/path'
 
 export const dailyDateFromFilename = (filename: string): Date | undefined => {
@@ -16,8 +16,7 @@ export const dailyDateFromFilename = (filename: string): Date | undefined => {
 
 export const filenameToId = (filename: string) => {
   const basename = stripFileExtension(filename)
-
-  return `md-${slugify(basename)}`
+  return toMarkdownNoteId(basename)
 }
 
 export const filenameToSubject = (filename: string) => {

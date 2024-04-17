@@ -33,9 +33,35 @@ describe('isDaily', () => {
 describe('id', () => {
   it('slugifies filename', async () => {
     const convertor = new MarkdownConvertor({graphId: '123'})
-    const {notes} = await convertor.convert({data: '# foo', filename: 'foo wem.md'})
+    const {notes} = await convertor.convert({
+      data: '# Alex MacCaw',
+      filename: 'Alex MacCaw.md',
+    })
     const [{id}] = notes
 
-    expect(id).toEqual('md-foo-wem')
+    expect(id).toEqual('md-alex-maccaw')
+  })
+})
+
+describe('backlinks', () => {
+  it('creates backlinks', async () => {
+    const data = `
+# Alex MacCaw
+
+- line [[With Backlink]]
+`
+    const convertor = new MarkdownConvertor({graphId: '123'})
+    const {notes} = await convertor.convert({
+      data,
+      filename: 'Alex MacCaw.md',
+    })
+    const [{backlinks}] = notes
+
+    expect(backlinks).toMatchObject([
+      {
+        id: 'md-with-backlink',
+        label: 'With Backlink',
+      },
+    ])
   })
 })
