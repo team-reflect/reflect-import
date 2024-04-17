@@ -25,7 +25,7 @@ This is a test
       <ul>
       <li>[ ] This is a task</li>
       <li>[x] This is a completed task</li>
-      <li>[ ] This is a task with a <a class=\\"backlink new\\" href=\\"https://reflect.app/g/testgraph/link\\">link</a></li>
+      <li>[ ] This is a task with a <a class=\\"backlink new\\" href=\\"https://reflect.app/g/testgraph/md-link\\">link</a></li>
       </ul>"
     `)
   })
@@ -60,11 +60,11 @@ This is a test
 
     expect(backlinks).toEqual([
       {
-        id: 'mybacklink',
+        id: 'md-my-backlink',
         label: 'my backlink',
       },
       {
-        id: 'anotherbacklink',
+        id: 'md-another-backlink',
         label: 'another backlink',
       },
     ])
@@ -72,8 +72,8 @@ This is a test
     // Backlinks should be converted to links
     expect(html).toMatchInlineSnapshot(`
       "<h1>Hello World</h1>
-      <p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/testgraph/mybacklink\\">my backlink</a>
-      <a class=\\"backlink new\\" href=\\"https://reflect.app/g/testgraph/anotherbacklink\\">another backlink</a></p>"
+      <p><a class=\\"backlink new\\" href=\\"https://reflect.app/g/testgraph/md-my-backlink\\">my backlink</a>
+      <a class=\\"backlink new\\" href=\\"https://reflect.app/g/testgraph/md-another-backlink\\">another backlink</a></p>"
     `)
   })
 

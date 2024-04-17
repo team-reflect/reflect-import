@@ -7,8 +7,8 @@ import wikiLinkPlugin from 'remark-wiki-link'
 import {unified} from 'unified'
 
 import {buildBacklinkUrl} from 'helpers/backlink'
-import {toNoteId} from 'helpers/to-id'
 
+import {toMarkdownNoteId} from './markdown-helpers'
 import {hydrateBacklinks} from './plugins/hydrate-backlink-note-ids'
 import {hydrateSubject} from './plugins/hydrate-subject'
 import {parseTags} from './plugins/parse-tags'
@@ -23,7 +23,12 @@ export const markdownToHtml = (
     pageResolver?: (pageName: string) => string
   },
 ) => {
-  const {constructsToDisable = [], graphId, linkHost, pageResolver = toNoteId} = options
+  const {
+    constructsToDisable = [],
+    graphId,
+    linkHost,
+    pageResolver = toMarkdownNoteId,
+  } = options
 
   const processor = unified()
     .data('micromarkExtensions', [

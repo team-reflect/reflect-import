@@ -39,6 +39,29 @@ describe('id', () => {
     })
     const [{id}] = notes
 
-    expect(id).toEqual('alexmaccaw')
+    expect(id).toEqual('md-alex-maccaw')
+  })
+})
+
+describe('backlinks', () => {
+  it('creates backlinks', async () => {
+    const data = `
+# Alex MacCaw
+
+- line [[With Backlink]]
+`
+    const convertor = new MarkdownConvertor({graphId: '123'})
+    const {notes} = await convertor.convert({
+      data,
+      filename: 'Alex MacCaw.md',
+    })
+    const [{backlinks}] = notes
+
+    expect(backlinks).toMatchObject([
+      {
+        id: 'md-with-backlink',
+        label: 'With Backlink',
+      },
+    ])
   })
 })
